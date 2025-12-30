@@ -64,6 +64,11 @@ body {
     color: #3498db;
 }
 
+.nav-link.active {
+    color: #3498db;
+    font-weight: 600;
+}
+
 /* Sections */
 .section {
     padding: 100px 0;
