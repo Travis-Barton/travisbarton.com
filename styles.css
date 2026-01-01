@@ -267,6 +267,22 @@ body {
     padding: 2rem 0;
 }
 
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.social-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #5dade2;
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
