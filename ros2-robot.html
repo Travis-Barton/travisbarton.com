@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RoboPi (ROS2 Robot) - Raspberry Pi 4 robot platform with ROS2 Humble, LIDAR, IMU, mapping, and a web-based control API.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.travisbarton.com/ros2-robot.html">
+    <meta property="og:title" content="Rover, the AI Dog - ROS2 Robot Project">
+    <meta property="og:description" content="A story-driven build of a Raspberry Pi 4 robot running ROS2 Humble, LIDAR, IMU, mapping, and web-based control.">
+    <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <title>Rover, the AI Dog - ROS2 Robot Project</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-body">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
+            <ul class="nav-menu">
+                <li><a href="#story" class="nav-link">Story</a></li>
+                <li><a href="#build" class="nav-link">Build</a></li>
+                <li><a href="#stack" class="nav-link">Stack</a></li>
+                <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+                <li><a href="#links" class="nav-link">Links</a></li>
+                <li><a href="index.html#projects" class="nav-link">Back to Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="story" class="section article-hero">
+        <div class="container article-container">
+            <p class="article-kicker">ROS2 Robot Platform</p>
+            <h1 class="article-title">Rover, the AI Dog: a robot that can come when called</h1>
+            <p class="article-subtitle">This is the build log of my Raspberry Pi 4 robot. It is a blend of ROS2, real sensors, and a control layer I can iterate on quickly. The goal is simple: call it from another room, watch it reason, and see it roll in like a good dog.</p>
+            <div class="article-meta">
+                <span class="meta-pill">Raspberry Pi 4 • Ubuntu 22.04</span>
+                <span class="meta-pill">ROS2 Humble • Foxglove</span>
+                <span class="meta-pill">RPLIDAR A2M12 • BNO085</span>
+                <span class="meta-pill">FastAPI control</span>
+            </div>
+            <div class="video-placeholder">
+                <div>
+                    <span class="video-badge">Demo video coming soon</span>
+                    <h2 class="video-title">“Rover, come.”</h2>
+                    <p class="video-text">The demo I am working toward starts with a voice prompt from another room. The robot spins up, plots a path, shows its live reasoning, and then rolls straight to me. I want that moment to feel fast, clear, and a little bit magical.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="build" class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">Why I built this</h2>
+            <p>Most robotics projects either stop at the sensor demo or vanish into perfect but non‑moving diagrams. This one is meant to be a story: real hardware, real tradeoffs, and a consistent push toward autonomy. RoboPi is where I test ideas around mapping, perception, and AI control without waiting for a lab.</p>
+            <p>Right now the fundamentals work: the LIDAR is live, the IMU is stable, and I can visualize and control everything from a browser. That gives me a clean baseline to experiment on motion, mapping, and higher‑level decision making.</p>
+        </div>
+    </section>
+
+    <section id="stack" class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">What works today</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Live Sensors</h3>
+                    <ul>
+                        <li>RPLIDAR publishes `/scan` at 10 Hz for 360° coverage.</li>
+                        <li>BNO085 IMU publishes `/imu/data` at 20 Hz.</li>
+                        <li>Optional camera stream via `usb_cam`.</li>
+                    </ul>
+                </div>
+                <div class="article-card">
+                    <h3>Visualization + Control</h3>
+                    <ul>
+                        <li>Foxglove bridge for live 3D visualization.</li>
+                        <li>FastAPI server for web-based control.</li>
+                        <li>Scripted bring‑up, status, and shutdown.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">How it is built</h2>
+            <p>The ROS2 workspace contains the LIDAR driver, custom message definitions, and my bring‑up package. A separate <span class="inline-code">robot-control</span> service handles GPIO, exposes the API, and publishes commands back into ROS2. Foxglove rides on a WebSocket bridge so I can inspect live data without extra tooling.</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Key Topics</h3>
+                    <ul>
+                        <li><span class="inline-code">/scan</span> from the RPLIDAR driver.</li>
+                        <li><span class="inline-code">/imu/data</span> from the BNO085 node.</li>
+                        <li><span class="inline-code">/map</span> when slam_toolbox is enabled.</li>
+                        <li><span class="inline-code">/cmd_vel</span> for motion commands.</li>
+                    </ul>
+                </div>
+                <div class="article-card">
+                    <h3>Ports</h3>
+                    <ul>
+                        <li><span class="inline-code">8765</span> Foxglove WebSocket</li>
+                        <li><span class="inline-code">8000</span> Robot Control API</li>
+                        <li><span class="inline-code">8001/8002</span> MCP endpoints</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">Quick start (the short version)</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Start the stack</h3>
+                    <pre><code>~/ros2_robot/scripts/start_robot.sh
+
+# Start mapping (IMU + SLAM)
+~/ros2_robot/scripts/start_robot.sh --with-imu --with-slam</code></pre>
+                </div>
+                <div class="article-card">
+                    <h3>Status + shutdown</h3>
+                    <pre><code>~/ros2_robot/scripts/status_robot.sh
+
+~/ros2_robot/scripts/stop_robot.sh</code></pre>
+                </div>
+            </div>
+            <div class="article-callout">
+                <h3>Foxglove</h3>
+                <p>Connect to <span class="inline-code">ws://&lt;pi_ip&gt;:8765</span>, add a 3D panel, and subscribe to <span class="inline-code">/scan</span>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">Hardware snapshot</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Compute</h3>
+                    <p>Raspberry Pi 4 Model B (4GB) running Ubuntu 22.04 aarch64 with ROS2 Humble.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Primary sensors</h3>
+                    <p>SLAMTEC RPLIDAR A2M12 over USB and an Adafruit BNO085 IMU on I2C6.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Expansion</h3>
+                    <p>Camera + motor hardware are staged for navigation and autonomy work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">What is next</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li>slam_toolbox integration for consistent maps.</li>
+                        <li>Nav2 for goal-based autonomy.</li>
+                        <li>Full TF tree + URDF model.</li>
+                    </ul>
+                </div>
+                <div class="article-card">
+                    <h3>Perception</h3>
+                    <ul>
+                        <li>Odometry via sensor fusion (LIDAR + IMU + camera).</li>
+                        <li>Compressed camera transport.</li>
+                        <li>Stabilize usb_cam pixel formats.</li>
+                    </ul>
+                </div>
+                <div class="article-card">
+                    <h3>Control</h3>
+                    <ul>
+                        <li>Refine obstacle avoidance + safety timeouts.</li>
+                        <li>Expose higher-level behaviors through MCP APIs.</li>
+                        <li>Battery monitoring + status LEDs.</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="article-footnote">Docs last updated January 28, 2026.</p>
+        </div>
+    </section>
+
+    <section id="links" class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">Links</h2>
+            <div class="article-links">
+                <a class="cta-button" href="https://github.com/Travis-Barton/ros2_robot" target="_blank" rel="noopener noreferrer">Code Repository</a>
+                <a class="ghost-button dark" href="https://github.com/Travis-Barton/wiki" target="_blank" rel="noopener noreferrer">Docs Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+            </div>
+            <p>&copy; 2026 Travis Barton. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
