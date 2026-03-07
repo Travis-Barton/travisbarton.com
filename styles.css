@@ -164,26 +164,89 @@ a {
 }
 
 /* About Section */
+.writing-section,
 .about-section {
     background-color: transparent;
 }
 
+.writing-content,
 .about-content {
     max-width: 720px;
     margin: 0;
-    text-align: left;
     background: transparent;
-    border-left: none;
     padding: 0.2rem 0;
     display: grid;
     gap: 1rem;
 }
 
+.writing-content {
+    border-left: 2px solid #d6d1c7;
+    padding-left: 1.2rem;
+}
+
+.writing-intro,
 .about-content p {
     font-size: 1.15rem;
     margin: 0;
     color: #1f2937;
     line-height: 1.9;
+}
+
+.writing-note {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.8;
+}
+
+.writing-list {
+    margin-top: 1.2rem;
+}
+
+.writing-card {
+    display: block;
+    max-width: 760px;
+    background-color: #fffdf8;
+    padding: 1.5rem 1.6rem;
+    border: 1px solid #e5e1d6;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.writing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 24px rgba(17, 24, 39, 0.08);
+    border-color: #c8c1b4;
+}
+
+.writing-card:focus-visible {
+    outline: 3px solid #3498db;
+    outline-offset: 4px;
+}
+
+.writing-card-meta {
+    margin: 0 0 0.7rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.writing-card-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+    color: #111827;
+}
+
+.writing-card-description {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.7;
+}
+
+.about-content p {
+    text-align: left;
 }
 
 /* Projects Section */
@@ -196,6 +259,10 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.4rem;
     margin-top: 0.8rem;
+}
+
+.projects-grid-featured {
+    grid-template-columns: minmax(260px, 420px);
 }
 
 .project-card {
@@ -434,6 +501,15 @@ a {
     color: #1f2937;
 }
 
+.article-callout ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.75rem;
+    color: #374151;
+    line-height: 1.75;
+}
+
 .article-footnote {
     margin-top: 2.5rem;
     color: #6b7280;
@@ -444,6 +520,39 @@ a {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.article-table {
+    margin-top: 1.6rem;
+    overflow-x: auto;
+}
+
+.article-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+    background: #fffdf8;
+    border: 1px solid #e5e1d6;
+}
+
+.article-table th,
+.article-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e1d6;
+    text-align: left;
+    vertical-align: top;
+}
+
+.article-table th {
+    font-size: 0.82rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    color: #374151;
+    background: #f8f5ed;
+}
+
+.article-table tr:last-child td {
+    border-bottom: none;
 }
 
 .ghost-button {
@@ -575,6 +684,7 @@ a {
 @media (prefers-color-scheme: dark) {
     body,
     .project-body,
+    .writing-section,
     .about-section,
     .projects-section,
     .contact-section,
@@ -619,6 +729,8 @@ a {
 
 
     .hero-subtitle,
+    .writing-intro,
+    .writing-note,
     .about-content p,
     .project-description,
     .article-subtitle,
@@ -632,6 +744,7 @@ a {
     }
 
     .project-card,
+    .writing-card,
     .article-card,
     .article-callout {
         background-color: #151922;
@@ -641,6 +754,10 @@ a {
 
     .about-content {
         background-color: transparent;
+        border-color: #4a5266;
+    }
+
+    .writing-content {
         border-color: #4a5266;
     }
 
@@ -655,11 +772,13 @@ a {
         border-color: #343c4b;
     }
 
+    .writing-card:hover,
     .project-card:hover {
         border-color: #4a5470;
         box-shadow: none;
     }
 
+    .writing-card-meta,
     .tag,
     .meta-pill,
     .video-badge {
@@ -667,11 +786,13 @@ a {
         border-color: #4a5266;
     }
 
+    .writing-card-title,
     .article-card h3,
     .article-callout h3 {
         color: #f5f1e8;
     }
 
+    .writing-card-description,
     .article-card ul,
     .article-card p {
         color: #ddd7ca;
@@ -691,12 +812,23 @@ a {
     }
 
     .article-card pre,
+    .article-table table,
     .inline-code,
     .form-group input,
     .form-group textarea {
         background-color: #0f1115;
         color: #ece7db;
         border-color: #40485a;
+    }
+
+    .article-table th,
+    .article-table td {
+        border-bottom-color: #343c4b;
+    }
+
+    .article-table th {
+        background-color: #151922;
+        color: #ece7db;
     }
 
     .form-group input:focus,
@@ -754,6 +886,7 @@ a {
     }
 
     .nav-logo a:focus-visible,
+    .writing-card:focus-visible,
     .project-card:focus-visible {
         outline-color: #9dbdff;
     }

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Travis Barton - Developer Portfolio. Showcasing innovative projects and technical expertise.">
+    <meta name="description" content="Notes, build logs, and experiments in AI, robotics, and software by Travis Barton.">
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.travisbarton.com/">
-    <meta property="og:title" content="Travis Barton - Portfolio">
-    <meta property="og:description" content="Developer Portfolio. Showcasing innovative projects and technical expertise.">
+    <meta property="og:title" content="Travis Barton - Writing and Projects">
+    <meta property="og:description" content="Notes, build logs, and experiments in AI, robotics, and software.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
-    <title>Travis Barton - Portfolio</title>
+    <title>Travis Barton - Writing and Projects</title>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -26,8 +26,9 @@
             <div class="nav-logo"><a href="#home">Travis Barton</a></div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About Me</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#writing" class="nav-link">Writing</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Work</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
@@ -36,19 +37,37 @@
     <!-- Home Section -->
     <section id="home" class="section hero-section">
         <div class="container">
-            <h1 class="hero-title">Welcome to My Portfolio</h1>
-            <p class="hero-subtitle">Showcasing my work and passion for development</p>
-            <a href="#projects" class="cta-button">View My Projects</a>
+            <h1 class="hero-title">Build logs, notes, and experiments</h1>
+            <p class="hero-subtitle">A home for AI side quests, robotics projects, and the technical rabbit holes worth writing down.</p>
+            <a href="friction-removal-agent-platforms.html" class="cta-button">Read the first post</a>
+        </div>
+    </section>
+
+    <!-- Writing Section -->
+    <section id="writing" class="section writing-section">
+        <div class="container">
+            <h2 class="section-title">Writing</h2>
+            <div class="writing-content">
+                <p class="writing-intro">Long-form posts on AI tooling, messy interfaces, and the systems around getting useful work done.</p>
+                <p class="writing-note">The writing archive starts with a practical argument for why agent platforms are winning on interface friction, not just model quality.</p>
+            </div>
+            <div class="writing-list">
+                <a class="writing-card" href="friction-removal-agent-platforms.html" aria-label="Read Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms">
+                    <p class="writing-card-meta">March 7, 2026 · Essay</p>
+                    <h3 class="writing-card-title">Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms</h3>
+                    <p class="writing-card-description">The model is rarely the bottleneck. The real advantage comes from collapsing messy inputs, packaging, and operations into a workflow ordinary humans can actually use.</p>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- About Me Section -->
     <section id="about" class="section about-section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">About</h2>
             <div class="about-content">
                 <p>By day, I'm a Machine Learning Engineer at Meta working on AI chatbots. This site is about the other stuff.</p>
-                <p>I love tinkering with AI and building things just to see if I can. Some projects turn out useful, some are just fun, and some are both. You'll find a few of them below.</p>
+                <p>I love tinkering with AI and building things just to see if I can. Some projects turn out useful, some are just fun, and the ones worth keeping usually become notes, demos, or build logs here.</p>
                 <p>When I'm not coding, I'm usually running, swimming, or losing at Catan.</p>
             </div>
         </div>
@@ -57,8 +76,8 @@
     <!-- Projects Section -->
     <section id="projects" class="section projects-section">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
+            <h2 class="section-title">Featured Project</h2>
+            <div class="projects-grid projects-grid-featured">
                 <a class="project-card" href="ros2-robot.html" aria-label="RoboPi (ROS2 Robot) project page">
                     <h3 class="project-title">Rover, the AI Dog</h3>
                     <p class="project-description">Raspberry Pi 4 robot platform running ROS2 Humble with LIDAR, IMU, mapping, and a FastAPI control layer.</p>
@@ -70,33 +89,6 @@
                         <span class="tag">FastAPI</span>
                     </div>
                 </a>
-                <div class="project-card">
-                    <h3 class="project-title">Project One</h3>
-                    <p class="project-description">A brief description of your first project. Explain what it does and the technologies used.</p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Project Two</h3>
-                    <p class="project-description">A brief description of your second project. Highlight key features and achievements.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Django</span>
-                        <span class="tag">PostgreSQL</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Project Three</h3>
-                    <p class="project-description">A brief description of your third project. Share the impact and results.</p>
-                    <div class="project-tags">
-                        <span class="tag">Java</span>
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

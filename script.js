@@ -315,8 +315,8 @@ if (document.body.classList.contains('project-body')) {
 // Streamed text effect for the main page (markdown-like)
 if (!document.body.classList.contains('project-body')) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const textSelector = '.hero-title, .hero-subtitle, .cta-button, .section-title, .about-content p, .project-title, .project-description, .project-tags .tag';
-    const blockSelector = '.project-card';
+    const textSelector = '.hero-title, .hero-subtitle, .cta-button, .section-title, .writing-content p, .writing-card-meta, .writing-card-title, .writing-card-description, .about-content p, .project-title, .project-description, .project-tags .tag';
+    const blockSelector = '.writing-card, .project-card';
     const sequence = Array.from(document.querySelectorAll(`${blockSelector}, ${textSelector}`));
 
     if (!reducedMotion && sequence.length > 0) {
