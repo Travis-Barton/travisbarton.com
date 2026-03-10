@@ -10,6 +10,10 @@ A minimal and sleek portfolio website showcasing projects, skills, and contact i
 - **Contact Form**: Integrated contact form for visitors to reach out
 - **Modern UI**: Clean, minimal design with smooth animations
 
+## Inspiration
+
+- https://mariya.fyi/ (design inspiration)
+
 ## Setup
 
 1. The website is ready to deploy to GitHub Pages as-is
