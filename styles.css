@@ -855,7 +855,53 @@ a:hover {
     object-position: center top;
 }
 
-.media-card figcaption {
+#nails .archive-intro-row {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+#nails .swatch-strip {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#nails .nail-grid {
+    gap: 0.9rem;
+}
+
+#nails .media-card {
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+#nails .media-visual {
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(28, 49, 84, 0.08);
+    background: rgba(255, 255, 255, 0.48);
+}
+
+#nails .media-image {
+    border-bottom: none;
+}
+
+#nails .media-badge {
+    top: 0.7rem;
+    left: 0.7rem;
+    background: rgba(255, 255, 255, 0.84);
+}
+
+#nails .media-card figcaption {
+    padding: 0.7rem 0.1rem 0;
+}
+
     display: grid;
     gap: 0.35rem;
     padding: 1rem 1rem 1.15rem;
