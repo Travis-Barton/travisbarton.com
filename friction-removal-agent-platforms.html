@@ -40,7 +40,7 @@
         <div class="container article-container">
             <p class="article-kicker">Essay &middot; March 2026</p>
             <h1 class="article-title">The Model Is Not the Hard Part</h1>
-            <p class="article-subtitle">The model is rarely the bottleneck. The expensive part of applied ML is usually everything wrapped around it: messy inputs, brittle integrations, awkward distribution, and the operational burden of keeping the whole thing alive.</p>
+            <p class="article-subtitle">I keep building ML systems where the model is the easy part. The hard part is everything around it: the Excel paste, the Slack thread, the screenshot of JSON, and the operational overhead of keeping the whole thing alive after the demo.</p>
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
@@ -144,10 +144,10 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     <section id="platform" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">Agent platforms change the economics</h2>
-            <p>The first mental move is simple: plain text is a primary data type. It's not something you immediately compress into a rigid schema.</p>
-            <p>This is the line that captures the lived experience: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed.</p>
-            <p>The same "accept what people have" approach extends to images. Drag-and-drop, paste, or just give a file path. That matters for the screenshot-of-JSON problem. It also matters for who can use the system &mdash; if the interface is "paste text and attach images," the business doesn't need your ingestion UI or API client library to get value.</p>
-            <p>You also get a different execution shape. The agent runs a loop: gather context, take action, verify results, repeat until done. It can branch, retry, and adapt without you writing a new <span class="inline-code">if</span> statement for each edge case. Subagents make this modular &mdash; each runs in its own context with a custom system prompt, specific tool access, and independent permissions. That's a clean way to package "ingestion," "classification," and "reporting" as separate specialists without mushing everything into one monolithic prompt.</p>
+            <p>The trick is treating plain text as a primary data type instead of something you immediately compress into a rigid schema.</p>
+            <p>Here's the line that captures it: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed. There is no real difference between a messy spreadsheet paste and a paragraph from the agent's perspective &mdash; both are just text with patterns.</p>
+            <p>This extends to images too. Drag-and-drop, paste, or just give a file path. That solves the screenshot-of-JSON problem. And if the interface is "paste text and attach images," the business person doesn't need your ingestion UI or your API client library to get value.</p>
+            <p>You also get a different execution shape. The agent runs a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular &mdash; each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
 
             <p>Here's what the same classifier looks like as a natural-language specification instead of a Python pipeline:</p>
             <div class="article-card">
@@ -178,7 +178,7 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
 
-            <p>Compare that with the Python version. The ingestion function on its own is 15 lines. Add HTML extraction, Slack auth, Jira pagination, OCR, deployment, and monitoring, and you're looking at hundreds of lines of adapter code before you write a single line of classification logic:</p>
+            <p>Now compare that with the Python version. The ingestion function alone is 15 lines, and it only handles one input format. Add HTML extraction, Slack auth, Jira pagination, OCR, and deployment, and you're writing hundreds of lines of adapter code before you touch classification:</p>
 
             <div class="article-card">
                 <h3>Equivalent Python pipeline</h3>
@@ -238,8 +238,8 @@ def ocr_json_screenshot(image_path):
     <!-- Where the platform claim becomes real -->
     <section class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">Where the platform claim becomes real</h2>
-            <p>What makes these systems feel like platforms instead of prompts is not only that they accept messy inputs. It's that they increasingly own the full loop: inspect the state of the world, call tools, edit code, run commands, recover from failure, and keep working without constant human babysitting.</p>
+            <h2 class="article-heading">Where it starts to feel like a platform</h2>
+            <p>What makes these systems feel like actual platforms and not just fancy prompts is that they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, keep going &mdash; all without constant babysitting.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -287,7 +287,7 @@ def ocr_json_screenshot(image_path):
             <h2 class="article-heading">Risks are real: leakage, prompt injection, and boundaries</h2>
             <p>When you remove friction, you also remove guardrails that used to exist by accident.</p>
             <p>Train-test leakage is the classic ML version of this. You split into train and test first and never include test data when calling <span class="inline-code">fit</span>, because it leads to overly optimistic scores. Agent systems add a more embarrassing failure mode: the agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug. That's a capability boundary bug.</p>
-            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not only parsing data. You're accepting instructions from the environment. The practical tools for boundary enforcement are sandboxing (OS-level filesystem and network isolation) and explicit permission systems that prevent bash commands from reaching resources outside defined boundaries even if prompt injection bypasses decision-making.</p>
+            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not just parsing data &mdash; you're accepting instructions from the environment. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
             <p>The trust model matters. Most personal agent setups assume a single trusted operator &mdash; one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
             <div class="article-grid">
                 <div class="article-card">
@@ -341,9 +341,9 @@ def ocr_json_screenshot(image_path):
     <section class="section article-section article-alt">
         <div class="container article-container">
             <h2 class="article-heading">The future is better interfaces, not just better models</h2>
-            <p>Applied ML has spent years pretending the hard part lives in the model. In a surprising number of internal workflows, that was never true. The hard part was interface design, source integration, workflow packaging, and the operational overhead required to keep the system useful after the demo.</p>
-            <p>Agent platforms are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's a real shift in where software value accumulates.</p>
-            <p>The caveat is not small: once friction drops, boundary design matters more. But if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges.</p>
+            <p>Applied ML has spent years pretending the hard part is the model. In a surprising number of internal workflows, that was never true. The hard part was the interface design, the source integration, the packaging, and keeping the thing alive after the demo.</p>
+            <p>Agent platforms are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's not a small shift.</p>
+            <p>The caveat isn't small either: once friction drops, boundary design matters more. But if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges. That has always been true. It's just becoming easier to do something about it.</p>
             <p class="article-footnote">Published March 2026. Views are my own.</p>
         </div>
     </section>
