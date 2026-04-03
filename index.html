@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Travis Barton — ML engineer, bird photographer, nail artist, and robot builder.">
+    <meta name="description" content="Travis Barton — ML engineer at Meta, bird photographer, nail artist, and writer on applied AI.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.travisbarton.com/">
-    <meta property="og:title" content="Travis Barton">
-    <meta property="og:description" content="Bird photography, nail art, and tech projects.">
+    <meta property="og:title" content="Travis Barton — Engineer, Photographer, Artist">
+    <meta property="og:description" content="ML engineer at Meta who photographs birds, designs nail art, and writes about the human side of building technology.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
     <title>Travis Barton</title>
@@ -28,29 +28,37 @@
         <div class="container header-row">
             <a class="site-logo" href="index.html">TB</a>
             <nav class="site-nav" data-section-nav aria-label="Primary">
-                <a class="nav-link" href="#birds">Birds</a>
-                <a class="nav-link" href="#tech">Tech</a>
-                <a class="nav-link" href="#nails">Nails</a>
+                <a class="nav-link" href="#photography">Photography</a>
+                <a class="nav-link" href="#nails">Nail Art</a>
+                <a class="nav-link" href="#writing">Writing</a>
                 <a class="nav-link" href="#about">About</a>
             </nav>
         </div>
     </header>
 
     <main id="content">
+
+        <!-- ====== HERO ====== -->
         <section class="hero">
-            <div class="container">
-                <p class="hero-label">Travis Barton</p>
-                <h1 class="hero-title">Birds, nails,<br>& side quests.</h1>
-                <p class="hero-sub">ML engineer by day. Bird photographer, nail artist, and robot builder the rest of the time.</p>
+            <div class="container hero-inner">
+                <div class="hero-text">
+                    <h1 class="hero-title">Machine learning engineer.<br>Bird photographer.<br>Nail artist.</h1>
+                    <p class="hero-sub">I build ML systems at Meta and spend the rest of my time with a camera or at a nail desk. This is where I keep the work that doesn't fit in a LinkedIn profile.</p>
+                </div>
+                <div class="hero-mosaic">
+                    <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron" class="mosaic-img mosaic-tall" loading="eager">
+                    <img src="images/nails/camping-moons.png" alt="Nail art — crescent moons" class="mosaic-img mosaic-square" loading="eager">
+                    <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe" class="mosaic-img mosaic-square" loading="eager">
+                </div>
             </div>
         </section>
 
-        <section id="birds" class="section">
+        <!-- ====== PHOTOGRAPHY ====== -->
+        <section id="photography" class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-num">01</span>
-                    <h2>Bird Photography</h2>
-                    <p class="section-desc">Field shots from Bay Area birding. All photos from my shared album.</p>
+                    <h2>Photography</h2>
+                    <p class="section-desc">I've been birding the Bay Area with a camera. These are picks from a growing field archive — each one a species I wanted to get right.</p>
                     <a class="section-link" href="https://www.icloud.com/sharedalbum/#B275Uzl7VJ5869P" target="_blank" rel="noopener noreferrer">View full album &rarr;</a>
                 </div>
                 <div class="bird-grid">
@@ -86,63 +94,12 @@
             </div>
         </section>
 
-        <section id="tech" class="section section--alt">
+        <!-- ====== NAIL ART ====== -->
+        <section id="nails" class="section section--alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-num">02</span>
-                    <h2>Tech</h2>
-                    <p class="section-desc">Projects, writing, and build logs.</p>
-                </div>
-
-                <div class="project-feature">
-                    <div class="project-feature__content">
-                        <div class="project-feature__label">Featured Project</div>
-                        <h3>Rover, the AI Dog</h3>
-                        <p>A ROS2 robot on a Raspberry Pi with LIDAR, IMU, web control, and a slowly growing autonomy stack. The kind of side project where you learn a new framework every week.</p>
-                        <div class="tag-row">
-                            <span class="tag">ROS2</span>
-                            <span class="tag">Raspberry Pi</span>
-                            <span class="tag">LIDAR + IMU</span>
-                            <span class="tag">FastAPI</span>
-                        </div>
-                        <div class="btn-row">
-                            <a class="btn btn--primary" href="ros2-robot.html">Build log</a>
-                            <a class="btn btn--ghost" href="https://github.com/Travis-Barton/ros2_robot" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="writing-list">
-                    <h3 class="writing-list__title">Writing</h3>
-                    <a class="writing-item" href="friction-removal-agent-platforms.html">
-                        <span class="writing-item__title">Friction Removal Is Why Agent Platforms Are Becoming Platforms</span>
-                        <span class="writing-item__meta">Mar 2026 &middot; Essay</span>
-                    </a>
-                    <a class="writing-item" href="ros2-robot.html">
-                        <span class="writing-item__title">Rover, the AI Dog: A Robot That Can Come When Called</span>
-                        <span class="writing-item__meta">Build Log</span>
-                    </a>
-                </div>
-
-                <div class="link-row">
-                    <a class="link-card" href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">
-                        <strong>GitHub</strong>
-                        <span>Code, experiments, repos</span>
-                    </a>
-                    <a class="link-card" href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">
-                        <strong>LinkedIn</strong>
-                        <span>Professional profile</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="nails" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-num">03</span>
                     <h2>Nail Art</h2>
-                    <p class="section-desc">Design explorations and concept directions for upcoming sets.</p>
+                    <p class="section-desc">I design nail sets the way I'd approach any creative problem — start with a constraint, build a palette, and refine until every detail earns its place on the canvas.</p>
                 </div>
                 <div class="nail-grid">
                     <figure class="nail-card">
@@ -170,6 +127,24 @@
             </div>
         </section>
 
+        <!-- ====== WRITING ====== -->
+        <section id="writing" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Writing</h2>
+                    <p class="section-desc">I think a lot about why some ML systems succeed and others don't. Usually it has nothing to do with the model.</p>
+                </div>
+
+                <article class="essay-card">
+                    <div class="essay-card__meta">March 2026 &middot; Essay</div>
+                    <h3 class="essay-card__title">Friction Removal Is Why Agent Platforms Are Becoming Platforms</h3>
+                    <p class="essay-card__excerpt">The model is rarely the bottleneck. In most applied ML systems, the expensive part is everything wrapped around it — messy inputs, brittle integrations, and the operational cost of keeping the whole thing alive. Interface design beats model quality more often than anyone wants to admit.</p>
+                    <a class="essay-card__link" href="friction-removal-agent-platforms.html">Read the essay &rarr;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- ====== ABOUT ====== -->
         <section id="about" class="section section--alt">
             <div class="container about-grid">
                 <div class="about-photo">
@@ -177,8 +152,9 @@
                 </div>
                 <div class="about-content">
                     <h2>About</h2>
-                    <p>I'm a machine learning engineer at Meta. This site is for the other stuff — robotics projects, AI tooling experiments, bird photos that deserve a better home, and nail art I want to keep track of.</p>
-                    <p>I like building things just to see if they can exist, then turning the useful ones into demos, notes, and public build logs.</p>
+                    <p>I'm Travis — a machine learning engineer at Meta, based in the Bay Area. My day job is building systems that work at scale. Everything else on this site is what I do because I can't stop making things.</p>
+                    <p>Bird photography taught me patience and attention to detail in ways no debugging session ever could. Nail art taught me that beauty and precision aren't opposites — they're the same muscle. And writing forces me to figure out what I actually believe about the technology I build for a living.</p>
+                    <p>If any of this resonates — or if you're building something interesting — I'd love to hear from you.</p>
                     <div class="about-links">
                         <a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -186,12 +162,12 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
         <div class="container footer-row">
             <span>&copy; 2026 Travis Barton</span>
-            <span>Built with plain HTML & CSS</span>
         </div>
     </footer>
 
