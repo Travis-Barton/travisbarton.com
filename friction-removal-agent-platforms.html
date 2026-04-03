@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used — and how agent platforms are changing the economics.">
+    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
-    <meta property="og:title" content="The Model Is Not the Hard Part — Travis Barton">
+    <meta property="og:title" content="The Model Is Not the Hard Part | Travis Barton">
     <meta property="og:description" content="The expensive part of applied ML is everything wrapped around the model: messy inputs, brittle integrations, and the operational burden of keeping the whole thing alive.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
-    <title>The Model Is Not the Hard Part — Travis Barton</title>
+    <title>The Model Is Not the Hard Part | Travis Barton</title>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -135,7 +135,7 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
                     <p>Tesseract requires installing the engine plus language traineddata. You own preprocessing and parsing the OCR output into something structured.</p>
                 </div>
             </div>
-            <p>Plus deployment, monitoring, and maintenance &mdash; because once people depend on the classifier, you own the interface forever.</p>
+            <p>Plus deployment, monitoring, and maintenance, because once people depend on the classifier, you own the interface forever.</p>
             <p>Python can do all of this. It just makes it your job.</p>
         </div>
     </section>
@@ -145,9 +145,9 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
         <div class="container article-container">
             <h2 class="article-heading">Agent platforms change the economics</h2>
             <p>The trick is treating plain text as a primary data type instead of something you immediately compress into a rigid schema.</p>
-            <p>Here's the line that captures it: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed. There is no real difference between a messy spreadsheet paste and a paragraph from the agent's perspective &mdash; both are just text with patterns.</p>
+            <p>Here's the line that captures it: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed. There is no real difference between a messy spreadsheet paste and a paragraph from the agent's perspective. Both are just text with patterns.</p>
             <p>This extends to images too. Drag-and-drop, paste, or just give a file path. That solves the screenshot-of-JSON problem. And if the interface is "paste text and attach images," the business person doesn't need your ingestion UI or your API client library to get value.</p>
-            <p>You also get a different execution shape. The agent runs a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular &mdash; each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
+            <p>You also get a different execution shape. The agent runs a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular: each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
 
             <p>Here's what the same classifier looks like as a natural-language specification instead of a Python pipeline:</p>
             <div class="article-card">
@@ -228,7 +228,7 @@ def ocr_json_screenshot(image_path):
         <div class="container article-container">
             <h2 class="article-heading">Ops and distribution remove the next layer</h2>
             <p>Even if the agent can interpret messy input, you still want it to run reliably.</p>
-            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The modern agent platforms give you cron-style scheduling with retry backoff after consecutive errors &mdash; 30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes &mdash; returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
+            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The modern agent platforms give you cron-style scheduling with retry backoff after consecutive errors (30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes) returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
             <p>Heartbeat polling is the other half. If nothing needs attention, the agent replies with an acknowledgement and suppresses delivery. You can run frequent check-ins without annoying anyone.</p>
             <p>Then you hit distribution friction: putting the capability behind a URL that's safe to share. Sitting an auth layer (like Cloudflare Access) in front of a self-hosted agent gives you deny-by-default behavior, wildcard policy patterns across subdomains, and real access control without building a whole auth system yourself.</p>
             <p>A personal example: I have a voice message workflow where I send a voice note and the agent notices the transcription tool is missing, installs it, transcribes the message, and drafts a reply. That's not a named product feature. It's just what happens when "natural language as the build interface" meets "the agent can run commands and fix missing dependencies in the moment."</p>
@@ -239,7 +239,7 @@ def ocr_json_screenshot(image_path):
     <section class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">Where it starts to feel like a platform</h2>
-            <p>What makes these systems feel like actual platforms and not just fancy prompts is that they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, keep going &mdash; all without constant babysitting.</p>
+            <p>What makes these systems feel like actual platforms and not just fancy prompts is that they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -273,7 +273,7 @@ def ocr_json_screenshot(image_path):
                         <tr>
                             <td>Developer UX</td>
                             <td>Explicit code paths, but lots of adapter work for each input source.</td>
-                            <td>A gather&ndash;act&ndash;verify loop with isolated subagents and independent permissions.</td>
+                            <td>A gather/act/verify loop with isolated subagents and independent permissions.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -287,8 +287,8 @@ def ocr_json_screenshot(image_path):
             <h2 class="article-heading">Risks are real: leakage, prompt injection, and boundaries</h2>
             <p>When you remove friction, you also remove guardrails that used to exist by accident.</p>
             <p>Train-test leakage is the classic ML version of this. You split into train and test first and never include test data when calling <span class="inline-code">fit</span>, because it leads to overly optimistic scores. Agent systems add a more embarrassing failure mode: the agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug. That's a capability boundary bug.</p>
-            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not just parsing data &mdash; you're accepting instructions from the environment. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
-            <p>The trust model matters. Most personal agent setups assume a single trusted operator &mdash; one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
+            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not just parsing data. You're accepting instructions from the environment. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
+            <p>The trust model matters. Most personal agent setups assume a single trusted operator: one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
             <div class="article-grid">
                 <div class="article-card">
                     <h3>What to protect</h3>
@@ -318,7 +318,7 @@ def ocr_json_screenshot(image_path):
                         <li>The main pain is messy input and messy workflows</li>
                         <li>Humans in the loop are a feature, not a bug</li>
                         <li>You want business users to paste what they have and get value without onboarding to your API surface</li>
-                        <li>You benefit from the gather&ndash;act&ndash;verify loop more than you fear it</li>
+                        <li>You benefit from the gather/act/verify loop more than you fear it</li>
                     </ul>
                 </div>
                 <div class="article-card">
@@ -331,7 +331,7 @@ def ocr_json_screenshot(image_path):
                 </div>
                 <div class="article-card">
                     <h3>And the trap</h3>
-                    <p>If you take messy input, coerce it into strict JSON, send it to another service, coerce the response, then feed it back into the agent &mdash; you just rebuilt the brittle contract layer you were trying to escape. You get the worst of both systems.</p>
+                    <p>If you take messy input, coerce it into strict JSON, send it to another service, coerce the response, then feed it back into the agent, you just rebuilt the brittle contract layer you were trying to escape. You get the worst of both systems.</p>
                 </div>
             </div>
         </div>
