@@ -209,13 +209,14 @@ a:hover {
     font-size: clamp(2.55rem, 5vw, 4.35rem);
     line-height: 0.94;
     letter-spacing: -0.045em;
-    max-width: 9.5ch;
+    max-width: 12ch;
+    margin-bottom: 0.5rem;
 }
 
 .hero-intro {
     max-width: 34rem;
-    margin-top: 0;
-    font-size: 1.08rem;
+    margin-top: 1rem;
+    font-size: 1.15rem;
     color: #2b3240;
 }
 
@@ -243,7 +244,8 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 0.7rem;
-    margin-top: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .pillar-signal {
