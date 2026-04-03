@@ -252,17 +252,17 @@ a:hover {
     position: relative;
     z-index: 1;
     display: grid;
-    gap: 0.85rem;
+    gap: 0.45rem;
 }
 
 .moodboard-card {
-    padding: 1rem;
+    padding: 1.05rem 1.05rem 0.75rem;
     background:
-        linear-gradient(160deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.58)),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.54)),
         linear-gradient(135deg, rgba(36, 93, 255, 0.08), rgba(223, 108, 145, 0.08));
     border: 1px solid var(--line);
-    border-radius: 22px;
-    box-shadow: 0 14px 28px rgba(23, 32, 51, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 12px 24px rgba(23, 32, 51, 0.06);
 }
 
 .moodboard-header {
@@ -280,28 +280,30 @@ a:hover {
 
 .moodboard-grid {
     display: grid;
-    gap: 0.7rem;
+    gap: 0;
+    margin-top: 0.15rem;
 }
 
 .mood-card {
     display: grid;
     gap: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 16px;
-    border: 1px solid rgba(28, 49, 84, 0.1);
-    background: rgba(255, 255, 255, 0.56);
+    padding: 0.75rem 0;
+    border: none;
+    border-top: 1px solid rgba(181, 171, 157, 0.52);
+    background: transparent;
+}
+
+.mood-card:first-child {
+    padding-top: 0;
+    border-top: none;
 }
 
 .mood-card-birds {
-    background: linear-gradient(135deg, rgba(221, 235, 224, 0.82), rgba(255, 255, 255, 0.52));
+    padding-bottom: 0.85rem;
 }
 
-.mood-card-projects {
-    background: linear-gradient(135deg, rgba(220, 231, 255, 0.86), rgba(255, 255, 255, 0.5));
-}
-
-.mood-card-nails {
-    background: linear-gradient(135deg, rgba(255, 224, 233, 0.86), rgba(255, 255, 255, 0.5));
+.mood-card-birds .card-meta {
+    margin-top: 0.1rem;
 }
 
 .mood-visual {
@@ -309,10 +311,9 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     gap: 0.7rem;
-    padding: 0.68rem 0.75rem;
-    border-radius: 13px;
-    background: rgba(255, 255, 255, 0.66);
-    border: 1px solid rgba(28, 49, 84, 0.08);
+    padding: 0.1rem 0;
+    background: transparent;
+    border: none;
 }
 
 .mood-visual-photo {
@@ -322,6 +323,8 @@ a:hover {
     padding: 0;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.82);
+    border-radius: 18px;
+    border: 1px solid rgba(28, 49, 84, 0.08);
 }
 
 .mood-visual-photo::after {
@@ -403,57 +406,73 @@ a:hover {
     margin-bottom: 1.35rem;
 }
 
-.pillar-grid {
+.pillar-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    border-top: 1px solid rgba(181, 171, 157, 0.72);
 }
 
-.pillar-card {
-    position: relative;
-    padding: 1.15rem;
-    background: rgba(255, 255, 255, 0.56);
-    border: 1px solid var(--line);
-    border-radius: 24px;
+.pillar-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 0.34fr) minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.15rem 0 1.2rem 1rem;
+    border-bottom: 1px solid rgba(181, 171, 157, 0.72);
     color: inherit;
     text-decoration: none;
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    transition: background 180ms ease, transform 180ms ease;
+    box-shadow: inset 3px 0 0 transparent;
 }
 
-.pillar-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    height: 3px;
-    background: var(--line-strong);
+.pillar-birds {
+    box-shadow: inset 3px 0 0 var(--bird-accent);
 }
 
-.pillar-birds::before {
-    background: var(--bird-accent);
+.pillar-projects {
+    box-shadow: inset 3px 0 0 var(--accent);
 }
 
-.pillar-projects::before {
-    background: var(--accent);
+.pillar-nails {
+    box-shadow: inset 3px 0 0 var(--nail-accent);
 }
 
-.pillar-nails::before {
-    background: var(--nail-accent);
+.pillar-row:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.34);
 }
 
-.pillar-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(36, 93, 255, 0.22);
-    box-shadow: 0 20px 38px rgba(23, 32, 51, 0.12);
+.pillar-row-meta,
+.pillar-row-copy {
+    display: grid;
+    gap: 0.28rem;
 }
 
-.pillar-card h3 {
-    margin: 0.2rem 0 0.45rem;
-    font-size: 1.2rem;
-    line-height: 1.2;
+.pillar-row-state,
+.pillar-row-link {
+    font-family: var(--mono-font);
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-.pillar-card p:not(.card-meta):not(.card-link) {
+.pillar-row-state {
+    color: var(--muted);
+}
+
+.pillar-row-copy h3 {
+    font-size: 1.18rem;
+    line-height: 1.16;
+}
+
+.pillar-row-copy p {
     color: #2d3442;
+    max-width: 42rem;
+}
+
+.pillar-row-link {
+    align-self: center;
+    color: var(--muted);
+    white-space: nowrap;
 }
 
 .eyebrow,
@@ -487,11 +506,12 @@ a:hover {
 }
 
 .directory-card {
-    padding: 1.1rem;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.62)),
-        linear-gradient(140deg, rgba(255, 204, 103, 0.08), rgba(36, 93, 255, 0.06));
-    box-shadow: 0 14px 28px rgba(23, 32, 51, 0.08);
+    padding: 0.55rem 0 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid rgba(181, 171, 157, 0.72);
 }
 
 .directory-list {
@@ -522,8 +542,20 @@ a:hover {
     align-items: start;
 }
 
+#about .bio-grid {
+    grid-template-columns: minmax(190px, 248px) minmax(0, 1fr);
+    gap: 2rem;
+}
+
 .portrait-card {
     padding: 1rem;
+}
+
+#about .portrait-card {
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 .portrait-image {
@@ -533,8 +565,22 @@ a:hover {
     border: 1px solid var(--line);
 }
 
+#about .portrait-image {
+    border: none;
+    border-radius: 24px;
+    aspect-ratio: 4 / 4.8;
+    object-position: center 28%;
+}
+
 .portrait-card figcaption {
     margin-top: 0.8rem;
+}
+
+#about .portrait-card figcaption {
+    max-width: 15rem;
+    margin-top: 0.75rem;
+    padding-left: 0.85rem;
+    border-left: 2px solid rgba(181, 171, 157, 0.72);
 }
 
 .bio-copy {
@@ -560,10 +606,27 @@ a:hover {
     margin-top: 0.5rem;
 }
 
+#about .fact-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(181, 171, 157, 0.72);
+}
+
 .fact-card {
     padding: 0.95rem 1rem;
     background: rgba(255, 255, 255, 0.48);
     border: 1px solid var(--line);
+}
+
+#about .fact-card {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.85rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(181, 171, 157, 0.72);
 }
 
 .fact-label {
@@ -573,6 +636,15 @@ a:hover {
     font-size: 0.76rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+}
+
+#about .fact-label {
+    margin-bottom: 0;
+}
+
+#about .fact-card p:last-child {
+    color: #2d3442;
+    max-width: 36rem;
 }
 
 .archive-section {
@@ -902,6 +974,7 @@ a:hover {
     padding: 0.7rem 0.1rem 0;
 }
 
+.media-card figcaption {
     display: grid;
     gap: 0.35rem;
     padding: 1rem 1rem 1.15rem;
@@ -1371,7 +1444,6 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .pillar-grid,
     .pillar-signal,
     .fact-grid,
     .media-grid,
@@ -1388,6 +1460,21 @@ a:hover {
 
     .focus-strip {
         grid-template-columns: 1fr;
+    }
+
+    #about .bio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+    }
+
+    .pillar-row {
+        grid-template-columns: minmax(150px, 0.42fr) minmax(0, 1fr);
+    }
+
+    .pillar-row-link {
+        grid-column: 2;
+        justify-self: start;
+        align-self: start;
     }
 }
 
@@ -1471,6 +1558,10 @@ a:hover {
         gap: 0.65rem;
     }
 
+    #about .bio-copy {
+        order: 1;
+    }
+
     .portrait-card {
         order: 2;
         max-width: 15rem;
@@ -1479,8 +1570,21 @@ a:hover {
         background: rgba(255, 255, 255, 0.42);
     }
 
+    #about .portrait-card {
+        order: 2;
+        max-width: 14rem;
+        margin: 0.15rem 0 0;
+        padding: 0;
+        background: transparent;
+    }
+
     .portrait-card figcaption {
         margin-top: 0.55rem;
+    }
+
+    #about .portrait-card figcaption {
+        max-width: none;
+        margin-top: 0.6rem;
     }
 
     .fact-card {
@@ -1488,7 +1592,12 @@ a:hover {
         background: rgba(255, 255, 255, 0.4);
     }
 
-    .pillar-grid,
+    #about .fact-card {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+        padding: 0.75rem 0;
+    }
+
     .pillar-signal,
     .fact-grid,
     .media-grid,
@@ -1497,6 +1606,16 @@ a:hover {
     .projects-grid,
     .article-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pillar-row {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+        padding: 1rem 0 1rem 0.9rem;
+    }
+
+    .pillar-row-link {
+        grid-column: auto;
     }
 
     .article-title {
@@ -1516,6 +1635,10 @@ a:hover {
 
     .portrait-card {
         max-width: 13rem;
+    }
+
+    #about .portrait-card {
+        max-width: 12rem;
     }
 
     .hero-copy h1 {
@@ -1545,7 +1668,7 @@ a:hover {
 @media (prefers-reduced-motion: no-preference) {
     .hero-copy,
     .hero-stage,
-    .pillar-card,
+    .pillar-row,
     .media-card,
     .feature-card,
     .project-spotlight {
@@ -1556,13 +1679,13 @@ a:hover {
         animation-delay: 80ms;
     }
 
-    .pillar-card:nth-child(2),
+    .pillar-row:nth-child(2),
     .media-card:nth-child(2),
     .feature-card:nth-child(2) {
         animation-delay: 120ms;
     }
 
-    .pillar-card:nth-child(3),
+    .pillar-row:nth-child(3),
     .media-card:nth-child(3),
     .feature-card:nth-child(3) {
         animation-delay: 180ms;
