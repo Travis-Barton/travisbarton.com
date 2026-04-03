@@ -44,13 +44,13 @@
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
-                <span class="meta-pill">Agent platforms</span>
+                <span class="meta-pill">Claude Code</span>
                 <span class="meta-pill">Operations</span>
             </div>
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
-                    <li>Agent platforms are becoming <em>platforms</em> because they remove friction across the whole workflow: what you can paste in, who can use it, how fast you can build it, how it debugs itself, how it runs on a schedule, and how you ship it behind real access control.</li>
+                    <li>Claude Code style systems are becoming <em>platforms</em> because they remove friction across the whole workflow: what you can paste in, who can use it, how fast you can build it, how it debugs itself, how it runs on a schedule, and how you ship it behind real access control.</li>
                     <li>Python ML pipelines can do all of this too, but you pay an ongoing interface tax: parsers, schema drift, auth, pagination, OCR, deployment, and maintenance.</li>
                     <li>The trade is that the hard part moves to safety boundaries: leakage, prompt injection, and access scoping.</li>
                 </ul>
@@ -143,15 +143,15 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     <!-- What agent platforms change -->
     <section id="platform" class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">Agent platforms change the economics</h2>
-            <p>The trick is treating plain text as a primary data type instead of something you immediately compress into a rigid schema.</p>
-            <p>Here's the line that captures it: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed. There is no real difference between a messy spreadsheet paste and a paragraph from the agent's perspective. Both are just text with patterns.</p>
-            <p>This extends to images too. Drag-and-drop, paste, or just give a file path. That solves the screenshot-of-JSON problem. And if the interface is "paste text and attach images," the business person doesn't need your ingestion UI or your API client library to get value.</p>
-            <p>You also get a different execution shape. The agent runs a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular: each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
+            <h2 class="article-heading">What Claude Code changes</h2>
+            <p>Claude Code is a tool for running AI agents that can read files, execute commands, call APIs, and iterate on their own work. It's meant for code generation, but the same architecture handles any workflow where the inputs are messy and the steps aren't fully predictable.</p>
+            <p>The trick is that plain text is a primary data type. You don't compress it into a rigid schema first. Here's the line that captures it: <em>"To a human it's borderline unreadable, but to Claude it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed. There is no real difference between a messy spreadsheet paste and a paragraph from Claude's perspective. Both are just text with patterns.</p>
+            <p>This extends to images too. Drag-and-drop, paste, or give a file path. That solves the screenshot-of-JSON problem. And if the interface is "paste text and attach images," the business person doesn't need your ingestion UI or your API client library to get value.</p>
+            <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular: each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
 
-            <p>Here's what the same classifier looks like as a natural-language specification instead of a Python pipeline:</p>
+            <p>Here's what the same classifier looks like as a Claude Code skill instead of a Python pipeline:</p>
             <div class="article-card">
-                <h3>Agent skill specification</h3>
+                <h3>Claude Code skill (SKILL.md)</h3>
                 <pre><code>---
 name: classify-feedback
 description: Classify messy customer feedback pasted from
@@ -178,7 +178,7 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
 
-            <p>Now compare that with the Python version. The ingestion function alone is 15 lines, and it only handles one input format. Add HTML extraction, Slack auth, Jira pagination, OCR, and deployment, and you're writing hundreds of lines of adapter code before you touch classification:</p>
+            <p>Now compare that with the Python version of the same workflow. The ingestion function alone is 15 lines, and it only handles one input format. Add HTML extraction, Slack auth, Jira pagination, OCR, and deployment, and you're writing hundreds of lines of adapter code before you touch classification:</p>
 
             <div class="article-card">
                 <h3>Equivalent Python pipeline</h3>
@@ -219,7 +219,7 @@ def ocr_json_screenshot(image_path):
     raise NotImplementedError</code></pre>
             </div>
 
-            <p>The skill specification is 20 lines of plain English. The Python pipeline is already longer and every <span class="inline-code">NotImplementedError</span> represents weeks of connector work that somebody owns.</p>
+            <p>The Claude Code skill is 20 lines of plain English. The Python pipeline is already longer and every <span class="inline-code">NotImplementedError</span> represents weeks of connector work that somebody owns.</p>
         </div>
     </section>
 
@@ -227,8 +227,8 @@ def ocr_json_screenshot(image_path):
     <section class="section article-section article-alt">
         <div class="container article-container">
             <h2 class="article-heading">Ops and distribution remove the next layer</h2>
-            <p>Even if the agent can interpret messy input, you still want it to run reliably.</p>
-            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The modern agent platforms give you cron-style scheduling with retry backoff after consecutive errors (30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes) returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
+            <p>Even if Claude can interpret messy input, you still want it to run reliably.</p>
+            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The runtime I use gives me cron-style scheduling with retry backoff after consecutive errors (30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes) returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
             <p>Heartbeat polling is the other half. If nothing needs attention, the agent replies with an acknowledgement and suppresses delivery. You can run frequent check-ins without annoying anyone.</p>
             <p>Then you hit distribution friction: putting the capability behind a URL that's safe to share. Sitting an auth layer (like Cloudflare Access) in front of a self-hosted agent gives you deny-by-default behavior, wildcard policy patterns across subdomains, and real access control without building a whole auth system yourself.</p>
             <p>A personal example: I have a voice message workflow where I send a voice note and the agent notices the transcription tool is missing, installs it, transcribes the message, and drafts a reply. That's not a named product feature. It's just what happens when "natural language as the build interface" meets "the agent can run commands and fix missing dependencies in the moment."</p>
@@ -238,15 +238,15 @@ def ocr_json_screenshot(image_path):
     <!-- Where the platform claim becomes real -->
     <section class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">Where it starts to feel like a platform</h2>
-            <p>These systems feel like platforms because they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
+            <h2 class="article-heading">Where Claude Code starts to feel like a platform</h2>
+            <p>What makes Claude Code feel like a platform is that it owns the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
             <div class="article-table">
                 <table>
                     <thead>
                         <tr>
                             <th>Attribute</th>
                             <th>Python ML pipeline</th>
-                            <th>Agent platform</th>
+                            <th>Claude Code pipeline</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -313,7 +313,7 @@ def ocr_json_screenshot(image_path):
             <p>Here's the decision logic I actually use:</p>
             <div class="article-grid">
                 <div class="article-card">
-                    <h3>Use an agent platform when</h3>
+                    <h3>Use a Claude Code pipeline when</h3>
                     <ul>
                         <li>The main pain is messy input and messy workflows</li>
                         <li>Humans in the loop are a feature, not a bug</li>
@@ -342,7 +342,7 @@ def ocr_json_screenshot(image_path):
         <div class="container article-container">
             <h2 class="article-heading">Better interfaces will matter more than better models</h2>
             <p>Applied ML has spent years pretending the hard part is the model. In a surprising number of internal workflows, that was never true. The hard part was the interface design, the source integration, the packaging, and keeping the thing alive after the demo.</p>
-            <p>Agent platforms are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's not a small shift.</p>
+            <p>Claude Code style systems are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's not a small shift.</p>
             <p>The caveat isn't small either: once friction drops, boundary design matters more. But if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges. That has always been true. It's just becoming easier to do something about it.</p>
             <p class="article-footnote">Published March 2026. Views are my own.</p>
         </div>
