@@ -40,16 +40,39 @@
 
         <!-- ====== HERO ====== -->
         <section class="hero">
-            <div class="container hero-inner">
+            <div class="container">
                 <div class="hero-text">
                     <h1 class="hero-title">Machine learning engineer.<br>Bird photographer.<br>Nail artist.</h1>
                     <p class="hero-sub">I build ML systems at Meta and spend the rest of my time with a camera or at a nail desk. This is where I keep the work that doesn't fit in a LinkedIn profile.</p>
                 </div>
-                <div class="hero-mosaic">
-                    <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron" class="mosaic-img mosaic-tall" loading="eager">
-                    <img src="images/nails/camping-moons.png" alt="Nail art — crescent moons" class="mosaic-img mosaic-square" loading="eager">
-                    <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe" class="mosaic-img mosaic-square" loading="eager">
+            </div>
+            <div class="coverflow" aria-label="Featured work">
+                <div class="coverflow-track">
+                    <div class="coverflow-slide" data-label="Great Blue Heron">
+                        <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron standing in shallow water" loading="eager">
+                    </div>
+                    <div class="coverflow-slide" data-label="Crescent Moons">
+                        <img src="images/nails/camping-moons.png" alt="Nail art — crescent moons on nude base" loading="eager">
+                    </div>
+                    <div class="coverflow-slide" data-label="Black Phoebe">
+                        <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe perched on a branch" loading="eager">
+                    </div>
+                    <div class="coverflow-slide" data-label="Campfire Icons">
+                        <img src="images/nails/camping-campfire.png" alt="Nail art — campfire icons on warm base" loading="eager">
+                    </div>
+                    <div class="coverflow-slide" data-label="Northern Shoveler">
+                        <img src="images/birds/northern-shoveler.jpg" alt="Northern Shoveler on water" loading="eager">
+                    </div>
+                    <div class="coverflow-slide" data-label="Wave + Star">
+                        <img src="images/nails/camping-wave-star.png" alt="Nail art — mauve wave with star accent" loading="lazy">
+                    </div>
+                    <div class="coverflow-slide" data-label="Oak Titmouse">
+                        <img src="images/birds/oak-titmouse.jpg" alt="Oak Titmouse on a branch" loading="lazy">
+                    </div>
                 </div>
+                <button class="coverflow-btn coverflow-prev" aria-label="Previous">&lsaquo;</button>
+                <button class="coverflow-btn coverflow-next" aria-label="Next">&rsaquo;</button>
+                <div class="coverflow-label" aria-live="polite"></div>
             </div>
         </section>
 
