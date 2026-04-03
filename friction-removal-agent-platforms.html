@@ -64,25 +64,7 @@
             <h2 class="article-heading">Friction is the feature</h2>
             <p>Let's take the example of a customer feedback classifier.</p>
             <p>Every week, a business person drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the "select all &rarr; copy &rarr; paste" blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
-            <p>Then things get worse. The "feedback" contains:</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>HTML dumps</h3>
-                    <p>Form output from a web tool that still needs to be stripped down and reconstructed into rows and fields.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Slack threads pasted inline</h3>
-                    <p>Customer context with its own auth model, cursor pagination, rate limits, and failure modes.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Jira tickets as labels</h3>
-                    <p>Tickets acting as ground truth, each behind their own auth and pagination (<span class="inline-code">startAt</span>, <span class="inline-code">maxResults</span>, <span class="inline-code">total</span>).</p>
-                </div>
-                <div class="article-card">
-                    <h3>Screenshots of JSON</h3>
-                    <p>The data exists, but only as an image because someone couldn't be bothered to find the endpoint.</p>
-                </div>
-            </div>
+            <p>Then things get worse. The "feedback" also contains HTML dumps from a web form, Slack threads pasted inline, Jira tickets that act as labels or ground truth, and screenshots of JSON from a dashboard because someone couldn't be bothered to find the endpoint.</p>
             <p>The model is not the hard part. The hard part is everything around the model. That's friction.</p>
         </div>
     </section>
