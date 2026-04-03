@@ -901,6 +901,39 @@ a:hover {
     line-height: 1.2;
 }
 
+#projects .link-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0.35rem 0 0;
+}
+
+#projects .feature-card {
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid rgba(181, 171, 157, 0.72);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#projects .feature-card:last-child {
+    border-bottom: 1px solid rgba(181, 171, 157, 0.72);
+}
+
+#projects .feature-card:hover {
+    transform: none;
+    border-color: rgba(181, 171, 157, 0.72);
+    box-shadow: none;
+}
+
+#projects .feature-card h3 {
+    font-size: 1.12rem;
+}
+
+#projects .feature-card .card-link {
+    margin-top: 0.1rem;
+}
+
 .feature-card p,
 .project-description,
 .article-section p,
