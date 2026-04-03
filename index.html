@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Travis Barton personal archive: bird photos, tech projects and notes, and nail art.">
+    <meta name="description" content="Travis Barton — ML engineer, bird photographer, nail artist, and robot builder.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.travisbarton.com/">
     <meta property="og:title" content="Travis Barton">
-    <meta property="og:description" content="Bird photos, cool tech projects and blogs, and nail art in a simple personal archive.">
+    <meta property="og:description" content="Bird photography, nail art, and tech projects.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
     <title>Travis Barton</title>
@@ -19,384 +19,179 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body class="home-body">
+<body>
     <a class="skip-link" href="#content">Skip to content</a>
 
     <header class="site-header">
         <div class="container header-row">
-            <a class="site-title" href="index.html">Travis Barton</a>
+            <a class="site-logo" href="index.html">TB</a>
             <nav class="site-nav" data-section-nav aria-label="Primary">
+                <a class="nav-link" href="#birds">Birds</a>
+                <a class="nav-link" href="#tech">Tech</a>
+                <a class="nav-link" href="#nails">Nails</a>
                 <a class="nav-link" href="#about">About</a>
-                <a class="nav-link" href="https://www.icloud.com/sharedalbum/#B275Uzl7VJ5869P" target="_blank" rel="noopener noreferrer">Bird photos (Album)</a>
-                <a class="nav-link" href="#projects">Tech</a>
-                <a class="nav-link" href="#nails">Nail art</a>
-                <a class="nav-link" href="#links">Links</a>
             </nav>
         </div>
     </header>
 
     <main id="content">
-        <section class="hero section">
-            <div class="container hero-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">travisbarton.com / three-lane archive / April 2026</p>
-                    <h1>Birds, nails, and robot side quests.</h1>
-                    <p class="hero-intro">A personal archive for three recurring lanes: bird photos, nail studies, and small projects led by the robot build.</p>
-                    <p class="hero-note">Bird photos now open with real shared-album picks, the robot trail is already live, and the nail lane stays clearly marked as concept work until finished sets arrive.</p>
-                    <div class="hero-actions">
-                        <a class="cta-button" href="ros2-robot.html">Read the robot build log</a>
-                        <a class="ghost-button" href="#pillars">Browse the three lanes</a>
-                    </div>
-                    <div class="pillar-signal" aria-label="Three homepage pillars">
-                        <article class="pillar-signal-card pillar-signal-birds">
-                            <p class="fact-label">01 / bird photography</p>
-                            <p>Real album-backed bird frames now lead the archive.</p>
-                        </article>
-                        <article class="pillar-signal-card pillar-signal-nails">
-                            <p class="fact-label">02 / nail art</p>
-                            <p>Concept tiles hold the place until finished sets arrive.</p>
-                        </article>
-                        <article class="pillar-signal-card pillar-signal-projects">
-                            <p class="fact-label">03 / robot + personal projects</p>
-                            <p>The live robot build log stays front and center.</p>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="hero-stage">
-                    <section class="moodboard-card" aria-label="Homepage visual direction">
-                        <div class="moodboard-header">
-                            <p class="directory-kicker">Three lanes</p>
-                            <p class="moodboard-note">Minimal, honest, and easy to scan.</p>
-                        </div>
-                        <div class="moodboard-grid">
-                            <article class="mood-card mood-card-birds">
-                                <div class="mood-visual mood-visual-photo">
-                                    <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron standing in shallow water." class="mood-photo" loading="eager" decoding="async">
-                                    <div class="mood-photo-meta">
-                                        <span class="mood-badge">album-backed</span>
-                                        <span class="mood-path">Pok&eacute;dex / first picks live</span>
-                                    </div>
-                                </div>
-                                <p class="card-meta">Bird photography</p>
-                                <p class="mood-title">Field-note archive, now with real frames</p>
-                            </article>
-                            <article class="mood-card mood-card-projects">
-                                <div class="mood-visual">
-                                    <span class="mood-badge">live now</span>
-                                    <span class="mood-path">robot / blog / prototypes</span>
-                                </div>
-                                <p class="card-meta">Projects + blog</p>
-                                <p class="mood-title">Robot build log</p>
-                            </article>
-                            <article class="mood-card mood-card-nails">
-                                <div class="mood-visual">
-                                    <span class="mood-badge">concept tiles</span>
-                                    <span class="mood-path">palette / pattern / finish</span>
-                                </div>
-                                <p class="card-meta">Nail art</p>
-                                <p class="mood-title">Future set studies</p>
-                            </article>
-                        </div>
-                    </section>
-
-                    <aside class="directory-card" aria-label="Site directory">
-                        <p class="directory-kicker">Top fold map</p>
-                        <ol class="directory-list">
-                            <li>
-                                <a href="#birds">Bird photography</a>
-                                <span>Real shared-album picks now, fuller field notes next.</span>
-                            </li>
-                            <li>
-                                <a href="#projects">Projects and blog</a>
-                                <span>Robot build log first, then other side quests.</span>
-                            </li>
-                            <li>
-                                <a href="#nails">Nail art</a>
-                                <span>Concept placeholders now, finished sets later.</span>
-                            </li>
-                        </ol>
-                    </aside>
-                </div>
-            </div>
-        </section>
-
-        <section id="pillars" class="section pillar-section archive-section" aria-labelledby="pillars-heading">
+        <section class="hero">
             <div class="container">
-                <div class="section-heading pillar-heading">
-                    <p class="section-index">Three pillars</p>
-                    <h2 id="pillars-heading">A clear table of contents for the whole archive.</h2>
-                    <p>The homepage already has three lanes. This section now just names them, shows their current state, and points you straight at the right place without another card grid.</p>
-                </div>
-
-                <div class="pillar-list" aria-label="Archive lanes">
-                    <a class="pillar-row pillar-birds" href="https://www.icloud.com/sharedalbum/#B275Uzl7VJ5869P" target="_blank" rel="noopener noreferrer">
-                        <div class="pillar-row-meta">
-                            <p class="card-meta">01 / bird photography</p>
-                            <p class="pillar-row-state">Live album picks</p>
-                        </div>
-                        <div class="pillar-row-copy">
-                            <h3>Bird picks first, then deeper field notes</h3>
-                            <p>Real shared-album frames already lead this lane, with room to add species notes, dates, and one sentence about why each image stays.</p>
-                        </div>
-                        <p class="pillar-row-link">Open album</p>
-                    </a>
-
-                    <a class="pillar-row pillar-projects" href="#projects">
-                        <div class="pillar-row-meta">
-                            <p class="card-meta">02 / projects + blog</p>
-                            <p class="pillar-row-state">Robot build active</p>
-                        </div>
-                        <div class="pillar-row-copy">
-                            <h3>Robot build log in front, other side quests behind it</h3>
-                            <p>The live robot work stays first, with space for essays, prototypes, and future build notes once they earn a place on the archive.</p>
-                        </div>
-                        <p class="pillar-row-link">Open projects</p>
-                    </a>
-
-                    <a class="pillar-row pillar-nails" href="#nails">
-                        <div class="pillar-row-meta">
-                            <p class="card-meta">03 / nail art</p>
-                            <p class="pillar-row-state">Concept lane</p>
-                        </div>
-                        <div class="pillar-row-copy">
-                            <h3>Design directions now, finished sets later</h3>
-                            <p>The nail lane stays explicit about being concept-first, so future finished photos can drop into a structure that already has clear rhythm and labels.</p>
-                        </div>
-                        <p class="pillar-row-link">Open nails</p>
-                    </a>
-                </div>
+                <p class="hero-label">Travis Barton</p>
+                <h1 class="hero-title">Birds, nails,<br>& side quests.</h1>
+                <p class="hero-sub">ML engineer by day. Bird photographer, nail artist, and robot builder the rest of the time.</p>
             </div>
         </section>
 
-        <section id="about" class="section archive-section alt-section">
-            <div class="container bio-grid">
-                <figure class="portrait-card">
-                    <img src="5E7AA291-C1E0-4EB9-8653-0EA328F90355_1_105_c.jpeg" alt="Portrait of Travis Barton smiling indoors." class="portrait-image">
-                    <figcaption class="caption-meta">Machine learning engineer, robot builder, birder, and collector of good side quests.</figcaption>
-                </figure>
-
-                <div class="bio-copy">
-                    <p class="section-index">00 / about</p>
-                    <h2>Hi, I’m Travis.</h2>
-                    <p>By day, I’m a machine learning engineer at Meta. This site is for the other stuff: robotics projects, AI tooling side quests, bird photos that deserve better organization, and nail art I actually want to keep.</p>
-                    <p>I like building things just to see if they can exist, then turning the useful ones into notes, demos, and public build logs. If it survives long enough to matter, it should probably have a home.</p>
-
-                    <div class="fact-grid" aria-label="Quick facts">
-                        <div class="fact-card">
-                            <p class="fact-label">Main interests</p>
-                            <p>AI tools, real-world robots, birding, visual experiments</p>
-                        </div>
-                        <div class="fact-card">
-                            <p class="fact-label">What this site is for</p>
-                            <p>Keeping the good artifacts instead of letting them disappear into chats and camera rolls</p>
-                        </div>
-                        <div class="fact-card">
-                            <p class="fact-label">Elsewhere</p>
-                            <p>GitHub for code, LinkedIn for the standard professional version</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="scatter-break">
-            <div class="container scatter-photo align-right">
-                <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron" loading="lazy">
-                <p class="scatter-caption">Great Blue Heron / Pok&eacute;dex / Nov 2025</p>
-            </div>
-        </section>
-
-        <section id="projects" class="section archive-section alt-section">
+        <section id="birds" class="section">
             <div class="container">
-                <div class="section-heading">
-                    <p class="section-index">02 / personal projects and blog</p>
-                    <h2>Robot build first, with writing and side projects behind it.</h2>
-                    <p>The homepage points straight at the robot project first, then leaves room for essays, experiments, and future build logs without falling back to a generic portfolio grid.</p>
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <h2>Bird Photography</h2>
+                    <p class="section-desc">Field shots from Bay Area birding. All photos from my shared album.</p>
+                    <a class="section-link" href="https://www.icloud.com/sharedalbum/#B275Uzl7VJ5869P" target="_blank" rel="noopener noreferrer">View full album &rarr;</a>
+                </div>
+                <div class="bird-grid">
+                    <figure class="bird-card">
+                        <img src="images/birds/great-blue-heron.jpg" alt="Great Blue Heron standing in shallow water" loading="eager">
+                        <figcaption>
+                            <strong>Great Blue Heron</strong>
+                            <span>Nov 2025</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="bird-card">
+                        <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe perched on a branch" loading="lazy">
+                        <figcaption>
+                            <strong>Black Phoebe</strong>
+                            <span>Oct 2025</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="bird-card">
+                        <img src="images/birds/northern-shoveler.jpg" alt="Northern Shoveler on water" loading="lazy">
+                        <figcaption>
+                            <strong>Northern Shoveler</strong>
+                            <span>Nov 2025</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="bird-card bird-card--wide">
+                        <img src="images/birds/oak-titmouse.jpg" alt="Oak Titmouse on a branch" loading="lazy">
+                        <figcaption>
+                            <strong>Oak Titmouse</strong>
+                            <span>Nov 2025</span>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="section section--alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <h2>Tech</h2>
+                    <p class="section-desc">Projects, writing, and build logs.</p>
                 </div>
 
-                <div class="project-spotlight">
-                    <div class="project-spotlight-copy">
-                        <p class="section-index">Featured now</p>
+                <div class="project-feature">
+                    <div class="project-feature__content">
+                        <div class="project-feature__label">Featured Project</div>
                         <h3>Rover, the AI Dog</h3>
-                        <p>My favorite side projects usually involve sensors, a slightly unreasonable end state, and a strong excuse to learn a new stack. Rover is the clearest version of that instinct: a ROS2 robot that is slowly turning into the kind of machine you can call from another room.</p>
-                        <div class="project-tags" aria-label="Robot project stack">
+                        <p>A ROS2 robot on a Raspberry Pi with LIDAR, IMU, web control, and a slowly growing autonomy stack. The kind of side project where you learn a new framework every week.</p>
+                        <div class="tag-row">
                             <span class="tag">ROS2</span>
                             <span class="tag">Raspberry Pi</span>
                             <span class="tag">LIDAR + IMU</span>
-                            <span class="tag">FastAPI control</span>
+                            <span class="tag">FastAPI</span>
                         </div>
-                        <div class="article-links">
-                            <a class="cta-button" href="ros2-robot.html">Read the build log</a>
-                            <a class="ghost-button" href="https://github.com/Travis-Barton/ros2_robot" target="_blank" rel="noopener noreferrer">View the repo</a>
+                        <div class="btn-row">
+                            <a class="btn btn--primary" href="ros2-robot.html">Build log</a>
+                            <a class="btn btn--ghost" href="https://github.com/Travis-Barton/ros2_robot" target="_blank" rel="noopener noreferrer">GitHub</a>
                         </div>
-                        <div class="focus-strip" aria-label="Current project focus">
-                            <div class="focus-card">
-                                <p class="fact-label">Now</p>
-                                <p>Bring-up, sensors, web control, and a stable base for demos.</p>
-                            </div>
-                            <div class="focus-card">
-                                <p class="fact-label">Next</p>
-                                <p>Mapping, autonomy experiments, and more public notes from the process.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="spotlight-panel">
-                        <p class="fact-label">Why it leads the homepage</p>
-                        <ul class="spotlight-list">
-                            <li>Live LIDAR, IMU, and web control as a stable baseline.</li>
-                            <li>Foxglove visualization and repeatable bring-up scripts.</li>
-                            <li>A clear path toward mapping, autonomy, voice, and future blog entries.</li>
-                        </ul>
                     </div>
                 </div>
 
-                <div class="link-grid">
-                    <a class="feature-card" href="ros2-robot.html">
-                        <p class="card-meta">Project page</p>
-                        <h3>Rover, the AI Dog</h3>
-                        <p>ROS2 robot platform on a Raspberry Pi with sensors, mapping, a web control layer, and a very clear roadmap.</p>
-                        <p class="card-link">Open project</p>
+                <div class="writing-list">
+                    <h3 class="writing-list__title">Writing</h3>
+                    <a class="writing-item" href="friction-removal-agent-platforms.html">
+                        <span class="writing-item__title">Friction Removal Is Why Agent Platforms Are Becoming Platforms</span>
+                        <span class="writing-item__meta">Mar 2026 &middot; Essay</span>
                     </a>
-
-                    <a class="feature-card" href="friction-removal-agent-platforms.html">
-                        <p class="card-meta">Essay</p>
-                        <h3>Friction Removal and agent platforms</h3>
-                        <p>Why applied ML systems win on interface and operations design more often than raw model quality.</p>
-                        <p class="card-link">Read essay</p>
-                    </a>
-
-                    <a class="feature-card" href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">
-                        <p class="card-meta">GitHub</p>
-                        <h3>Code, experiments, and repos</h3>
-                        <p>The broader trail: prototypes, robot work, and whatever else is currently getting pushed into version control.</p>
-                        <p class="card-link">Visit profile</p>
+                    <a class="writing-item" href="ros2-robot.html">
+                        <span class="writing-item__title">Rover, the AI Dog: A Robot That Can Come When Called</span>
+                        <span class="writing-item__meta">Build Log</span>
                     </a>
                 </div>
 
-                <div id="writing" class="archive-listing">
-                    <div>
-                        <p class="section-index">Archive index</p>
-                        <h3 class="subheading">Published + in progress</h3>
-                    </div>
-                    <ul class="archive-list">
-                        <li>
-                            <a href="friction-removal-agent-platforms.html">Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms</a>
-                            <span>March 7, 2026 / essay</span>
-                        </li>
-                        <li>
-                            <a href="ros2-robot.html">Rover, the AI Dog: a robot that can come when called</a>
-                            <span>Project page / ROS2 robot build log</span>
-                        </li>
-                        <li>
-                            <span class="plain-label">Next in queue</span>
-                            <span>Bird field notes, nail set process notes, and more robot build logs are the next obvious additions.</span>
-                        </li>
-                    </ul>
+                <div class="link-row">
+                    <a class="link-card" href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">
+                        <strong>GitHub</strong>
+                        <span>Code, experiments, repos</span>
+                    </a>
+                    <a class="link-card" href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">
+                        <strong>LinkedIn</strong>
+                        <span>Professional profile</span>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="scatter-break">
-            <div class="container scatter-photo">
-                <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe" loading="lazy">
-                <p class="scatter-caption">Black Phoebe / Pok&eacute;dex / Oct 2025</p>
-            </div>
-        </section>
-
-        <section id="nails" class="section archive-section">
+        <section id="nails" class="section">
             <div class="container">
-                <div class="section-heading">
-                    <p class="section-index">03 / nail art</p>
-                    <h2>Nail studies framed like real design directions.</h2>
-                    <p>Finished nail photos will come later, so the homepage now treats these as named concept directions instead of fake completed archive entries.</p>
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <h2>Nail Art</h2>
+                    <p class="section-desc">Design explorations and concept directions for upcoming sets.</p>
                 </div>
+                <div class="nail-grid">
+                    <figure class="nail-card">
+                        <img src="images/nails/camping-moons.png" alt="Almond-shaped nude nails with tiny cream crescent moons" loading="lazy">
+                        <figcaption>
+                            <strong>Crescent Moons</strong>
+                            <span>Sheer neutral base with moon details</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="nail-card">
+                        <img src="images/nails/camping-campfire.png" alt="Nude nails with campfire and dotted trail details" loading="lazy">
+                        <figcaption>
+                            <strong>Campfire Icons</strong>
+                            <span>Graphic icon set on a warm base</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="nail-card">
+                        <img src="images/nails/camping-wave-star.png" alt="Neutral nails with mauve wave detail and star accent" loading="lazy">
+                        <figcaption>
+                            <strong>Wave + Star</strong>
+                            <span>Mauve accent line with star detail</span>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
 
-                <div class="archive-intro-row nail-intro-row">
-                    <div class="archive-callout nail-callout">
-                        <p class="fact-label">Current format</p>
-                        <p>Each card already has a visual direction, palette cue, and caption rhythm, so swapping in finished set photos later becomes a content update instead of a homepage rewrite.</p>
+        <section id="about" class="section section--alt">
+            <div class="container about-grid">
+                <div class="about-photo">
+                    <img src="5E7AA291-C1E0-4EB9-8653-0EA328F90355_1_105_c.jpeg" alt="Travis Barton" loading="lazy">
+                </div>
+                <div class="about-content">
+                    <h2>About</h2>
+                    <p>I'm a machine learning engineer at Meta. This site is for the other stuff — robotics projects, AI tooling experiments, bird photos that deserve a better home, and nail art I want to keep track of.</p>
+                    <p>I like building things just to see if they can exist, then turning the useful ones into demos, notes, and public build logs.</p>
+                    <div class="about-links">
+                        <a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                     </div>
-
-                    <div class="swatch-strip" aria-label="Nail palette placeholders">
-                        <span class="swatch swatch-soft"></span>
-                        <span class="swatch swatch-warm"></span>
-                        <span class="swatch swatch-bright"></span>
-                        <span class="swatch-label">Working palette for the first three directions</span>
-                    </div>
                 </div>
-
-                <div class="media-grid media-grid-compact nail-grid">
-                    <figure class="media-card">
-                        <div class="media-visual">
-                            <span class="media-badge">Concept direction</span>
-                            <img class="media-image nail-image" src="images/nails/camping-moons.png" alt="Design mockup of almond-shaped nude nails with tiny cream crescent moons." loading="lazy" decoding="async">
-                        </div>
-                        <figcaption>
-                            <span class="caption-title">Crescent moons</span>
-                            <span class="caption-meta">Concept direction / sheer neutral base / a quieter first set with room for moon details.</span>
-                        </figcaption>
-                    </figure>
-                    <figure class="media-card">
-                        <div class="media-visual">
-                            <span class="media-badge">Concept direction</span>
-                            <img class="media-image nail-image" src="images/nails/camping-campfire.png" alt="Design mockup of nude nails with campfire and dotted trail details." loading="lazy" decoding="async">
-                        </div>
-                        <figcaption>
-                            <span class="caption-title">Campfire icons</span>
-                            <span class="caption-meta">Concept direction / graphic icon set / the clearest candidate for future process photos.</span>
-                        </figcaption>
-                    </figure>
-                    <figure class="media-card">
-                        <div class="media-visual">
-                            <span class="media-badge">Concept direction</span>
-                            <img class="media-image nail-image" src="images/nails/camping-wave-star.png" alt="Design mockup of neutral nails with a mauve wave detail and one star accent nail." loading="lazy" decoding="async">
-                        </div>
-                        <figcaption>
-                            <span class="caption-title">Wave line + star</span>
-                            <span class="caption-meta">Concept direction / mauve accent line / a cleaner bridge between mockup and finished set.</span>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <section class="scatter-break">
-            <div class="container scatter-photo align-right">
-                <img src="images/birds/northern-shoveler.jpg" alt="Northern Shoveler" loading="lazy">
-                <p class="scatter-caption">Northern Shoveler / Pok&eacute;dex / Nov 2025</p>
-            </div>
-        </section>
-
-        <section class="scatter-break">
-            <div class="container scatter-photo">
-                <img src="images/birds/oak-titmouse.jpg" alt="Oak Titmouse" loading="lazy">
-                <p class="scatter-caption">Oak Titmouse / Pok&eacute;dex / Nov 2025</p>
-            </div>
-        </section>
-
-        <section id="links" class="section archive-section alt-section">
-            <div class="container footer-grid">
-                <div>
-                    <p class="section-index">Elsewhere</p>
-                    <h2>Links</h2>
-                    <p>Enough context to reach the right place without a big contact funnel.</p>
-                </div>
-                <ul class="link-list">
-                    <li><a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                    <li><a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                </ul>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="container footer-row">
-            <p>Travis Barton</p>
-            <p>Simple HTML, crisp gradients, and a growing archive of birds, nails, and robot side quests.</p>
+            <span>&copy; 2026 Travis Barton</span>
+            <span>Built with plain HTML & CSS</span>
         </div>
     </footer>
 
