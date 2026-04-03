@@ -966,9 +966,10 @@ a:hover {
 .technical-aside {
     margin: 1.25rem 0;
     padding: 1.25rem 1.5rem;
-    background: rgba(255, 243, 205, 0.45);
-    border: 1px solid rgba(200, 175, 100, 0.25);
+    background: rgba(255, 245, 210, 0.18);
+    border: 1px solid rgba(200, 175, 100, 0.12);
     border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
 }
 
 .technical-aside p {
