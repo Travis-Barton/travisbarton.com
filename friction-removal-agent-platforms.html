@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Why Claude Code style agent platforms win by collapsing input, packaging, and ops friction around applied ML workflows.">
+    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
-    <meta property="og:title" content="Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms">
-    <meta property="og:description" content="The model is not the hard part. The hard part is the interface tax around messy inputs, packaging, and operations.">
+    <meta property="og:title" content="The Model Is Not the Hard Part — Travis Barton">
+    <meta property="og:description" content="The expensive part of applied ML is everything wrapped around the model: messy inputs, brittle integrations, and the operational burden of keeping the whole thing alive.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
-    <title>Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms</title>
+    <title>The Model Is Not the Hard Part — Travis Barton</title>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -26,43 +26,41 @@
         <div class="nav-container">
             <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
             <ul class="nav-menu">
-                <li><a href="#summary" class="nav-link">TL;DR</a></li>
-                <li><a href="#friction" class="nav-link">Friction</a></li>
-                <li><a href="#platform" class="nav-link">Platform Shift</a></li>
-                <li><a href="#boundaries" class="nav-link">Boundaries</a></li>
-                <li><a href="#decision" class="nav-link">Decision</a></li>
-                <li><a href="index.html#writing" class="nav-link">Back to Writing</a></li>
+                <li><a href="#top" class="nav-link">Top</a></li>
+                <li><a href="#friction" class="nav-link">The Interface Tax</a></li>
+                <li><a href="#platform" class="nav-link">The Shift</a></li>
+                <li><a href="#boundaries" class="nav-link">The Trade-off</a></li>
+                <li><a href="index.html#writing" class="nav-link">&larr; Back</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="summary" class="section article-hero">
+    <section id="top" class="section article-hero">
         <div class="container article-container">
-            <p class="article-kicker">Essay · March 7, 2026</p>
-            <h1 class="article-title">Friction Removal Is Why Claude Code Style Agent Platforms Are Becoming Platforms</h1>
-            <p class="article-subtitle">The model is rarely the bottleneck. The expensive part of applied ML is usually everything wrapped around the model: messy inputs, brittle integrations, awkward distribution, and the operational burden of keeping the whole thing alive.</p>
+            <p class="article-kicker">Essay &middot; March 2026</p>
+            <h1 class="article-title">The Model Is Not the Hard Part</h1>
+            <p class="article-subtitle">The model is rarely the bottleneck. The expensive part of applied ML is usually everything wrapped around it: messy inputs, brittle integrations, awkward distribution, and the operational burden of keeping the whole thing alive. Interface design beats model quality more often than anyone wants to admit.</p>
             <div class="article-meta">
-                <span class="meta-pill">Agent platforms</span>
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
+                <span class="meta-pill">Agent platforms</span>
                 <span class="meta-pill">Operations</span>
-            </div>
-            <div class="article-callout">
-                <h2 class="article-heading">TL;DR</h2>
-                <ul>
-                    <li>Claude Code style systems are infrastructure, not just coding assistants.</li>
-                    <li>Because the infrastructure itself reasons, it can handle messy inputs, flexible outputs, and failure recovery.</li>
-                    <li>Used well, that helps teams move faster by collapsing interface work, packaging, and ops into one surface.</li>
-                </ul>
             </div>
         </div>
     </section>
 
     <section class="section article-section">
         <div class="container article-container">
+            <p>I've spent the last few years building ML systems that need to work with real users and real data. The lesson that keeps coming back is this: the interesting engineering problem is almost never the model. It's everything around it — the messy interfaces, the fragile connectors, the operational overhead that determines whether the system actually gets used after the demo.</p>
+            <p>This essay is about that pattern, and about a shift in platform design that's starting to address it.</p>
+        </div>
+    </section>
+
+    <section class="section article-section article-alt">
+        <div class="container article-container">
             <h2 class="article-heading">The messy Excel export keeps winning</h2>
-            <p>The recurring example is a customer feedback classifier. On paper, this sounds like a solved problem: take customer comments, assign a category, produce a weekly summary. In practice, the classifier is the least interesting part of the system. The hard part is the parade of ugly interfaces that feed it.</p>
-            <p>Every week the data arrives in a different shape. Sometimes it is an Excel export. Sometimes it is a copy-paste from a spreadsheet into a chat box. Sometimes the rows are shifted because one cell contained a line break. Sometimes the categories live in Jira. Sometimes the customer context sits in Slack. Sometimes the only artifact anyone can hand you is a screenshot of JSON from an internal dashboard.</p>
+            <p>The recurring example is a customer feedback classifier. On paper, this sounds like a solved problem: take customer comments, assign a category, produce a weekly summary. In practice, the classifier is the least interesting part. The hard part is the parade of ugly interfaces that feed it.</p>
+            <p>Every week the data arrives in a different shape. Sometimes it's an Excel export. Sometimes it's a copy-paste from a spreadsheet into a chat box. Sometimes the rows are shifted because one cell contained a line break. Sometimes the categories live in Jira. Sometimes the customer context sits in Slack. Sometimes the only artifact anyone can hand you is a screenshot of JSON from an internal dashboard.</p>
             <div class="article-grid">
                 <div class="article-card">
                     <h3>Spreadsheet paste</h3>
@@ -85,10 +83,10 @@
         </div>
     </section>
 
-    <section id="friction" class="section article-section article-alt">
+    <section id="friction" class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">Python pipelines make you pay the interface tax</h2>
-            <p>Python is still the best general-purpose tool for turning chaos into structure. That is not the issue. The issue is that Python makes the cost visible, because every messy edge case becomes code that somebody owns.</p>
+            <h2 class="article-heading">The interface tax</h2>
+            <p>Python is still the best general-purpose tool for turning chaos into structure. That's not the issue. The issue is that Python makes the cost visible, because every messy edge case becomes code that somebody owns.</p>
             <p>Even the innocent spreadsheet paste tells the story. Before you classify anything, you end up guessing delimiters, normalizing columns, validating required fields, and building fallback behavior for the inevitable broken export. That work is necessary, but none of it is the model.</p>
             <div class="article-grid">
                 <div class="article-card">
@@ -105,179 +103,7 @@
                 </div>
             </div>
             <div class="article-card">
-                <h3>Mock ingestion function</h3>
-                <pre><code>import io, csv
-import pandas as pd
-
-REQUIRED = {"comment"}
-
-def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
-    try:
-        sep = csv.Sniffer().sniff(text[:5000]).delimiter
-    except Exception:
-        sep = "\t"
-
-    df = pd.read_csv(io.StringIO(text), sep=sep, engine="python")
-    df.columns = [c.strip().lower() for c in df.columns]
-
-    missing = REQUIRED - set(df.columns)
-    if missing:
-        raise ValueError(f"Missing columns: {sorted(missing)}")
-
-    return df</code></pre>
-            </div>
-            <p>There is nothing wrong with this code. The point is that once you add the rest of the workflow, you discover that the product is no longer a classifier. The product is the interface layer around the classifier, and you have become its maintainer.</p>
-        </div>
-    </section>
-
-    <section id="platform" class="section article-section">
-        <div class="container article-container">
-            <h2 class="article-heading">Plain text, images, and skills change the economics</h2>
-            <p>Claude Code style platforms flip the problem by treating plain language as the primary interface instead of treating schema as the primary interface. That sounds cosmetic until you watch what it does to adoption.</p>
-            <p>The business user no longer has to meet your ingestion contract first. They can paste the ugly spreadsheet block, drag in the screenshot, drop in an HTML fragment, and ask for the output they want in English. The system starts from human-native input and works backward into structure, which is exactly the inverse of how most internal tooling is built.</p>
-            <p>That matters twice. First, input friction drops because the user is no longer blocked on formatting. Second, sharing friction drops because the distribution format is no longer “install this environment and run my script correctly.” It becomes “paste what you have and ask.”</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Input friction collapses</h3>
-                    <p>Messy text, screenshots, excerpts, and half-structured dumps become acceptable inputs instead of reasons the workflow fails before it starts.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Packaging gets simpler</h3>
-                    <p>A skill file is smaller than an internal service, easier to explain than a custom pipeline, and closer to how business users actually discover workflows.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Specialization becomes modular</h3>
-                    <p>Once skills and subagents exist, ingestion, labeling, reporting, and follow-up can live as separate specialists instead of one monolithic app.</p>
-                </div>
-            </div>
-            <div class="article-card">
-                <h3>Illustrative skill</h3>
-                <pre><code>---
-name: classify-feedback
-description: Classify messy customer feedback pasted from Excel, HTML, or threads; output tags and a weekly memo.
----
-
-Inputs may be:
-- Raw pasted spreadsheet text
-- HTML dumps
-- Slack and Jira excerpts pasted as text
-- Screenshot containing JSON
-
-Guardrails:
-- Do not search for answer keys or labels unless they are explicitly provided in the session.
-- If labels are required, ask for a labeled subset.
-
-Outputs:
-- Table: id, category, sentiment, confidence, rationale
-- Weekly memo: top themes, top pain points, notable outliers</code></pre>
-            </div>
-            <p>The important shift is conceptual. This is not just a nicer wrapper around a model. It is a different build surface. Once the interface is natural language plus reusable skills, the workflow becomes much easier to create, reuse, and hand to someone else.</p>
-        </div>
-    </section>
-
-    <section class="section article-section article-alt">
-        <div class="container article-container">
-            <h2 class="article-heading">The platform claim becomes real in debugging, ops, and distribution</h2>
-            <p>What makes these systems feel like platforms instead of prompts is not only that they accept messy inputs. It is that they increasingly own the full loop: inspect the state of the world, call tools, edit code, run commands, recover from failure, and keep working without constant human babysitting.</p>
-            <p>That shows up in three places. Debugging gets faster because the system can read files, execute commands, and use the output as feedback. Operations get simpler because recurring runs, retries, and health checks can be built into the same environment as the workflow itself. Distribution gets easier because the workflow can be exposed behind access controls rather than repackaged as yet another internal service.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Debugging</h3>
-                    <p>The loop is tighter when the same system can inspect code, run it, see the failure, and patch the next attempt without switching contexts.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Operations</h3>
-                    <p>Scheduling, retries, and lightweight health checks push the workflow closer to an always-on internal product rather than a one-off script.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Distribution</h3>
-                    <p>Access layers and sandbox rules let you publish the workflow to the right audience without turning every useful internal tool into a full web app.</p>
-                </div>
-            </div>
-            <div class="article-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Traditional Python ML pipeline</th>
-                            <th>Claude Code style agent platform</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Ingestion complexity</td>
-                            <td>High. Developers explicitly own parsing, validation, and source-specific adapters.</td>
-                            <td>Lower for humans. Plain language, pasted text, and images reduce the need for rigid pre-formatting.</td>
-                        </tr>
-                        <tr>
-                            <td>Resilience</td>
-                            <td>You implement scheduling, retries, monitoring, and runbooks yourself.</td>
-                            <td>Recurring runs, retries, and health checks can live in the same environment as the workflow.</td>
-                        </tr>
-                        <tr>
-                            <td>Deployment</td>
-                            <td>You ship an API or script plus the connectors and maintenance burden around it.</td>
-                            <td>You can package the workflow as a skill and expose it through the same platform that executes it.</td>
-                        </tr>
-                        <tr>
-                            <td>Access control</td>
-                            <td>App-layer auth, secret handling, and permissions are usually custom glue.</td>
-                            <td>Sandbox rules and access gates can be part of the platform, not an afterthought.</td>
-                        </tr>
-                        <tr>
-                            <td>Developer UX</td>
-                            <td>Explicit, reproducible, and powerful, but heavy on adapters and interface maintenance.</td>
-                            <td>Fast to iterate and easier to share, but only if boundaries are designed deliberately.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section id="boundaries" class="section article-section">
-        <div class="container article-container">
-            <h2 class="article-heading">The trade is that leakage and boundaries become the hard part</h2>
-            <p>The reason agent platforms feel so fluid is that they have broad latitude. The same trait that removes friction also makes sloppy boundaries dangerous.</p>
-            <p>In traditional ML, train-test leakage is the classic warning sign: the system performs well because it accidentally saw information it should not have seen. In agent workflows, that failure mode can become a permissions problem. If the agent can reach labels, answer keys, or downstream outputs that should have been hidden, it can appear to be smart when it is really just peeking.</p>
-            <p>Prompt injection lives in the same category. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you are not only parsing data. You are accepting instructions from the environment. That means permissions, isolation, and scoping are not optional operational polish. They are part of the product design.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>What to protect</h3>
-                    <p>Labels, answer keys, production credentials, tenant boundaries, and any system state that would let the workflow “cheat.”</p>
-                </div>
-                <div class="article-card">
-                    <h3>What to design early</h3>
-                    <p>Sandbox policies, connector scope, file boundaries, and explicit rules about which sources the workflow may consult.</p>
-                </div>
-                <div class="article-card">
-                    <h3>What not to assume</h3>
-                    <p>That friction is safety. Removing accidental friction means you must replace it with real isolation and deliberate permissions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="decision" class="section article-section article-alt">
-        <div class="container article-container">
-            <h2 class="article-heading">Practical decision criteria</h2>
-            <p>The useful question is not whether agents replace pipelines. The useful question is where the dominant cost lives.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Use agents when</h3>
-                    <p>Your inputs are messy and human-native, your users want to interact through paste and natural language, and the workflow changes faster than formal ingestion contracts can keep up.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Use traditional pipelines when</h3>
-                    <p>You need strict determinism, fixed schemas, reproducible contracts, or strong multi-tenant isolation as the primary requirement.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Watch for the misuse pattern</h3>
-                    <p>If you keep forcing the agent through rigid JSON roundtrips at every step, you are rebuilding the brittle interface layer you were trying to escape.</p>
-                </div>
-            </div>
-            <div class="article-card">
-                <h3>Illustrative Python contrast</h3>
+                <h3>A typical ingestion function</h3>
                 <pre><code>import io, csv
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -302,17 +128,146 @@ def ingest_html_dump(html: str) -&gt; pd.DataFrame:
     text = soup.get_text("\n")
     return ingest_excel_paste(text)</code></pre>
             </div>
-            <p>The practical takeaway is simple: if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges. That is why these agent systems are drifting from “coding assistant” toward “platform.” The platform is the thing that absorbs the edge work so the user does not have to.</p>
+            <p>There's nothing wrong with this code. The point is that once you add the rest of the workflow, you discover that the product is no longer a classifier. The product is the interface layer around the classifier, and you've become its maintainer.</p>
+        </div>
+    </section>
+
+    <section id="platform" class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">Agent platforms change the economics</h2>
+            <p>A new class of AI agent platforms — systems that can reason about inputs, call tools, recover from errors, and maintain context across a workflow — flip the problem by treating plain language as the primary interface instead of schema.</p>
+            <p>That sounds cosmetic until you watch what it does to adoption.</p>
+            <p>The business user no longer has to meet your ingestion contract first. They can paste the ugly spreadsheet block, drag in the screenshot, drop in an HTML fragment, and ask for the output they want in English. The system starts from human-native input and works backward into structure — exactly the inverse of how most internal tooling is built.</p>
+            <p>That matters twice. First, input friction drops because the user is no longer blocked on formatting. Second, sharing friction drops because the distribution format is no longer "install this environment and run my script correctly." It becomes "paste what you have and ask."</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Input friction collapses</h3>
+                    <p>Messy text, screenshots, excerpts, and half-structured dumps become acceptable inputs instead of reasons the workflow fails before it starts.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Packaging gets simpler</h3>
+                    <p>A natural-language spec is smaller than an internal service, easier to explain than a custom pipeline, and closer to how business users actually discover workflows.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Specialization becomes modular</h3>
+                    <p>Once tool-using agents exist, ingestion, labeling, reporting, and follow-up can live as separate specialists instead of one monolithic app.</p>
+                </div>
+            </div>
+            <p>The important shift is conceptual. This isn't just a nicer wrapper around a model. It's a different build surface. Once the interface is natural language plus reusable tool-calling agents, the workflow becomes much easier to create, reuse, and hand to someone else.</p>
         </div>
     </section>
 
     <section class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">Conclusion</h2>
+            <h2 class="article-heading">Where the platform claim becomes real</h2>
+            <p>What makes these systems feel like platforms instead of prompts is not only that they accept messy inputs. It's that they increasingly own the full loop: inspect the state of the world, call tools, edit code, run commands, recover from failure, and keep working without constant human babysitting.</p>
+            <p>That shows up in three places:</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Debugging</h3>
+                    <p>The loop is tighter when the same system can inspect code, run it, see the failure, and patch the next attempt without switching contexts.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Operations</h3>
+                    <p>Scheduling, retries, and lightweight health checks push the workflow closer to an always-on internal product rather than a one-off script.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Distribution</h3>
+                    <p>Access layers and sandbox rules let you publish the workflow to the right audience without turning every useful internal tool into a full web app.</p>
+                </div>
+            </div>
+            <div class="article-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Traditional Python pipeline</th>
+                            <th>Agent platform</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ingestion complexity</td>
+                            <td>High. Developers explicitly own parsing, validation, and source-specific adapters.</td>
+                            <td>Lower for humans. Plain language, pasted text, and images reduce the need for rigid pre-formatting.</td>
+                        </tr>
+                        <tr>
+                            <td>Resilience</td>
+                            <td>You implement scheduling, retries, monitoring, and runbooks yourself.</td>
+                            <td>Recurring runs, retries, and health checks can live in the same environment as the workflow.</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment</td>
+                            <td>You ship an API or script plus the connectors and maintenance burden around it.</td>
+                            <td>You can package the workflow as a specification and expose it through the same platform that executes it.</td>
+                        </tr>
+                        <tr>
+                            <td>Access control</td>
+                            <td>App-layer auth, secret handling, and permissions are usually custom glue.</td>
+                            <td>Sandbox rules and access gates can be part of the platform, not an afterthought.</td>
+                        </tr>
+                        <tr>
+                            <td>Developer UX</td>
+                            <td>Explicit, reproducible, and powerful, but heavy on adapters and interface maintenance.</td>
+                            <td>Fast to iterate and easier to share, but only if boundaries are designed deliberately.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="boundaries" class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">The trade-off: boundaries become the hard part</h2>
+            <p>The reason agent platforms feel so fluid is that they have broad latitude. The same trait that removes friction also makes sloppy boundaries dangerous.</p>
+            <p>In traditional ML, train-test leakage is the classic warning sign: the system performs well because it accidentally saw information it should not have seen. In agent workflows, that failure mode becomes a permissions problem. If the agent can reach labels, answer keys, or downstream outputs that should have been hidden, it can appear to be smart when it's really just peeking.</p>
+            <p>Prompt injection lives in the same category. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not only parsing data. You're accepting instructions from the environment. That means permissions, isolation, and scoping aren't optional operational polish. They're part of the product design.</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>What to protect</h3>
+                    <p>Labels, answer keys, production credentials, tenant boundaries, and any system state that would let the workflow "cheat."</p>
+                </div>
+                <div class="article-card">
+                    <h3>What to design early</h3>
+                    <p>Sandbox policies, connector scope, file boundaries, and explicit rules about which sources the workflow may consult.</p>
+                </div>
+                <div class="article-card">
+                    <h3>What not to assume</h3>
+                    <p>That friction is safety. Removing accidental friction means you must replace it with real isolation and deliberate permissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">When to use what</h2>
+            <p>The useful question is not whether agents replace pipelines. The useful question is where the dominant cost lives.</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Use agent platforms when</h3>
+                    <p>Your inputs are messy and human-native, your users want to interact through paste and natural language, and the workflow changes faster than formal ingestion contracts can keep up.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Use traditional pipelines when</h3>
+                    <p>You need strict determinism, fixed schemas, reproducible contracts, or strong multi-tenant isolation as the primary requirement.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Watch for the misuse pattern</h3>
+                    <p>If you keep forcing the agent through rigid JSON roundtrips at every step, you're rebuilding the brittle interface layer you were trying to escape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">The future is better interfaces, not just better models</h2>
             <p>Applied ML has spent years pretending the hard part lives in the model. In a surprising number of internal workflows, that was never true. The hard part was interface design, source integration, workflow packaging, and the operational overhead required to keep the system useful after the demo.</p>
-            <p>Claude Code style agent platforms are becoming platforms because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That is a real shift in where software value accumulates.</p>
-            <p>The caveat is not small: once friction drops, boundary design matters more. But if you handle that part seriously, the payoff is obvious. The future is not just “better models.” It is better interfaces for everything around them.</p>
-            <p class="article-footnote">Published March 7, 2026.</p>
+            <p>Agent platforms are becoming platforms because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's a real shift in where software value accumulates.</p>
+            <p>The caveat is not small: once friction drops, boundary design matters more. But if you handle that part seriously, the payoff is obvious. The practical takeaway is simple — if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges.</p>
+            <p class="article-footnote">Published March 2026. Views are my own.</p>
         </div>
     </section>
 
@@ -322,7 +277,7 @@ def ingest_html_dump(html: str) -&gt; pd.DataFrame:
                 <a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a>
                 <a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
             </div>
-            <p>&copy; 2026 Travis Barton. All rights reserved.</p>
+            <p>&copy; 2026 Travis Barton</p>
         </div>
     </footer>
 
