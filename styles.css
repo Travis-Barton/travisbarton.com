@@ -922,6 +922,41 @@ a:hover {
     object-position: center 38%;
 }
 
+#birds .bird-grid {
+    gap: 1rem;
+    align-items: start;
+}
+
+#birds .media-card {
+    display: grid;
+    gap: 0.7rem;
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+#birds .media-image {
+    border-bottom: none;
+    border-radius: 22px;
+    box-shadow: 0 14px 24px rgba(23, 32, 51, 0.08);
+}
+
+#birds .media-card figcaption {
+    gap: 0.42rem;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid rgba(181, 171, 157, 0.72);
+}
+
+#birds .caption-title {
+    font-size: 1.04rem;
+}
+
+#birds .caption-meta {
+    max-width: 24rem;
+}
+
 .nail-image {
     aspect-ratio: 1 / 1;
     object-position: center top;
