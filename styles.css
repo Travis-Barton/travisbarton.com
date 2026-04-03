@@ -1353,7 +1353,60 @@ a:hover {
     }
 
     .section {
-        padding: 3rem 0;
+        padding: 2.45rem 0;
+    }
+
+    .section-heading {
+        margin-bottom: 1.2rem;
+    }
+
+    .archive-intro-row,
+    .bio-grid,
+    .archive-listing,
+    .project-spotlight,
+    .footer-grid {
+        gap: 1rem;
+    }
+
+    .alt-section {
+        background: transparent;
+    }
+
+    .directory-card,
+    .media-card,
+    .feature-card,
+    .article-card,
+    .article-callout,
+    .fact-card,
+    .portrait-card {
+        box-shadow: none;
+        border-radius: 18px;
+    }
+
+    .media-card figcaption {
+        padding: 0.85rem 0.85rem 0.95rem;
+    }
+
+    .bio-copy {
+        order: 1;
+        gap: 0.65rem;
+    }
+
+    .portrait-card {
+        order: 2;
+        max-width: 15rem;
+        margin: 0.15rem auto 0 0;
+        padding: 0.55rem;
+        background: rgba(255, 255, 255, 0.42);
+    }
+
+    .portrait-card figcaption {
+        margin-top: 0.55rem;
+    }
+
+    .fact-card {
+        padding: 0.82rem 0.9rem;
+        background: rgba(255, 255, 255, 0.4);
     }
 
     .pillar-grid,
@@ -1367,10 +1420,6 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .portrait-card {
-        padding: 0.85rem;
-    }
-
     .article-title {
         font-size: 2.4rem;
     }
@@ -1380,6 +1429,14 @@ a:hover {
     .container,
     .article-container {
         width: min(100% - 1.2rem, 100%);
+    }
+
+    .section {
+        padding: 2.15rem 0;
+    }
+
+    .portrait-card {
+        max-width: 13rem;
     }
 
     .hero-copy h1 {
