@@ -51,7 +51,7 @@
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
                     <li>Claude Code pipelines handle messy inputs without custom parsers, are fast to build, and can debug themselves. Ops features like scheduling come attached to the LLM harness rather than requiring separate infrastructure.</li>
-                    <li>Everything described here <em>can</em> be done with Python pipelines, but you pay an ongoing interface tax for every input source: parsers, schema drift, auth, pagination, OCR, and maintenance.</li>
+                    <li>Everything described here can be done with Python pipelines, but you pay an ongoing tax in the form of: parsers, schema drift, auth, pagination, OCR, maintenance, etc.</li>
                     <li>The trade-off is that what you save in interface work, you spend on security design: leakage, prompt injection, and scoping what the agent can reach.</li>
                 </ul>
             </div>
