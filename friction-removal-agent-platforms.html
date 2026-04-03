@@ -239,7 +239,7 @@ def ocr_json_screenshot(image_path):
     <section class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">Where it starts to feel like a platform</h2>
-            <p>What makes these systems feel like actual platforms and not just fancy prompts is that they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
+            <p>These systems feel like platforms because they own the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -287,7 +287,7 @@ def ocr_json_screenshot(image_path):
             <h2 class="article-heading">Risks are real: leakage, prompt injection, and boundaries</h2>
             <p>When you remove friction, you also remove guardrails that used to exist by accident.</p>
             <p>Train-test leakage is the classic ML version of this. You split into train and test first and never include test data when calling <span class="inline-code">fit</span>, because it leads to overly optimistic scores. Agent systems add a more embarrassing failure mode: the agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug. That's a capability boundary bug.</p>
-            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not just parsing data. You're accepting instructions from the environment. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
+            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, every input is a potential instruction. The environment can talk back. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
             <p>The trust model matters. Most personal agent setups assume a single trusted operator: one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
             <div class="article-grid">
                 <div class="article-card">
@@ -340,7 +340,7 @@ def ocr_json_screenshot(image_path):
     <!-- Conclusion -->
     <section class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">The future is better interfaces, not just better models</h2>
+            <h2 class="article-heading">Better interfaces will matter more than better models</h2>
             <p>Applied ML has spent years pretending the hard part is the model. In a surprising number of internal workflows, that was never true. The hard part was the interface design, the source integration, the packaging, and keeping the thing alive after the demo.</p>
             <p>Agent platforms are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's not a small shift.</p>
             <p>The caveat isn't small either: once friction drops, boundary design matters more. But if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges. That has always been true. It's just becoming easier to do something about it.</p>
