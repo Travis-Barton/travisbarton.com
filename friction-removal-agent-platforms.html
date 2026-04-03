@@ -74,7 +74,10 @@
         <div class="container article-container">
             <h2 class="article-heading">Python pipelines make you pay for every input</h2>
             <p>Python can turn chaos into structure, but it's hard. You have to build and maintain a parser for every input format, and if someone pastes something slightly wrong, the pipeline fails. Sometimes gracefully, sometimes not. Either way, the output is wrong or missing.</p>
-            <p>Start with pasted spreadsheet text. Python's standard library includes <span class="inline-code">csv.Sniffer</span> specifically because CSV "dialects" vary and you often have to deduce the delimiter from a sample. It even has a <span class="inline-code">has_header</span> heuristic to guess whether the first row looks like column names. pandas can help, but its own docs note that if <span class="inline-code">sep=None</span>, the fast C engine can't automatically detect the separator, so it falls back to the Python engine and relies on <span class="inline-code">csv.Sniffer</span>.</p>
+            <div class="technical-aside">
+                <span class="technical-aside__label">&#9888; Technical</span>
+                <p>Start with pasted spreadsheet text. Python's standard library includes <span class="inline-code">csv.Sniffer</span> specifically because CSV "dialects" vary and you often have to deduce the delimiter from a sample. It even has a <span class="inline-code">has_header</span> heuristic to guess whether the first row looks like column names. pandas can help, but its own docs note that if <span class="inline-code">sep=None</span>, the fast C engine can't automatically detect the separator, so it falls back to the Python engine and relies on <span class="inline-code">csv.Sniffer</span>.</p>
+            </div>
             <p>Here's a concise ingestion function that already hints at the problem:</p>
             <div class="article-card">
                 <h3>Mock ingestion function</h3>

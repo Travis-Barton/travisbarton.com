@@ -961,6 +961,34 @@ a:hover {
     }
 }
 
+/* ---- Technical Aside ---- */
+
+.technical-aside {
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 243, 205, 0.45);
+    border: 1px solid rgba(200, 175, 100, 0.25);
+    border-radius: var(--radius);
+}
+
+.technical-aside p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.technical-aside__label {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a7430;
+    margin-bottom: 0.6rem;
+}
+
 /* ---- Sub-page Nav (robot / essay pages) ---- */
 
 .navbar {
