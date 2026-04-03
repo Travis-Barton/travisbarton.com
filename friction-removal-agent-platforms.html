@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used.">
+    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used — and how agent platforms are changing the economics.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
     <meta property="og:title" content="The Model Is Not the Hard Part — Travis Barton">
@@ -27,9 +27,10 @@
             <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
             <ul class="nav-menu">
                 <li><a href="#top" class="nav-link">Top</a></li>
-                <li><a href="#friction" class="nav-link">The Interface Tax</a></li>
+                <li><a href="#friction" class="nav-link">The Tax</a></li>
                 <li><a href="#platform" class="nav-link">The Shift</a></li>
-                <li><a href="#boundaries" class="nav-link">The Trade-off</a></li>
+                <li><a href="#risks" class="nav-link">Risks</a></li>
+                <li><a href="#decision" class="nav-link">Decision</a></li>
                 <li><a href="index.html#writing" class="nav-link">&larr; Back</a></li>
             </ul>
         </div>
@@ -39,71 +40,148 @@
         <div class="container article-container">
             <p class="article-kicker">Essay &middot; March 2026</p>
             <h1 class="article-title">The Model Is Not the Hard Part</h1>
-            <p class="article-subtitle">The model is rarely the bottleneck. The expensive part of applied ML is usually everything wrapped around it: messy inputs, brittle integrations, awkward distribution, and the operational burden of keeping the whole thing alive. Interface design beats model quality more often than anyone wants to admit.</p>
+            <p class="article-subtitle">The model is rarely the bottleneck. The expensive part of applied ML is usually everything wrapped around it: messy inputs, brittle integrations, awkward distribution, and the operational burden of keeping the whole thing alive.</p>
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
                 <span class="meta-pill">Agent platforms</span>
                 <span class="meta-pill">Operations</span>
             </div>
+            <div class="article-callout">
+                <h2 class="article-heading">TL;DR</h2>
+                <ul>
+                    <li>Agent platforms are becoming <em>platforms</em> because they remove friction across the whole workflow: what you can paste in, who can use it, how fast you can build it, how it debugs itself, how it runs on a schedule, and how you ship it behind real access control.</li>
+                    <li>Python ML pipelines can do all of this too, but you pay an ongoing interface tax: parsers, schema drift, auth, pagination, OCR, deployment, and maintenance.</li>
+                    <li>The trade is that the hard part moves to safety boundaries: leakage, prompt injection, and access scoping.</li>
+                </ul>
+            </div>
         </div>
     </section>
 
+    <!-- Friction Is the Feature -->
     <section class="section article-section">
         <div class="container article-container">
-            <p>I've spent the last few years building ML systems that need to work with real users and real data. The lesson that keeps coming back is this: the interesting engineering problem is almost never the model. It's everything around it — the messy interfaces, the fragile connectors, the operational overhead that determines whether the system actually gets used after the demo.</p>
-            <p>This essay is about that pattern, and about a shift in platform design that's starting to address it.</p>
+            <h2 class="article-heading">Friction is the feature</h2>
+            <p>I keep coming back to the same project because it's the most honest one: a customer feedback classifier.</p>
+            <p>Every week, a business person drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the "select all &rarr; copy &rarr; paste" blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
+            <p>Then things get worse. The "feedback" contains:</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>HTML dumps</h3>
+                    <p>Form output from a web tool that still needs to be stripped down and reconstructed into rows and fields.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Slack threads pasted inline</h3>
+                    <p>Customer context with its own auth model, cursor pagination, rate limits, and failure modes.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Jira tickets as labels</h3>
+                    <p>Tickets acting as ground truth, each behind their own auth and pagination (<span class="inline-code">startAt</span>, <span class="inline-code">maxResults</span>, <span class="inline-code">total</span>).</p>
+                </div>
+                <div class="article-card">
+                    <h3>Screenshots of JSON</h3>
+                    <p>The data exists, but only as an image because someone couldn't be bothered to find the endpoint.</p>
+                </div>
+            </div>
+            <p>The model is not the hard part. The hard part is everything around the model. That's friction.</p>
         </div>
     </section>
 
-    <section class="section article-section article-alt">
+    <!-- Python pipelines make you pay -->
+    <section id="friction" class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">The messy Excel export keeps winning</h2>
-            <p>The recurring example is a customer feedback classifier. On paper, this sounds like a solved problem: take customer comments, assign a category, produce a weekly summary. In practice, the classifier is the least interesting part. The hard part is the parade of ugly interfaces that feed it.</p>
-            <p>Every week the data arrives in a different shape. Sometimes it's an Excel export. Sometimes it's a copy-paste from a spreadsheet into a chat box. Sometimes the rows are shifted because one cell contained a line break. Sometimes the categories live in Jira. Sometimes the customer context sits in Slack. Sometimes the only artifact anyone can hand you is a screenshot of JSON from an internal dashboard.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Spreadsheet paste</h3>
-                    <p>Tabs, uneven spacing, multiline cells, and columns that drift when the export changes.</p>
-                </div>
-                <div class="article-card">
-                    <h3>HTML dump</h3>
-                    <p>Form output that still needs to be stripped down and reconstructed into rows and fields.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Slack and Jira</h3>
-                    <p>Threads for context and tickets for labels, each with their own auth, pagination, and failure modes.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Screenshot of JSON</h3>
-                    <p>The data exists, but only as an image because the real endpoint is inconvenient or inaccessible.</p>
-                </div>
-            </div>
-            <p>This is why interface design beats model choice so often in real work. A mediocre model wrapped in a forgiving interface gets adopted. A better model behind a brittle ingestion contract does not.</p>
-        </div>
-    </section>
-
-    <section id="friction" class="section article-section">
-        <div class="container article-container">
-            <h2 class="article-heading">The interface tax</h2>
-            <p>Python is still the best general-purpose tool for turning chaos into structure. That's not the issue. The issue is that Python makes the cost visible, because every messy edge case becomes code that somebody owns.</p>
-            <p>Even the innocent spreadsheet paste tells the story. Before you classify anything, you end up guessing delimiters, normalizing columns, validating required fields, and building fallback behavior for the inevitable broken export. That work is necessary, but none of it is the model.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Input handling</h3>
-                    <p>Delimiter sniffing, header inference, schema validation, schema drift, HTML extraction, OCR, and retries are all table stakes once business users start bringing you real data.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Connector work</h3>
-                    <p>Slack, Jira, tickets, dashboards, and internal tools each need their own auth model, pagination logic, rate-limit handling, and error reporting.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Packaging and ops</h3>
-                    <p>After the pipeline works on your laptop, someone still has to deploy it, monitor it, version it, document it, and keep it alive when the upstream system changes.</p>
-                </div>
-            </div>
+            <h2 class="article-heading">Python pipelines make you pay for every input</h2>
+            <p>Python is great at turning chaos into structure, but it doesn't make that free. It makes it <em>possible</em>.</p>
+            <p>Start with pasted spreadsheet text. Python's standard library includes <span class="inline-code">csv.Sniffer</span> specifically because CSV "dialects" vary and you often have to deduce the delimiter from a sample. It even has a <span class="inline-code">has_header</span> heuristic to guess whether the first row looks like column names. pandas can help, but its own docs note that if <span class="inline-code">sep=None</span>, the fast C engine can't automatically detect the separator, so it falls back to the Python engine and relies on <span class="inline-code">csv.Sniffer</span>.</p>
+            <p>Here's a concise ingestion function that already hints at the problem:</p>
             <div class="article-card">
-                <h3>A typical ingestion function</h3>
+                <h3>Mock ingestion function</h3>
+                <pre><code>import io, csv
+import pandas as pd
+
+REQUIRED = {"comment"}
+
+def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
+    try:
+        sep = csv.Sniffer().sniff(text[:5000]).delimiter
+    except Exception:
+        sep = "\t"  # common "Excel paste" guess
+
+    df = pd.read_csv(io.StringIO(text), sep=sep, engine="python")
+    df.columns = [c.strip().lower() for c in df.columns]
+
+    missing = REQUIRED - set(df.columns)
+    if missing:
+        raise ValueError(f"Missing columns: {sorted(missing)}")
+
+    return df</code></pre>
+            </div>
+            <p>Now zoom out. To accept the real inputs that show up in this classifier, you end up building and maintaining:</p>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Parsing &amp; validation</h3>
+                    <p>Delimiter sniffing, header inference, schema validation, schema drift handling. Columns change, fields appear, fields disappear.</p>
+                </div>
+                <div class="article-card">
+                    <h3>HTML extraction</h3>
+                    <p>Usually Beautiful Soup, which is specifically built for pulling data out of HTML and XML and navigating the parse tree.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Connectors &amp; auth</h3>
+                    <p>Slack OAuth + rate limits + cursor pagination. Jira auth + <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination. Each with their own failure modes.</p>
+                </div>
+                <div class="article-card">
+                    <h3>OCR</h3>
+                    <p>Tesseract requires installing the engine plus language traineddata. You own preprocessing and parsing the OCR output into something structured.</p>
+                </div>
+            </div>
+            <p>Plus deployment, monitoring, and maintenance &mdash; because once people depend on the classifier, you own the interface forever.</p>
+            <p>Python can do all of this. It just makes it your job.</p>
+        </div>
+    </section>
+
+    <!-- What agent platforms change -->
+    <section id="platform" class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">Agent platforms change the economics</h2>
+            <p>The first mental move is simple: plain text is a primary data type. It's not something you immediately compress into a rigid schema.</p>
+            <p>This is the line that captures the lived experience: <em>"To a human it's borderline unreadable, but to the agent it's clearly structured."</em> You stop fighting the paste. You feed it in, ask for the classification, and the system reconstructs enough structure to proceed.</p>
+            <p>The same "accept what people have" approach extends to images. Drag-and-drop, paste, or just give a file path. That matters for the screenshot-of-JSON problem. It also matters for who can use the system &mdash; if the interface is "paste text and attach images," the business doesn't need your ingestion UI or API client library to get value.</p>
+            <p>You also get a different execution shape. The agent runs a loop: gather context, take action, verify results, repeat until done. It can branch, retry, and adapt without you writing a new <span class="inline-code">if</span> statement for each edge case. Subagents make this modular &mdash; each runs in its own context with a custom system prompt, specific tool access, and independent permissions. That's a clean way to package "ingestion," "classification," and "reporting" as separate specialists without mushing everything into one monolithic prompt.</p>
+
+            <p>Here's what the same classifier looks like as a natural-language specification instead of a Python pipeline:</p>
+            <div class="article-card">
+                <h3>Agent skill specification</h3>
+                <pre><code>---
+name: classify-feedback
+description: Classify messy customer feedback pasted from
+  Excel, HTML, or threads; output tags and a weekly memo.
+---
+
+Inputs may be:
+- Raw pasted spreadsheet text (Excel or Google Sheets)
+- HTML dumps
+- Slack and Jira excerpts pasted as text
+- Screenshot of JSON (image attachment)
+
+Guardrails:
+- Do not search for labels, answer keys, or ground truth
+  unless the user provided them in this session.
+- If training labels are required, ask for a labeled subset.
+
+Outputs:
+- Table: id, category, sentiment, confidence, rationale
+- Weekly memo: top themes, top pain points, notable outliers
+
+Failure handling:
+- If parsing is ambiguous, ask one clarifying question
+  and propose a best-guess interpretation.</code></pre>
+            </div>
+
+            <p>Compare that with the Python version. The ingestion function on its own is 15 lines. Add HTML extraction, Slack auth, Jira pagination, OCR, deployment, and monitoring, and you're looking at hundreds of lines of adapter code before you write a single line of classification logic:</p>
+
+            <div class="article-card">
+                <h3>Equivalent Python pipeline</h3>
                 <pre><code>import io, csv
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -120,96 +198,82 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     df = pd.read_csv(io.StringIO(text), sep=sniff_sep(text), engine="python")
     df.columns = [c.strip().lower() for c in df.columns]
     if not REQUIRED.issubset(df.columns):
-        raise ValueError(f"Missing columns: {sorted(REQUIRED - set(df.columns))}")
+        raise ValueError(f"Missing: {sorted(REQUIRED - set(df.columns))}")
     return df
 
 def ingest_html_dump(html: str) -&gt; pd.DataFrame:
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text("\n")
-    return ingest_excel_paste(text)</code></pre>
+    return ingest_excel_paste(text)
+
+def fetch_slack_threads(token, channel):
+    # You own OAuth, rate limits, cursor pagination, retries.
+    raise NotImplementedError
+
+def fetch_jira_tickets(auth, jql):
+    # You own auth and pagination (startAt, maxResults, total).
+    raise NotImplementedError
+
+def ocr_json_screenshot(image_path):
+    # You own Tesseract install, preprocessing, JSON parsing.
+    raise NotImplementedError</code></pre>
             </div>
-            <p>There's nothing wrong with this code. The point is that once you add the rest of the workflow, you discover that the product is no longer a classifier. The product is the interface layer around the classifier, and you've become its maintainer.</p>
+
+            <p>The skill specification is 20 lines of plain English. The Python pipeline is already longer and every <span class="inline-code">NotImplementedError</span> represents weeks of connector work that somebody owns.</p>
         </div>
     </section>
 
-    <section id="platform" class="section article-section article-alt">
+    <!-- Ops and distribution -->
+    <section class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">Agent platforms change the economics</h2>
-            <p>A new class of AI agent platforms — systems that can reason about inputs, call tools, recover from errors, and maintain context across a workflow — flip the problem by treating plain language as the primary interface instead of schema.</p>
-            <p>That sounds cosmetic until you watch what it does to adoption.</p>
-            <p>The business user no longer has to meet your ingestion contract first. They can paste the ugly spreadsheet block, drag in the screenshot, drop in an HTML fragment, and ask for the output they want in English. The system starts from human-native input and works backward into structure — exactly the inverse of how most internal tooling is built.</p>
-            <p>That matters twice. First, input friction drops because the user is no longer blocked on formatting. Second, sharing friction drops because the distribution format is no longer "install this environment and run my script correctly." It becomes "paste what you have and ask."</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Input friction collapses</h3>
-                    <p>Messy text, screenshots, excerpts, and half-structured dumps become acceptable inputs instead of reasons the workflow fails before it starts.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Packaging gets simpler</h3>
-                    <p>A natural-language spec is smaller than an internal service, easier to explain than a custom pipeline, and closer to how business users actually discover workflows.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Specialization becomes modular</h3>
-                    <p>Once tool-using agents exist, ingestion, labeling, reporting, and follow-up can live as separate specialists instead of one monolithic app.</p>
-                </div>
-            </div>
-            <p>The important shift is conceptual. This isn't just a nicer wrapper around a model. It's a different build surface. Once the interface is natural language plus reusable tool-calling agents, the workflow becomes much easier to create, reuse, and hand to someone else.</p>
+            <h2 class="article-heading">Ops and distribution remove the next layer</h2>
+            <p>Even if the agent can interpret messy input, you still want it to run reliably.</p>
+            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The modern agent platforms give you cron-style scheduling with retry backoff after consecutive errors &mdash; 30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes &mdash; returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
+            <p>Heartbeat polling is the other half. If nothing needs attention, the agent replies with an acknowledgement and suppresses delivery. You can run frequent check-ins without annoying anyone.</p>
+            <p>Then you hit distribution friction: putting the capability behind a URL that's safe to share. Sitting an auth layer (like Cloudflare Access) in front of a self-hosted agent gives you deny-by-default behavior, wildcard policy patterns across subdomains, and real access control without building a whole auth system yourself.</p>
+            <p>A personal example: I have a voice message workflow where I send a voice note and the agent notices the transcription tool is missing, installs it, transcribes the message, and drafts a reply. That's not a named product feature. It's just what happens when "natural language as the build interface" meets "the agent can run commands and fix missing dependencies in the moment."</p>
         </div>
     </section>
 
+    <!-- Where the platform claim becomes real -->
     <section class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">Where the platform claim becomes real</h2>
             <p>What makes these systems feel like platforms instead of prompts is not only that they accept messy inputs. It's that they increasingly own the full loop: inspect the state of the world, call tools, edit code, run commands, recover from failure, and keep working without constant human babysitting.</p>
-            <p>That shows up in three places:</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Debugging</h3>
-                    <p>The loop is tighter when the same system can inspect code, run it, see the failure, and patch the next attempt without switching contexts.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Operations</h3>
-                    <p>Scheduling, retries, and lightweight health checks push the workflow closer to an always-on internal product rather than a one-off script.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Distribution</h3>
-                    <p>Access layers and sandbox rules let you publish the workflow to the right audience without turning every useful internal tool into a full web app.</p>
-                </div>
-            </div>
             <div class="article-table">
                 <table>
                     <thead>
                         <tr>
                             <th>Attribute</th>
-                            <th>Traditional Python pipeline</th>
+                            <th>Python ML pipeline</th>
                             <th>Agent platform</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Ingestion complexity</td>
-                            <td>High. Developers explicitly own parsing, validation, and source-specific adapters.</td>
-                            <td>Lower for humans. Plain language, pasted text, and images reduce the need for rigid pre-formatting.</td>
+                            <td>High. Dialect sniffing and header inference exist because variation is normal.</td>
+                            <td>Lower for humans. Skills accept plain text, and images can be pasted or attached.</td>
                         </tr>
                         <tr>
                             <td>Resilience</td>
-                            <td>You implement scheduling, retries, monitoring, and runbooks yourself.</td>
-                            <td>Recurring runs, retries, and health checks can live in the same environment as the workflow.</td>
+                            <td>You build retries, scheduling, and monitoring.</td>
+                            <td>Cron persists jobs, retries with exponential backoff, heartbeats suppress "nothing to report."</td>
                         </tr>
                         <tr>
                             <td>Deployment</td>
-                            <td>You ship an API or script plus the connectors and maintenance burden around it.</td>
-                            <td>You can package the workflow as a specification and expose it through the same platform that executes it.</td>
+                            <td>You ship and maintain an API plus connectors and credentials.</td>
+                            <td>You ship a skill spec plus an ops runtime. Skills are invoked like commands.</td>
                         </tr>
                         <tr>
                             <td>Access control</td>
-                            <td>App-layer auth, secret handling, and permissions are usually custom glue.</td>
-                            <td>Sandbox rules and access gates can be part of the platform, not an afterthought.</td>
+                            <td>You build auth and data scoping inside your app.</td>
+                            <td>You still must scope permissions and sandbox boundaries, but can gate behind access policies.</td>
                         </tr>
                         <tr>
                             <td>Developer UX</td>
-                            <td>Explicit, reproducible, and powerful, but heavy on adapters and interface maintenance.</td>
-                            <td>Fast to iterate and easier to share, but only if boundaries are designed deliberately.</td>
+                            <td>Explicit code paths, but lots of adapter work for each input source.</td>
+                            <td>A gather&ndash;act&ndash;verify loop with isolated subagents and independent permissions.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -217,12 +281,14 @@ def ingest_html_dump(html: str) -&gt; pd.DataFrame:
         </div>
     </section>
 
-    <section id="boundaries" class="section article-section article-alt">
+    <!-- Risks -->
+    <section id="risks" class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">The trade-off: boundaries become the hard part</h2>
-            <p>The reason agent platforms feel so fluid is that they have broad latitude. The same trait that removes friction also makes sloppy boundaries dangerous.</p>
-            <p>In traditional ML, train-test leakage is the classic warning sign: the system performs well because it accidentally saw information it should not have seen. In agent workflows, that failure mode becomes a permissions problem. If the agent can reach labels, answer keys, or downstream outputs that should have been hidden, it can appear to be smart when it's really just peeking.</p>
-            <p>Prompt injection lives in the same category. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not only parsing data. You're accepting instructions from the environment. That means permissions, isolation, and scoping aren't optional operational polish. They're part of the product design.</p>
+            <h2 class="article-heading">Risks are real: leakage, prompt injection, and boundaries</h2>
+            <p>When you remove friction, you also remove guardrails that used to exist by accident.</p>
+            <p>Train-test leakage is the classic ML version of this. You split into train and test first and never include test data when calling <span class="inline-code">fit</span>, because it leads to overly optimistic scores. Agent systems add a more embarrassing failure mode: the agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug. That's a capability boundary bug.</p>
+            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, you're not only parsing data. You're accepting instructions from the environment. The practical tools for boundary enforcement are sandboxing (OS-level filesystem and network isolation) and explicit permission systems that prevent bash commands from reaching resources outside defined boundaries even if prompt injection bypasses decision-making.</p>
+            <p>The trust model matters. Most personal agent setups assume a single trusted operator &mdash; one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
             <div class="article-grid">
                 <div class="article-card">
                     <h3>What to protect</h3>
@@ -240,33 +306,44 @@ def ingest_html_dump(html: str) -&gt; pd.DataFrame:
         </div>
     </section>
 
-    <section class="section article-section">
+    <!-- Decision -->
+    <section id="decision" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">When to use what</h2>
-            <p>The useful question is not whether agents replace pipelines. The useful question is where the dominant cost lives.</p>
+            <p>Here's the decision logic I actually use:</p>
             <div class="article-grid">
                 <div class="article-card">
-                    <h3>Use agent platforms when</h3>
-                    <p>Your inputs are messy and human-native, your users want to interact through paste and natural language, and the workflow changes faster than formal ingestion contracts can keep up.</p>
+                    <h3>Use an agent platform when</h3>
+                    <ul>
+                        <li>The main pain is messy input and messy workflows</li>
+                        <li>Humans in the loop are a feature, not a bug</li>
+                        <li>You want business users to paste what they have and get value without onboarding to your API surface</li>
+                        <li>You benefit from the gather&ndash;act&ndash;verify loop more than you fear it</li>
+                    </ul>
                 </div>
                 <div class="article-card">
-                    <h3>Use traditional pipelines when</h3>
-                    <p>You need strict determinism, fixed schemas, reproducible contracts, or strong multi-tenant isolation as the primary requirement.</p>
+                    <h3>Use a traditional pipeline when</h3>
+                    <ul>
+                        <li>You need strict determinism, fixed schemas, and reproducible data contracts</li>
+                        <li>You need hard multi-tenant guarantees</li>
+                        <li>You're doing high-volume, latency-sensitive scoring where adaptability isn't the point</li>
+                    </ul>
                 </div>
                 <div class="article-card">
-                    <h3>Watch for the misuse pattern</h3>
-                    <p>If you keep forcing the agent through rigid JSON roundtrips at every step, you're rebuilding the brittle interface layer you were trying to escape.</p>
+                    <h3>And the trap</h3>
+                    <p>If you take messy input, coerce it into strict JSON, send it to another service, coerce the response, then feed it back into the agent &mdash; you just rebuilt the brittle contract layer you were trying to escape. You get the worst of both systems.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Conclusion -->
     <section class="section article-section article-alt">
         <div class="container article-container">
             <h2 class="article-heading">The future is better interfaces, not just better models</h2>
             <p>Applied ML has spent years pretending the hard part lives in the model. In a surprising number of internal workflows, that was never true. The hard part was interface design, source integration, workflow packaging, and the operational overhead required to keep the system useful after the demo.</p>
-            <p>Agent platforms are becoming platforms because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's a real shift in where software value accumulates.</p>
-            <p>The caveat is not small: once friction drops, boundary design matters more. But if you handle that part seriously, the payoff is obvious. The practical takeaway is simple — if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges.</p>
+            <p>Agent platforms are becoming <em>platforms</em> because they attack that entire stack at once. They lower the cost of getting messy human reality into a working loop. They make workflows easier to share. They pull scheduling, retries, and tool use into the same surface. That's a real shift in where software value accumulates.</p>
+            <p>The caveat is not small: once friction drops, boundary design matters more. But if your system spends most of its time fighting humans and source systems, the winning product is the one that removes the most friction at the edges.</p>
             <p class="article-footnote">Published March 2026. Views are my own.</p>
         </div>
     </section>
