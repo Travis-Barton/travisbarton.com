@@ -98,26 +98,7 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
 
     return df</code></pre>
             </div>
-            <p>Now zoom out. To accept the real inputs that show up in this classifier, you end up building and maintaining:</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>Parsing &amp; validation</h3>
-                    <p>Delimiter sniffing, header inference, schema validation, schema drift handling. Columns change, fields appear, fields disappear.</p>
-                </div>
-                <div class="article-card">
-                    <h3>HTML extraction</h3>
-                    <p>Usually Beautiful Soup, which is specifically built for pulling data out of HTML and XML and navigating the parse tree.</p>
-                </div>
-                <div class="article-card">
-                    <h3>Connectors &amp; auth</h3>
-                    <p>Slack OAuth + rate limits + cursor pagination. Jira auth + <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination. Each with their own failure modes.</p>
-                </div>
-                <div class="article-card">
-                    <h3>OCR</h3>
-                    <p>Tesseract requires installing the engine plus language traineddata. You own preprocessing and parsing the OCR output into something structured.</p>
-                </div>
-            </div>
-            <p>Plus deployment, monitoring, and maintenance, because once people depend on the classifier, you own the interface forever.</p>
+            <p>Now zoom out. To accept the real inputs that show up in this classifier, you end up building and maintaining: delimiter sniffing and schema validation (columns change, fields appear, fields disappear), HTML extraction with Beautiful Soup, Slack OAuth with cursor pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract (you own the engine install, preprocessing, and output parsing), plus deployment, monitoring, and maintenance.</p>
             <p>Python can do all of this. It just makes it your job.</p>
         </div>
     </section>
