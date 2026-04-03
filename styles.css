@@ -1774,7 +1774,70 @@ a:hover {
     }
 }
 
-/* Carousel Styles */
+/* Scattered Bird Photo Styles */
+.scatter-break {
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.scatter-photo {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+    padding: 0 1rem;
+}
+
+.scatter-photo.align-right {
+    justify-items: end;
+}
+
+.scatter-photo img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    transform: rotate(-1deg);
+    transition: transform 0.4s ease;
+}
+
+.scatter-photo.align-right img {
+    transform: rotate(1.5deg);
+}
+
+.scatter-photo:hover img {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.scatter-caption {
+    max-width: 32ch;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.scatter-photo.full-width {
+    max-width: 100%;
+    padding: 0;
+}
+
+.scatter-photo.full-width img {
+    max-width: 100%;
+    border-radius: 0;
+    transform: none;
+    box-shadow: none;
+}
+
+.scatter-photo.full-width .scatter-caption {
+    padding: 1rem 2rem;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Carousel Styles (DEPRECATED - REMOVE LATER) */
 .carousel-container {
     position: relative;
     width: 100%;
