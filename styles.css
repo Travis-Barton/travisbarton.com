@@ -1773,3 +1773,124 @@ a:hover {
         transform: translateY(0);
     }
 }
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+    overflow: hidden;
+    padding: 3rem 0;
+    perspective: 1200px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    gap: 0;
+    padding: 0;
+    transform-style: preserve-3d;
+}
+
+.carousel-slide {
+    flex: 0 0 500px;
+    margin: 0 -50px; /* Slight overlap for Coverflow look */
+    opacity: 0.6;
+    transform: scale(0.8) rotateY(45deg);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--panel-strong);
+    filter: brightness(0.7) blur(1px);
+    z-index: 1;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: scale(1.1) rotateY(0deg);
+    z-index: 10;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+    filter: brightness(1) blur(0px);
+}
+
+/* Previous slides look the opposite way */
+.carousel-slide.prev-active {
+    transform: scale(0.8) rotateY(-45deg);
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 20;
+}
+
+.carousel-button {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    margin: 0 2rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.carousel-button:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--line-strong);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.4);
+    box-shadow: 0 0 10px var(--accent-soft);
+}
+
+@media (max-width: 960px) {
+    .carousel-slide {
+        flex: 0 0 80%;
+        margin: 0;
+        transform: scale(0.9) rotateY(0deg);
+    }
+    .carousel-slide.active {
+        transform: scale(1) rotateY(0deg);
+    }
+}
