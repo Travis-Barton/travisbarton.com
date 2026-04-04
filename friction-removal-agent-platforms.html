@@ -202,10 +202,34 @@ Failure handling:
         <div class="container article-container">
             <h2 class="article-heading">The downsides are real</h2>
             <p>This approach has serious costs and it is not suited for every application.</p>
-            <p><strong>Cost.</strong> Every invocation burns tokens. A Python pipeline that runs a classifier costs compute once at training time and near-zero at inference. A Claude Code pipeline pays per run, and complex workflows with retries and subagents can get expensive fast. For high-volume, latency-sensitive scoring, the economics don't work.</p>
-            <p><strong>Speed.</strong> An LLM reading and interpreting a messy input is slower than a hardcoded parser that knows exactly what to expect. If your pipeline runs thousands of times a day and needs sub-second response, this is the wrong tool.</p>
-            <p><strong>Security.</strong> The interface tax in Python pipelines is annoying, but it has a side effect: it limits what the system can reach. Remove that friction and you have to replace those limits intentionally. The agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug, that's a capability boundary bug. Prompt injection is real too: once you ingest arbitrary text, HTML, and screenshots, every input is a potential instruction. The environment can talk back. You need sandboxing, explicit permissions, and a clear trust model. Most personal setups assume one trusted operator. That's fine for individual use, but know the difference between that and a multi-tenant security boundary.</p>
-            <p><strong>Reliability.</strong> Traditional cron, PubSub, and monitoring are battle-tested. LLM-based scheduling and orchestration is younger and less predictable. The model can hallucinate actions, retry incorrectly, or silently drop tasks that a deterministic pipeline would catch.</p>
+            <div class="article-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Downside</th>
+                            <th>What happens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cost</td>
+                            <td>Every invocation burns tokens. A Python pipeline costs compute once at training time and near-zero at inference. A CC pipeline pays per run, and complex workflows with retries and subagents get expensive fast.</td>
+                        </tr>
+                        <tr>
+                            <td>Speed</td>
+                            <td>An LLM reading and interpreting messy input is slower than a hardcoded parser that knows exactly what to expect. If your pipeline runs thousands of times a day and needs sub-second response, this is the wrong tool.</td>
+                        </tr>
+                        <tr>
+                            <td>Security</td>
+                            <td>Python's interface tax limits what the system can reach. Remove that friction and you have to replace those limits intentionally. The agent can find labels or answer keys it shouldn't see. Prompt injection is real: every input is a potential instruction. You need sandboxing, explicit permissions, and a clear trust model.</td>
+                        </tr>
+                        <tr>
+                            <td>Reliability</td>
+                            <td>Traditional cron, PubSub, and monitoring are battle-tested. LLM-based orchestration is younger and less predictable. The model can hallucinate actions, retry incorrectly, or silently drop tasks that a deterministic pipeline would catch.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <p>But where it does work, something interesting happens: the people building on your platform stop being limited to your engineers. Your EMs can build workflows. Your PMs can prototype pipelines. Sales and finance can paste their data and get structured output without filing a ticket. The barrier to building drops from "can write Python" to "can describe what they want."</p>
         </div>
     </section>
