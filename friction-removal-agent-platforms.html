@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comparing the same applied ML workflow built two ways, traditional Python vs Claude Code, and where the real engineering tax actually lives.">
+    <meta name="description" content="The same customer feedback workflow built two ways, in Python and in Claude Code, to show where the real engineering tax in applied ML actually lives.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
-    <meta property="og:title" content="The Hard Part Should Be the Model | Travis Barton">
-    <meta property="og:description" content="Most applied ML systems spend more time on parsing, auth, and operational glue than on the model. This essay compares the same workflow in Python and Claude Code.">
+    <meta property="og:title" content="Claude Code as Infrastructure | Travis Barton">
+    <meta property="og:description" content="Most applied ML systems spend more time on parsing, auth, and operational glue than on the model. This essay shows what changes when the same workflow is built in Python versus Claude Code.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
-    <title>The Hard Part Should Be the Model | Travis Barton</title>
+    <title>Claude Code as Infrastructure | Travis Barton</title>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -39,7 +39,7 @@
     <section id="top" class="section article-hero">
         <div class="container article-container">
             <p class="article-kicker">Essay &middot; March 2026</p>
-            <h1 class="article-title">The Hard Part Should Be the Model</h1>
+            <h1 class="article-title">Claude Code as Infrastructure</h1>
             <p class="article-subtitle">Most applied ML systems spend more engineering time on parsing, auth, pagination, OCR, and operational glue than on the actual model. Here's the same customer feedback workflow built two ways: once in Python, and once as a Claude Code pipeline.</p>
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
@@ -56,7 +56,7 @@
                 </ul>
             </div>
             <br>
-            <p class="article-footnote"><strong>A note on naming:</strong> I'm using "Claude Code" the way people use "Kleenex": as a familiar brand name for a broader category. The more precise label would be something like "agentic coding tool," but Claude Code is the name most people recognize. Tools in the same family include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity. I'm working on a comparison of those next.</p>
+            <p class="article-footnote"><strong>A note on naming:</strong> I'm using "Claude Code" the way people use "Kleenex": as a familiar brand name for a broader category. The more precise label would be something like "code-facing agent runtime," but Claude Code is the name most people recognize. Tools in the same family include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity.</p>
         </div>
     </section>
 
@@ -64,7 +64,7 @@
     <section class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">The problem: messy inputs</h2>
-            <p>Let's take the example of a customer feedback classifier.</p>
+            <p>Let's take the example of a <em>customer feedback classifier</em>.</p>
             <p>Every week, someone drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the select-all, copy, paste blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
             <p>Then things get worse. The "feedback" also contains HTML dumps from a web form, Slack threads pasted inline, Jira tickets used as labels or ground truth, and screenshots of JSON from a dashboard because that was the fastest way to share it.</p>
             <p>In most applied ML work, the model is the easy part. The hard part is the interface between reality and the model. That's the tax.</p>
@@ -115,9 +115,9 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     <section id="platform" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">What Claude Code changes</h2>
-            <p>Claude Code is a code-facing agent runtime: it can read files, execute commands, call tools and APIs, and iterate on its own work. It happens to be used for code generation, but the same pattern works anywhere the inputs are messy and the steps are not fully predictable.</p>
-            <p>The key difference is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON. The model infers structure instead of making you write a parser for every variation.</p>
-            <p>Once you embrace that, input stops being the bottleneck. The person pastes what they have and gets value. No ingestion UI, no client library, no "please clean this up before I can use it."</p>
+            <p>Claude Code is a code-facing agent runtime. It can read files, execute commands, call tools and APIs, and iterate on its own work. It happens to be used for code generation, but the same pattern works anywhere the inputs are messy and the steps are not fully predictable.</p>
+            <p>The key difference is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON. The model can often infer structure instead of making you write a parser for every variation.</p>
+            <p>Once you embrace that, input stops being the bottleneck. Someone pastes what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it."</p>
             <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch, recover, and retry without you spelling out every edge case in advance. Subagents make that modular: ingestion, classification, and reporting can each run as separate specialists with separate context and permissions.</p>
 
             <p>Here's what the same classifier looks like as a Claude Code skill instead of a Python pipeline:</p>
@@ -149,7 +149,7 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
             <br>
-            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: well over a hundred Python modules dedicated to specific input sources. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
+            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: well over a hundred Python modules dedicated to specific input sources. Across that directory, you see source-specific auth, pagination, error handling, and format quirks repeated over and over. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
             <p class="article-footnote">*The complexity does not vanish. It gets pushed down into the runtime, existing CLI tools, MCP connectors, or the rest of your company's infrastructure. The work still happens. You just are not the one hand-writing and maintaining each adapter.</p>
         </div>
     </section>
@@ -265,6 +265,7 @@ Failure handling:
                     </ul>
                 </div>
             </div>
+            <p>What changed for me is where the engineering effort sits. In these systems, the center of gravity moves away from parser code and toward guardrails, tool access, and clear task design. For workflows like this one, that trade is often worth making.</p>
         </div>
     </section>
 
