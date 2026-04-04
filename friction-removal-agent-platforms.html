@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comparing the same ML workflow built two ways: traditional Python vs Claude Code. Where each one wins and what the trade-offs are.">
+    <meta name="description" content="Comparing the same applied ML workflow built two ways, traditional Python vs Claude Code, and where the real engineering tax actually lives.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
     <meta property="og:title" content="The Hard Part Should Be the Model | Travis Barton">
-    <meta property="og:description" content="Most applied ML systems spend more time on input parsing and connector auth than on the model. This essay compares the same workflow in Python vs Claude Code.">
+    <meta property="og:description" content="Most applied ML systems spend more time on parsing, auth, and operational glue than on the model. This essay compares the same workflow in Python and Claude Code.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
     <title>The Hard Part Should Be the Model | Travis Barton</title>
@@ -40,7 +40,7 @@
         <div class="container article-container">
             <p class="article-kicker">Essay &middot; March 2026</p>
             <h1 class="article-title">The Hard Part Should Be the Model</h1>
-            <p class="article-subtitle">Most applied ML systems spend more engineering time on input parsing, connector auth, and operational overhead than on the actual classification or prediction work. This essay compares building the same workflow two ways: one in traditional Python and one on top of Claude Code.</p>
+            <p class="article-subtitle">Most applied ML systems spend more engineering time on parsing, auth, pagination, OCR, and operational glue than on the actual model. Here's the same customer feedback workflow built two ways: once in Python, and once as a Claude Code pipeline.</p>
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
@@ -50,13 +50,13 @@
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
-                    <li>Claude Code pipelines handle messy inputs without custom parsers, are fast to build, and can debug themselves. Traditional ops (cron, monitoring) is still more stable, but the gap is closing.</li>
-                    <li>Everything described here can be done with Python pipelines, but you pay an ongoing tax in the form of: parsers, schema drift, auth, pagination, OCR, maintenance, etc.</li>
-                    <li>The trade-off is that what you save in interface work, you spend on security design: leakage, prompt injection, and scoping what the agent can reach.</li>
+                    <li>Claude Code pipelines are strongest when the inputs are messy, the output is language or code, and speed of building matters more than strict determinism.</li>
+                    <li>You can build the same workflow in Python, but you pay for it in parser code, connector maintenance, schema drift, OCR, and all the glue nobody shows in the demo.</li>
+                    <li>The trade-off is real: higher run-time cost, slower execution, weaker guarantees, and a much larger security surface if you do not sandbox the agent carefully.</li>
                 </ul>
             </div>
             <br>
-            <p class="article-footnote"><strong>A note on naming:</strong> "Claude Code" is to LLM code harnesses what Kleenex is to tissues. The more accurate category name would be something like "agentic coding tool," but Claude Code is what people recognize. I'll use it throughout this essay as shorthand for the category. Other tools in the same category include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity, among others. I'm working on a comparison of these. <!-- TODO: link to comparison essay when published --></p>
+            <p class="article-footnote"><strong>A note on naming:</strong> I'm using "Claude Code" the way people use "Kleenex": as a familiar brand name for a broader category. The more precise label would be something like "agentic coding tool," but Claude Code is the name most people recognize. Tools in the same family include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity. I'm working on a comparison of those next.</p>
         </div>
     </section>
 
@@ -65,9 +65,9 @@
         <div class="container article-container">
             <h2 class="article-heading">The problem: messy inputs</h2>
             <p>Let's take the example of a customer feedback classifier.</p>
-            <p>Every week, a business person drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the "select all &rarr; copy &rarr; paste" blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
-            <p>Then things get worse. The "feedback" also contains HTML dumps from a web form, Slack threads pasted inline, Jira tickets that act as labels or ground truth, and screenshots of JSON from a dashboard because someone couldn't be bothered to find the endpoint.</p>
-            <p>The model is not the hard part. The hard part is everything around the model. That's friction.</p>
+            <p>Every week, someone drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the select-all, copy, paste blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
+            <p>Then things get worse. The "feedback" also contains HTML dumps from a web form, Slack threads pasted inline, Jira tickets used as labels or ground truth, and screenshots of JSON from a dashboard because that was the fastest way to share it.</p>
+            <p>In most applied ML work, the model is the easy part. The hard part is the interface between reality and the model. That's the tax.</p>
         </div>
     </section>
 
@@ -75,14 +75,14 @@
     <section id="friction" class="section article-section article-alt">
         <div class="container article-container">
             <h2 class="article-heading">Python pipelines make you pay for every input</h2>
-            <p>Python can turn chaos into structure, but it's hard. You have to build and maintain a parser for every input format, and if someone pastes something slightly wrong, the pipeline fails. Sometimes gracefully, sometimes not. Either way, the output is wrong or missing.</p>
+            <p>Python can tame this kind of chaos, but only if you're willing to own every adapter yourself. You have to build and maintain a parser for every input format, and if someone pastes something slightly wrong, the pipeline fails. Sometimes gracefully, sometimes not. Either way, the output is wrong or missing.</p>
             <div class="technical-aside">
                 <span class="technical-aside__label">&#9888; Technical</span>
-                <p>Start with pasted spreadsheet text. Python's standard library includes <span class="inline-code">csv.Sniffer</span> specifically because CSV "dialects" vary and you often have to deduce the delimiter from a sample. It even has a <span class="inline-code">has_header</span> heuristic to guess whether the first row looks like column names. pandas can help, but its own docs note that if <span class="inline-code">sep=None</span>, the fast C engine can't automatically detect the separator, so it falls back to the Python engine and relies on <span class="inline-code">csv.Sniffer</span>.</p>
+                <p>Start with pasted spreadsheet text. Python's standard library includes <span class="inline-code">csv.Sniffer</span> specifically because CSV "dialects" vary and you often have to deduce the delimiter from a sample. It even has a <span class="inline-code">has_header</span> heuristic to guess whether the first row looks like column names. pandas helps, but even its docs note that if <span class="inline-code">sep=None</span>, the fast C engine cannot automatically detect the separator, so it falls back to the Python engine and relies on <span class="inline-code">csv.Sniffer</span>.</p>
             </div>
-            <p>Here's a concise ingestion function that already hints at the problem:</p>
+            <p>Even the toy version starts like this:</p>
             <div class="article-card">
-                <h3>Mock ingestion function</h3>
+                <h3>Illustrative ingestion function</h3>
                 <pre><code>import io, csv
 import pandas as pd
 
@@ -104,9 +104,10 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     return df</code></pre>
             </div>
             <br>
-            <p>Now zoom out. To accept the real inputs that show up in this classifier, you end up building and maintaining: delimiter sniffing and schema validation (columns change, fields appear, fields disappear), HTML extraction with Beautiful Soup, Slack OAuth with cursor pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract (you own the engine install, preprocessing, and output parsing), plus deployment, monitoring, and maintenance.</p>
+            <p>Now zoom out. To accept the real inputs that show up in this classifier, you wind up owning delimiter sniffing and schema validation, because columns change, fields appear, and fields disappear.</p>
+            <p>Then you add HTML extraction with <span class="inline-code">BeautifulSoup</span>, Slack OAuth plus cursor-based pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract, and finally the operational work of deployment, monitoring, and maintenance.</p>
             <p>Python can do all of this. It just makes it your job.*</p>
-            <p class="article-footnote">*In a Claude Code pipeline, these problems don't disappear. They become the model's problem instead of yours. The LLM harness handles the parsing, retries, and format detection, and when something breaks, the model is the one that has to debug it. More on that in a moment.</p>
+            <p class="article-footnote">*In a Claude Code pipeline, these problems do not disappear. More of them get absorbed by the runtime, existing tools, and the model's ability to reason through bad inputs. You are trading handwritten adapters for a system that can often recover on its own.</p>
         </div>
     </section>
 
@@ -114,10 +115,10 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     <section id="platform" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">What Claude Code changes</h2>
-            <p>Claude Code is a tool for running AI agents that can read files, execute commands, call APIs, and iterate on their own work. It's meant for code generation, but the same architecture handles any workflow where the inputs are messy and the steps aren't fully predictable.</p>
-            <p>The key difference is what counts as valid input. In a Python pipeline, you define a schema and reject anything that doesn't match. In Claude Code, you throw in the chaos: a messy spreadsheet paste, an HTML dump, a screenshot of a dashboard, whatever you have. You can paste in a broken CSV or malformed JSON and it still works. Claude sees the typo, infers what you meant, and keeps going. The model figures out the structure instead of you writing a parser for it.</p>
-            <p>Once you embrace that, data input stops being a bottleneck. The business person pastes what they have and gets value. No ingestion UI, no API client library, no "please reformat this as a ____ first."</p>
-            <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch and retry without you writing a new <span class="inline-code">if</span> for each edge case. Subagents make it modular: each runs in its own context with independent permissions. So "ingestion," "classification," and "reporting" become separate specialists instead of one monolithic prompt.</p>
+            <p>Claude Code is a code-facing agent runtime: it can read files, execute commands, call tools and APIs, and iterate on its own work. It happens to be used for code generation, but the same pattern works anywhere the inputs are messy and the steps are not fully predictable.</p>
+            <p>The key difference is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON. The model infers structure instead of making you write a parser for every variation.</p>
+            <p>Once you embrace that, input stops being the bottleneck. The person pastes what they have and gets value. No ingestion UI, no client library, no "please clean this up before I can use it."</p>
+            <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch, recover, and retry without you spelling out every edge case in advance. Subagents make that modular: ingestion, classification, and reporting can each run as separate specialists with separate context and permissions.</p>
 
             <p>Here's what the same classifier looks like as a Claude Code skill instead of a Python pipeline:</p>
             <div class="article-card">
@@ -148,8 +149,8 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
             <br>
-            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: over 170 separate Python files, one for each input source. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
-            <p class="article-footnote">*The complexity doesn't vanish. It's handled by the model's ability to call existing CLI tools, by MCP connectors maintained as part of the ecosystem, or by your company's existing infrastructure that the agent already knows how to talk to. The work still gets done, you just don't write and maintain the adapter code yourself.</p>
+            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: well over a hundred Python modules dedicated to specific input sources. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
+            <p class="article-footnote">*The complexity does not vanish. It gets pushed down into the runtime, existing CLI tools, MCP connectors, or the rest of your company's infrastructure. The work still happens. You just are not the one hand-writing and maintaining each adapter.</p>
         </div>
     </section>
 
@@ -157,8 +158,8 @@ Failure handling:
     <section class="section article-section article-alt">
         <div class="container article-container">
             <h2 class="article-heading">Where Claude Code starts to feel like a platform</h2>
-            <p>What makes Claude Code feel like a platform is that it owns the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
-            <blockquote><strong>A personal example:</strong> I sent a voice note to one of my agents on a system that didn't have a transcription tool installed. The agent found one, installed it, transcribed the message, and drafted a reply. Nobody designed that feature. The agent just knew it needed to get to a solution and worked backward from there.</blockquote>
+            <p>The reason this starts to feel like a platform is that it can own the full loop. Inspect the world, call tools, edit code, recover from failure, and keep going. Not perfectly, and not with the same guarantees as traditional infrastructure, but with much less hand-built glue.</p>
+            <blockquote><strong>A personal example:</strong> I once sent a voice note into one of my agent workflows, and there was no transcription tool installed. The agent noticed the missing dependency, found one, installed it, transcribed the message, and drafted a reply. Nobody had designed that feature. The system just worked backward from the outcome and filled in the missing piece.</blockquote>
             <div class="article-table">
                 <table>
                     <thead>
@@ -181,8 +182,8 @@ Failure handling:
                         </tr>
                         <tr>
                             <td>Deployment</td>
-                            <td>You ship and maintain an API plus connectors and credentials.</td>
-                            <td>You ship a skill spec. Lighter to set up, but the runtime is younger.</td>
+                            <td>You ship code plus the API surface, connectors, and credentials.</td>
+                            <td>You ship an agent spec plus the runtime boundaries around it. Lighter to set up, but the runtime is younger.</td>
                         </tr>
                         <tr>
                             <td>Access control</td>
@@ -192,7 +193,7 @@ Failure handling:
                         <tr>
                             <td>Developer UX</td>
                             <td>Explicit code paths, but lots of adapter work for each input source.</td>
-                            <td>A gather/act/verify loop with isolated subagents and independent permissions.</td>
+                            <td>A gather/act/verify loop with subagents, tool access, and less adapter code.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -204,7 +205,7 @@ Failure handling:
     <section id="risks" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">The downsides are real</h2>
-            <p>This approach has serious costs and it is not suited for every application.</p>
+            <p>These downsides are not theoretical. They should change what kinds of systems you do and do not build this way.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -216,24 +217,24 @@ Failure handling:
                     <tbody>
                         <tr>
                             <td>Cost</td>
-                            <td>Every invocation burns tokens. A Python pipeline costs compute once at training time and near-zero at inference. A CC pipeline pays per run, and complex workflows with retries and subagents get expensive fast. You can easily burn 100 million tokens on a 24+ hour pipeline.</td>
+                            <td>Every invocation burns tokens. Traditional pipelines usually pay more of their cost up front in engineering time and fixed infrastructure. Agent pipelines keep charging you at run time, and retries, long contexts, and subagents can make that bill spike fast. Long-running workflows can burn through tens or even hundreds of millions of tokens.</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
-                            <td>An LLM reading and interpreting messy input is slower than a hardcoded parser that knows exactly what to expect. If your pipeline runs thousands of times a day and needs sub-second response, this is the wrong tool.</td>
+                            <td>An LLM reading and interpreting messy input is slower than a hardcoded parser that already knows what to expect. If the workflow runs thousands of times a day and needs sub-second response, this is probably the wrong tool.</td>
                         </tr>
                         <tr>
                             <td>Security</td>
-                            <td>Python's interface tax limits what the system can reach. Remove that friction and you have to replace those limits intentionally. The agent can find labels or answer keys it shouldn't see. Prompt injection is real: every input is a potential instruction. Ask <a href="https://arstechnica.com/tech-policy/2024/02/air-canada-must-honor-refund-policy-invented-by-airlines-chatbot/" target="_blank" rel="noopener noreferrer">Air Canada</a>, whose chatbot invented a refund policy and a court forced them to honor it. You need sandboxing, explicit permissions, and a clear trust model.</td>
+                            <td>Python's interface tax acts as a crude safety boundary: the system can only reach what you explicitly wired up. Remove that friction and you have to replace it intentionally. Every pasted document, web page, or tool result is a possible instruction. Prompt injection is real; <a href="https://arstechnica.com/information-technology/2023/02/ai-powered-bing-chat-spills-its-secrets-via-prompt-injection-attack/" target="_blank" rel="noopener noreferrer">early Bing</a> famously exposed its hidden system prompt when users prodded it the right way. You need tight scopes, explicit permissions, and a clear trust model.</td>
                         </tr>
                         <tr>
                             <td>Reliability</td>
-                            <td>Traditional cron, PubSub, and monitoring are battle-tested. LLM-based orchestration is younger and less predictable. The model can hallucinate actions, retry incorrectly, or silently drop tasks that a deterministic pipeline would catch. Replit's agent <a href="https://www.businessinsider.com/replit-ceo-apologizes-ai-coding-tool-delete-company-database-2025-7" target="_blank" rel="noopener noreferrer">wiped a startup's production database</a> and their CEO had to publicly apologize.</td>
+                            <td>Traditional cron, PubSub, and monitoring are battle-tested. LLM-based orchestration is younger and less predictable. The model can take the wrong action, retry the wrong thing, or paper over a failure with a confident guess. <a href="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" target="_blank" rel="noopener noreferrer">Replit's agent deleting a startup's production database</a> is the kind of failure mode deterministic systems usually contain better.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p style="margin-top: 2rem;">But where it does work, something interesting happens: the people building on your platform stop being limited to your engineers. Your EMs can build workflows. Your PMs can prototype pipelines. Sales and finance can paste their data and get structured output without filing a ticket. The barrier to building drops from "can write Python" to "can describe what they want."</p>
+            <p style="margin-top: 2rem;">Where it does work, though, something interesting happens: the people who can build on your platform stop being limited to engineers. EMs can assemble workflows. PMs can prototype internal tools. Sales and finance can paste their data and get structured output without filing a ticket. The barrier drops from "can write Python" to "can clearly describe the work."</p>
         </div>
     </section>
 
@@ -241,26 +242,26 @@ Failure handling:
     <section id="decision" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">When to use which</h2>
-            <p>This technology is really new and I don't have a comprehensive guide for when to reach for which approach. But here's the rough heuristic I use for my own work:</p>
+            <p>This is still new enough that I would not pretend to have a universal decision tree. But these are the heuristics I use in my own work:</p>
             <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="article-card">
-                    <h3>Claude Code pipeline</h3>
+                    <h3>Reach for Claude Code when</h3>
                     <ul>
-                        <li>There's tolerance for small amounts of error</li>
-                        <li>The desired output is text, code, or reports</li>
-                        <li>You want to share the result with non-technical people</li>
-                        <li>You have a small team (or no team) to build it</li>
-                        <li>Inputs are messy and unpredictable</li>
+                        <li>Inputs are messy, heterogeneous, or human-generated</li>
+                        <li>Small amounts of error are acceptable</li>
+                        <li>The output is text, code, reports, or structured summaries</li>
+                        <li>Non-technical people should be able to use it directly</li>
+                        <li>You have a small team, or no team, available to build it</li>
                     </ul>
                 </div>
                 <div class="article-card">
-                    <h3>Traditional Python pipeline</h3>
+                    <h3>Reach for Python when</h3>
                     <ul>
-                        <li>You need strict determinism and reproducible contracts</li>
-                        <li>High-volume, latency-sensitive scoring</li>
-                        <li>Hard multi-tenant security guarantees</li>
-                        <li>Cost per invocation matters</li>
-                        <li>Zero tolerance for error</li>
+                        <li>You need deterministic contracts and repeatable behavior</li>
+                        <li>Latency or per-run cost matters</li>
+                        <li>Security boundaries have to be hard, not implied</li>
+                        <li>The same task runs at high volume</li>
+                        <li>A wrong answer is unacceptable</li>
                     </ul>
                 </div>
             </div>
