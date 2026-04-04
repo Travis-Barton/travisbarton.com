@@ -145,7 +145,8 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
 
-            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: over 170 separate Python files, one for each input source. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.</p>
+            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: over 170 separate Python files, one for each input source. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
+            <p class="article-footnote">*The complexity doesn't vanish. It's handled by the model's ability to call existing CLI tools, by MCP connectors maintained as part of the ecosystem, or by your company's existing infrastructure that the agent already knows how to talk to. The work still gets done, you just don't write and maintain the adapter code yourself.</p>
         </div>
     </section>
 
