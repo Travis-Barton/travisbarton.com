@@ -103,6 +103,7 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
 
     return df</code></pre>
             </div>
+            <br>
             <p>Now zoom out. To accept the real inputs that show up in this classifier, you end up building and maintaining: delimiter sniffing and schema validation (columns change, fields appear, fields disappear), HTML extraction with Beautiful Soup, Slack OAuth with cursor pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract (you own the engine install, preprocessing, and output parsing), plus deployment, monitoring, and maintenance.</p>
             <p>Python can do all of this. It just makes it your job.*</p>
             <p class="article-footnote">*In a Claude Code pipeline, these problems don't disappear. They become the model's problem instead of yours. The LLM harness handles the parsing, retries, and format detection, and when something breaks, the model is the one that has to debug it. More on that in a moment.</p>
