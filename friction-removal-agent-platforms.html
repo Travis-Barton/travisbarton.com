@@ -50,7 +50,7 @@
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
-                    <li>Claude Code pipelines handle messy inputs without custom parsers, are fast to build, and can debug themselves. Ops features like scheduling come attached to the LLM harness rather than requiring separate infrastructure.</li>
+                    <li>Claude Code pipelines handle messy inputs without custom parsers, are fast to build, and can debug themselves. Traditional ops (cron, monitoring) is still more stable, but the gap is closing.</li>
                     <li>Everything described here can be done with Python pipelines, but you pay an ongoing tax in the form of: parsers, schema drift, auth, pagination, OCR, maintenance, etc.</li>
                     <li>The trade-off is that what you save in interface work, you spend on security design: leakage, prompt injection, and scoping what the agent can reach.</li>
                 </ul>
@@ -150,23 +150,12 @@ Failure handling:
         </div>
     </section>
 
-    <!-- Ops and distribution -->
+    <!-- Where Claude Code starts to feel like a platform -->
     <section class="section article-section article-alt">
-        <div class="container article-container">
-            <h2 class="article-heading">Ops and distribution remove the next layer</h2>
-            <p>Even if Claude can interpret messy input, you still want it to run reliably.</p>
-            <p>Scheduled execution is the difference between "someone remembers to run it" and "it runs." For a weekly feedback classifier, that's table stakes. The runtime I use gives me cron-style scheduling with retry backoff after consecutive errors (30 seconds, 1 minute, 5 minutes, 15 minutes, 60 minutes) returning to normal after the next success. That's what "self-healing" looks like in practice when an upstream system flakes out.</p>
-            <p>Heartbeat polling is the other half. If nothing needs attention, the agent replies with an acknowledgement and suppresses delivery. You can run frequent check-ins without annoying anyone.</p>
-            <p>Then you hit distribution friction: putting the capability behind a URL that's safe to share. Sitting an auth layer (like Cloudflare Access) in front of a self-hosted agent gives you deny-by-default behavior, wildcard policy patterns across subdomains, and real access control without building a whole auth system yourself.</p>
-            <p>A personal example: I have a voice message workflow where I send a voice note and the agent notices the transcription tool is missing, installs it, transcribes the message, and drafts a reply. Nobody designed that feature. The agent just ran commands until the dependency was resolved, because it could.</p>
-        </div>
-    </section>
-
-    <!-- Where the platform claim becomes real -->
-    <section class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">Where Claude Code starts to feel like a platform</h2>
             <p>What makes Claude Code feel like a platform is that it owns the full loop. Inspect the world, call tools, edit code, run commands, recover from failure, and keep going. All without constant babysitting.</p>
+            <p>A personal example: I have a voice message workflow where I send a voice note and the agent notices the transcription tool is missing, installs it, transcribes the message, and drafts a reply. Nobody designed that feature. The agent just ran commands until the dependency was resolved, because it could.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -183,14 +172,14 @@ Failure handling:
                             <td>Lower for humans. Skills accept plain text, and images can be pasted or attached.</td>
                         </tr>
                         <tr>
-                            <td>Resilience</td>
-                            <td>You build retries, scheduling, and monitoring.</td>
-                            <td>Cron persists jobs, retries with exponential backoff, heartbeats suppress "nothing to report."</td>
+                            <td>Ops and scheduling</td>
+                            <td>Mature. PubSub, cron, monitoring are battle-tested.</td>
+                            <td>Catching up. LLM scheduling exists but is less stable than traditional infra.</td>
                         </tr>
                         <tr>
                             <td>Deployment</td>
                             <td>You ship and maintain an API plus connectors and credentials.</td>
-                            <td>You ship a skill spec plus an ops runtime. Skills are invoked like commands.</td>
+                            <td>You ship a skill spec. Lighter to set up, but the runtime is younger.</td>
                         </tr>
                         <tr>
                             <td>Access control</td>
