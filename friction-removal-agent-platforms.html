@@ -237,29 +237,25 @@ Failure handling:
     <!-- Decision -->
     <section id="decision" class="section article-section">
         <div class="container article-container">
-            <h2 class="article-heading">When to use what</h2>
-            <p>Here's the decision logic I actually use:</p>
-            <div class="article-grid">
+            <h2 class="article-heading">When to use which</h2>
+            <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="article-card">
-                    <h3>Use a Claude Code pipeline when</h3>
+                    <h3>Claude Code pipeline</h3>
                     <ul>
-                        <li>The main pain is messy input and messy workflows</li>
-                        <li>Humans in the loop are a feature, not a bug</li>
-                        <li>You want business users to paste what they have and get value without onboarding to your API surface</li>
-                        <li>You benefit from the gather/act/verify loop more than you fear it</li>
+                        <li>Inputs are messy and unpredictable</li>
+                        <li>Non-engineers need to use it</li>
+                        <li>The workflow changes faster than a schema can keep up</li>
+                        <li>Humans in the loop are a feature</li>
                     </ul>
                 </div>
                 <div class="article-card">
-                    <h3>Use a traditional pipeline when</h3>
+                    <h3>Traditional Python pipeline</h3>
                     <ul>
-                        <li>You need strict determinism, fixed schemas, and reproducible data contracts</li>
-                        <li>You need hard multi-tenant guarantees</li>
-                        <li>You're doing high-volume, latency-sensitive scoring where adaptability isn't the point</li>
+                        <li>You need strict determinism and reproducible contracts</li>
+                        <li>High-volume, latency-sensitive scoring</li>
+                        <li>Hard multi-tenant security guarantees</li>
+                        <li>Cost per invocation matters</li>
                     </ul>
-                </div>
-                <div class="article-card">
-                    <h3>And the trap</h3>
-                    <p>If you take messy input, coerce it into strict JSON, send it to another service, coerce the response, then feed it back into the agent, you just rebuilt the brittle contract layer you were trying to escape. You get the worst of both systems.</p>
                 </div>
             </div>
         </div>
