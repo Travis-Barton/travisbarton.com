@@ -145,48 +145,7 @@ Failure handling:
   and propose a best-guess interpretation.</code></pre>
             </div>
 
-            <p>Now compare that with the Python version of the same workflow. The ingestion function alone is 15 lines, and it only handles one input format. Add HTML extraction, Slack auth, Jira pagination, OCR, and deployment, and you're writing hundreds of lines of adapter code before you touch classification:</p>
-
-            <div class="article-card">
-                <h3>Equivalent Python pipeline</h3>
-                <pre><code>import io, csv
-import pandas as pd
-from bs4 import BeautifulSoup
-
-REQUIRED = {"comment"}
-
-def sniff_sep(text: str) -&gt; str:
-    try:
-        return csv.Sniffer().sniff(text[:5000]).delimiter
-    except Exception:
-        return "\t"
-
-def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
-    df = pd.read_csv(io.StringIO(text), sep=sniff_sep(text), engine="python")
-    df.columns = [c.strip().lower() for c in df.columns]
-    if not REQUIRED.issubset(df.columns):
-        raise ValueError(f"Missing: {sorted(REQUIRED - set(df.columns))}")
-    return df
-
-def ingest_html_dump(html: str) -&gt; pd.DataFrame:
-    soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text("\n")
-    return ingest_excel_paste(text)
-
-def fetch_slack_threads(token, channel):
-    # You own OAuth, rate limits, cursor pagination, retries.
-    raise NotImplementedError
-
-def fetch_jira_tickets(auth, jql):
-    # You own auth and pagination (startAt, maxResults, total).
-    raise NotImplementedError
-
-def ocr_json_screenshot(image_path):
-    # You own Tesseract install, preprocessing, JSON parsing.
-    raise NotImplementedError</code></pre>
-            </div>
-
-            <p>The Claude Code skill is 20 lines of plain English. The Python pipeline is already longer and every <span class="inline-code">NotImplementedError</span> represents weeks of connector work that somebody owns.</p>
+            <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: over 170 separate Python files, one for each input source. Each one handles its own auth model, pagination logic, error handling, and format quirks. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.</p>
         </div>
     </section>
 
