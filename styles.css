@@ -961,6 +961,17 @@ a:hover {
     }
 }
 
+/* ---- Blockquote ---- */
+
+blockquote {
+    margin: 1.25rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--border-strong);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.65;
+}
+
 /* ---- Technical Aside ---- */
 
 .technical-aside {
