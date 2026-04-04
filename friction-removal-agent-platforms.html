@@ -197,28 +197,16 @@ Failure handling:
         </div>
     </section>
 
-    <!-- Risks -->
+    <!-- Downsides -->
     <section id="risks" class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">Risks are real: leakage, prompt injection, and boundaries</h2>
-            <p>The interface tax in Python pipelines is annoying, but it has a side effect: it limits what the system can reach. Remove that friction and you have to replace those limits intentionally.</p>
-            <p>Train-test leakage is the classic ML version of this. You split into train and test first and never include test data when calling <span class="inline-code">fit</span>, because it leads to overly optimistic scores. Agent systems add a more embarrassing failure mode: the agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug. That's a capability boundary bug.</p>
-            <p>Prompt injection is the other big one. Once you build systems that ingest arbitrary text, HTML, screenshots, and external content, every input is a potential instruction. The environment can talk back. The practical tools for this are sandboxing (OS-level filesystem and network isolation) and permission systems that block commands from reaching outside defined boundaries, even if prompt injection bypasses the decision-making layer.</p>
-            <p>The trust model matters. Most personal agent setups assume a single trusted operator: one person, one gateway. That's fine for individual use, but it's not a hostile multi-tenant security boundary for mutually untrusted users sharing one system. Know which one you're building.</p>
-            <div class="article-grid">
-                <div class="article-card">
-                    <h3>What to protect</h3>
-                    <p>Labels, answer keys, production credentials, tenant boundaries, and any system state that would let the workflow "cheat."</p>
-                </div>
-                <div class="article-card">
-                    <h3>What to design early</h3>
-                    <p>Sandbox policies, connector scope, file boundaries, and explicit rules about which sources the workflow may consult.</p>
-                </div>
-                <div class="article-card">
-                    <h3>What not to assume</h3>
-                    <p>That friction is safety. Removing accidental friction means you must replace it with real isolation and deliberate permissions.</p>
-                </div>
-            </div>
+            <h2 class="article-heading">The downsides are real</h2>
+            <p>This approach has serious costs and it is not suited for every application.</p>
+            <p><strong>Cost.</strong> Every invocation burns tokens. A Python pipeline that runs a classifier costs compute once at training time and near-zero at inference. A Claude Code pipeline pays per run, and complex workflows with retries and subagents can get expensive fast. For high-volume, latency-sensitive scoring, the economics don't work.</p>
+            <p><strong>Speed.</strong> An LLM reading and interpreting a messy input is slower than a hardcoded parser that knows exactly what to expect. If your pipeline runs thousands of times a day and needs sub-second response, this is the wrong tool.</p>
+            <p><strong>Security.</strong> The interface tax in Python pipelines is annoying, but it has a side effect: it limits what the system can reach. Remove that friction and you have to replace those limits intentionally. The agent can "help" by finding labels or answer keys somewhere it shouldn't look. That's not a model bug, that's a capability boundary bug. Prompt injection is real too: once you ingest arbitrary text, HTML, and screenshots, every input is a potential instruction. The environment can talk back. You need sandboxing, explicit permissions, and a clear trust model. Most personal setups assume one trusted operator. That's fine for individual use, but know the difference between that and a multi-tenant security boundary.</p>
+            <p><strong>Reliability.</strong> Traditional cron, PubSub, and monitoring are battle-tested. LLM-based scheduling and orchestration is younger and less predictable. The model can hallucinate actions, retry incorrectly, or silently drop tasks that a deterministic pipeline would catch.</p>
+            <p>But where it does work, something interesting happens: the people building on your platform stop being limited to your engineers. Your EMs can build workflows. Your PMs can prototype pipelines. Sales and finance can paste their data and get structured output without filing a ticket. The barrier to building drops from "can write Python" to "can describe what they want."</p>
         </div>
     </section>
 
