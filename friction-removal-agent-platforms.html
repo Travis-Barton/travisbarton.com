@@ -238,15 +238,16 @@ Failure handling:
     <section id="decision" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">When to use which</h2>
-            <p>This technology is really new and I don't have a comprehensive guide for when to reach for which approach. But here's the rough heuristic I use for my own work: I reach for a Claude Code pipeline when there's tolerance for small amounts of error, when the desired output is text or code or reports, when I want to share the result easily with non-technical people, and when I have a small team (or no team) available to build it. The cases where you shouldn't use it tend to be obvious from the downsides above: latency, cost, and security requirements that need deterministic guarantees.</p>
+            <p>This technology is really new and I don't have a comprehensive guide for when to reach for which approach. But here's the rough heuristic I use for my own work:</p>
             <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="article-card">
                     <h3>Claude Code pipeline</h3>
                     <ul>
+                        <li>There's tolerance for small amounts of error</li>
+                        <li>The desired output is text, code, or reports</li>
+                        <li>You want to share the result with non-technical people</li>
+                        <li>You have a small team (or no team) to build it</li>
                         <li>Inputs are messy and unpredictable</li>
-                        <li>Non-engineers need to use it</li>
-                        <li>The workflow changes faster than a schema can keep up</li>
-                        <li>Humans in the loop are a feature</li>
                     </ul>
                 </div>
                 <div class="article-card">
@@ -256,6 +257,7 @@ Failure handling:
                         <li>High-volume, latency-sensitive scoring</li>
                         <li>Hard multi-tenant security guarantees</li>
                         <li>Cost per invocation matters</li>
+                        <li>Zero tolerance for error</li>
                     </ul>
                 </div>
             </div>
