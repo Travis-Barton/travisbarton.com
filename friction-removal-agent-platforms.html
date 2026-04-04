@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Why interface design, not model quality, determines whether an applied ML system actually gets used.">
+    <meta name="description" content="Comparing the same ML workflow built two ways: traditional Python vs Claude Code. Where each one wins and what the trade-offs are.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
     <meta property="og:title" content="The Hard Part Should Be the Model | Travis Barton">
-    <meta property="og:description" content="The expensive part of applied ML is everything wrapped around the model: messy inputs, brittle integrations, and the operational burden of keeping the whole thing alive.">
+    <meta property="og:description" content="Most applied ML systems spend more time on input parsing and connector auth than on the model. This essay compares the same workflow in Python vs Claude Code.">
     <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
     <meta name="twitter:card" content="summary">
     <title>The Hard Part Should Be the Model | Travis Barton</title>
@@ -29,7 +29,7 @@
                 <li><a href="#top" class="nav-link">Top</a></li>
                 <li><a href="#friction" class="nav-link">The Tax</a></li>
                 <li><a href="#platform" class="nav-link">The Shift</a></li>
-                <li><a href="#risks" class="nav-link">Risks</a></li>
+                <li><a href="#risks" class="nav-link">Downsides</a></li>
                 <li><a href="#decision" class="nav-link">Decision</a></li>
                 <li><a href="index.html#writing" class="nav-link">&larr; Back</a></li>
             </ul>
@@ -40,12 +40,12 @@
         <div class="container article-container">
             <p class="article-kicker">Essay &middot; March 2026</p>
             <h1 class="article-title">The Hard Part Should Be the Model</h1>
-            <p class="article-subtitle">Most applied ML systems spend more engineering time on input parsing, connector auth, and operational overhead than on the actual classification or prediction work. This essay builds the same workflow two ways, one in traditional Python and one on top of Claude Code, and compares the strengths and costs of both.</p>
+            <p class="article-subtitle">Most applied ML systems spend more engineering time on input parsing, connector auth, and operational overhead than on the actual classification or prediction work. This essay compares building the same workflow two ways: one in traditional Python and one on top of Claude Code.</p>
             <div class="article-meta">
                 <span class="meta-pill">Applied ML</span>
                 <span class="meta-pill">Interfaces</span>
                 <span class="meta-pill">Claude Code</span>
-                <span class="meta-pill">Operations</span>
+                <span class="meta-pill">Trade-offs</span>
             </div>
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
@@ -56,7 +56,7 @@
                 </ul>
             </div>
             <br>
-            <p class="article-footnote"><strong>A note on naming:</strong> "Claude Code" is to LLM code harnesses what Kleenex is to tissues. The more accurate term would be something like "code-assisted LLM agent harness," but nobody says that. I'll use "Claude Code" throughout this essay because it's what people recognize. Other tools in the same category include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity, among others. I'm working on a comparison of these. <!-- TODO: link to comparison essay when published --></p>
+            <p class="article-footnote"><strong>A note on naming:</strong> "Claude Code" is to LLM code harnesses what Kleenex is to tissues. The more accurate category name would be something like "agentic coding tool," but Claude Code is what people recognize. I'll use it throughout this essay as shorthand for the category. Other tools in the same category include Codex, OpenCode, Gemini CLI, Droid, Amp, and Antigravity, among others. I'm working on a comparison of these. <!-- TODO: link to comparison essay when published --></p>
         </div>
     </section>
 
@@ -201,7 +201,7 @@ Failure handling:
     </section>
 
     <!-- Downsides -->
-    <section id="risks" class="section article-section article-alt">
+    <section id="risks" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">The downsides are real</h2>
             <p>This approach has serious costs and it is not suited for every application.</p>
