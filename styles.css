@@ -935,11 +935,27 @@ a:hover {
     }
 
     .bird-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .bird-grid::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+
+    .bird-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
     }
 
     .bird-card--wide {
-        grid-column: span 1;
+        grid-column: auto;
+        flex: 0 0 85%;
     }
 
     .bird-card--wide img {
@@ -947,7 +963,22 @@ a:hover {
     }
 
     .nail-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .nail-grid::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+    
+    .nail-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
     }
 
     .essay-card {
