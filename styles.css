@@ -702,6 +702,15 @@ a:hover {
     box-shadow: var(--shadow-md);
 }
 
+.essay-cover {
+    width: calc(100% + 4.5rem);
+    margin: -2.25rem -2.25rem 2rem -2.25rem;
+    border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+    object-fit: cover;
+    aspect-ratio: 21 / 9;
+    display: block;
+}
+
 .essay-card__meta {
     font-family: var(--mono);
     font-size: 0.75rem;
