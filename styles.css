@@ -687,14 +687,30 @@ a:hover {
 
 /* ---- Essay Card ---- */
 
+.essay-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    max-width: 700px;
+    cursor: pointer;
+}
+
+.essay-card-link:hover {
+    color: inherit;
+}
+
 .essay-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 2.25rem;
+    padding: 0;
     box-shadow: var(--shadow-sm);
-    max-width: 700px;
+    overflow: hidden;
     transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.essay-card__body {
+    padding: 2rem 2.25rem 2.25rem;
 }
 
 .essay-card:hover {
@@ -703,9 +719,7 @@ a:hover {
 }
 
 .essay-cover {
-    width: calc(100% + 4.5rem);
-    margin: -2.25rem -2.25rem 2rem -2.25rem;
-    border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+    width: 100%;
     object-fit: cover;
     aspect-ratio: 21 / 9;
     display: block;
