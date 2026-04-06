@@ -104,6 +104,16 @@
                             <span>Mar 2026</span>
                         </figcaption>
                     </figure>
+                    <!-- Hidden gallery items for lightbox -->
+                    <div style="display: none;">
+                        <img src="images/birds/belted-kingfisher.jpg" alt="Belted Kingfisher">
+                        <img src="images/birds/black-phoebe.jpg" alt="Black Phoebe">
+                        <img src="images/birds/northern-shoveler.jpg" alt="Northern Shoveler">
+                        <img src="images/birds/oak-titmouse.jpg" alt="Oak Titmouse">
+                        <img src="images/birds/ruby-throated-hummingbird.jpg" alt="Ruby-throated Hummingbird">
+                        <img src="images/birds/western-fence-lizard.jpg" alt="Western Fence Lizard">
+                        <img src="images/birds/wild-turkey.jpg" alt="Wild Turkey">
+                    </div>
                 </div>
             </div>
         </section>
@@ -137,6 +147,12 @@
                             <span>Olive green base with simple red accents</span>
                         </figcaption>
                     </figure>
+                    <!-- Hidden gallery items for lightbox -->
+                    <div style="display: none;">
+                        <img src="images/nails/black-white-checkered.jpg" alt="Checkered Gold">
+                        <img src="images/nails/green-french-holly.jpg" alt="Holly French Tips">
+                        <img src="images/nails/pink-silver.jpg" alt="Silver Accents">
+                    </div>
                 </div>
             </div>
         </section>
@@ -190,6 +206,18 @@
             <span>&copy; 2026 Travis Barton</span>
         </div>
     </footer>
+
+    <!-- ====== LIGHTBOX ====== -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-overlay" id="lightbox-close-overlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+            <button class="lightbox-btn lightbox-prev" aria-label="Previous image">&lsaquo;</button>
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption"></div>
+            <button class="lightbox-btn lightbox-next" aria-label="Next image">&rsaquo;</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
