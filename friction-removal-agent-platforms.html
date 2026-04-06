@@ -8,8 +8,8 @@
     <meta property="og:url" content="https://www.travisbarton.com/friction-removal-agent-platforms.html">
     <meta property="og:title" content="Claude Code as Infrastructure | Travis Barton">
     <meta property="og:description" content="Most applied ML systems spend more time on parsing, auth, and operational glue than on the model. This essay shows what changes when the same workflow is built in Python versus Claude Code.">
-    <meta property="og:image" content="https://www.travisbarton.com/favicon/android-chrome-512x512.png">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://www.travisbarton.com/images/claude-infrastructure-cover.png">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Claude Code as Infrastructure | Travis Barton</title>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -27,6 +27,7 @@
             <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
             <ul class="nav-menu">
                 <li><a href="#top" class="nav-link">Top</a></li>
+                <li><a href="#problem" class="nav-link">The Problem</a></li>
                 <li><a href="#friction" class="nav-link">The Tax</a></li>
                 <li><a href="#platform" class="nav-link">The Shift</a></li>
                 <li><a href="#risks" class="nav-link">Downsides</a></li>
@@ -38,6 +39,7 @@
 
     <section id="top" class="section article-hero">
         <div class="container article-container">
+            <img src="images/claude-infrastructure-cover.png" alt="Claude Code as Infrastructure" class="article-hero-banner">
             <p class="article-kicker">Essay &middot; March 2026</p>
             <h1 class="article-title">Claude Code as Infrastructure</h1>
             <p class="article-subtitle">Most applied ML systems spend more engineering time on parsing, auth, pagination, OCR, and operational glue than on the actual model. Here's the same customer feedback workflow built two ways: once in Python, and once as a Claude Code pipeline.</p>
@@ -61,7 +63,7 @@
     </section>
 
     <!-- Friction Is the Feature -->
-    <section class="section article-section">
+    <section id="problem" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">The problem: messy inputs</h2>
             <p>Let's take the example of a <em>customer feedback classifier</em>.</p>

@@ -1124,6 +1124,16 @@ blockquote {
     padding-top: 5rem;
 }
 
+.article-hero-banner {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    aspect-ratio: 21 / 9;
+    display: block;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
 .article-kicker {
     font-family: var(--mono);
     font-size: 0.75rem;
