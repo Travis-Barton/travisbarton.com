@@ -162,44 +162,7 @@ Failure handling:
             <h2 class="article-heading">Where Claude Code starts to feel like a platform</h2>
             <p>The reason this starts to feel like a platform is that it can own the full loop. Inspect the world, call tools, edit code, recover from failure, and keep going. Not perfectly, and not with the same guarantees as traditional infrastructure, but with much less hand-built glue.</p>
             <blockquote><strong>A personal example:</strong> I once sent a voice note into one of my agent workflows, and there was no transcription tool installed. The agent noticed the missing dependency, found one, installed it, transcribed the message, and drafted a reply. Nobody had designed that feature. The system just worked backward from the outcome and filled in the missing piece.</blockquote>
-            <div class="article-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Python ML pipeline</th>
-                            <th>Claude Code pipeline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Ingestion complexity</td>
-                            <td>High. Dialect sniffing and header inference exist because variation is normal.</td>
-                            <td>Lower for humans. Skills accept plain text, and images can be pasted or attached.</td>
-                        </tr>
-                        <tr>
-                            <td>Ops and scheduling</td>
-                            <td>Mature. PubSub, cron, monitoring are battle-tested.</td>
-                            <td>Catching up. LLM scheduling exists but is less stable than traditional infra.</td>
-                        </tr>
-                        <tr>
-                            <td>Deployment</td>
-                            <td>You ship code plus the API surface, connectors, and credentials.</td>
-                            <td>You ship an agent spec plus the runtime boundaries around it. Lighter to set up, but the runtime is younger.</td>
-                        </tr>
-                        <tr>
-                            <td>Access control</td>
-                            <td>You build auth and data scoping inside your app.</td>
-                            <td>Same requirement. You still own permissions and sandbox boundaries.</td>
-                        </tr>
-                        <tr>
-                            <td>Developer UX</td>
-                            <td>Explicit code paths, but lots of adapter work for each input source.</td>
-                            <td>A gather/act/verify loop with subagents, tool access, and less adapter code.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <p>That is the shift. Not that Claude Code wins every category. It doesn't. Traditional infrastructure is still better at scheduling, monitoring, and hard guarantees. What changes is the human interface. Inputs get looser, iteration gets faster, and far less of the work lives in handwritten adapter code.</p>
         </div>
     </section>
 
@@ -219,7 +182,7 @@ Failure handling:
                     <tbody>
                         <tr>
                             <td>Cost</td>
-                            <td>Every invocation burns tokens. Traditional pipelines usually pay more of their cost up front in engineering time and fixed infrastructure. Agent pipelines keep charging you at run time, and retries, long contexts, and subagents can make that bill spike fast. Long-running workflows can burn through tens or even hundreds of millions of tokens.</td>
+                            <td>Cost can be brutal. A Claude Code pipeline doing the same job can easily cost 10x or 100x more than a traditional pipeline, especially once retries, long contexts, and subagents get involved. Traditional pipelines usually pay more of the price up front in engineering time and fixed infrastructure. Claude Code keeps charging you every run, and long-running workflows can burn through tens or even hundreds of millions of tokens.</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
@@ -227,7 +190,7 @@ Failure handling:
                         </tr>
                         <tr>
                             <td>Security</td>
-                            <td>Python's interface tax acts as a crude safety boundary: the system can only reach what you explicitly wired up. Remove that friction and you have to replace it intentionally. Every pasted document, web page, or tool result is a possible instruction. Prompt injection is real; <a href="https://arstechnica.com/information-technology/2023/02/ai-powered-bing-chat-spills-its-secrets-via-prompt-injection-attack/" target="_blank" rel="noopener noreferrer">early Bing</a> famously exposed its hidden system prompt when users prodded it the right way. You need tight scopes, explicit permissions, and a clear trust model.</td>
+                            <td>Python's interface tax acts as a crude safety boundary: the system can only reach what you explicitly wired up. Remove that friction and you have to replace it intentionally. Every pasted document, web page, or tool result is a possible instruction. Prompt injection is real; competitions like <a href="https://www.hackaprompt.com/" target="_blank" rel="noopener noreferrer">HackAPrompt</a> exist because getting models to ignore instructions is a real and repeatable attack surface, not a theoretical one. You need tight scopes, explicit permissions, and a clear trust model.</td>
                         </tr>
                         <tr>
                             <td>Reliability</td>
