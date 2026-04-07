@@ -151,3 +151,98 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     layout();
     startAuto();
 })();
+
+/* ---- Lightbox Gallery ---- */
+
+(function() {
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox) return;
+
+    const overlay = document.getElementById("lightbox-close-overlay");
+    const closeBtn = document.querySelector(".lightbox-close");
+    const prevBtn = document.querySelector(".lightbox-prev");
+    const nextBtn = document.querySelector(".lightbox-next");
+    const imgEl = document.querySelector(".lightbox-img");
+    const captionEl = document.querySelector(".lightbox-caption");
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openLightbox(imgElement) {
+        // Group by section containers
+        const container = imgElement.closest(".coverflow-track, .bird-grid, .nail-grid");
+        if (!container) return;
+
+        currentGallery = Array.from(container.querySelectorAll("img"));
+        currentIndex = currentGallery.indexOf(imgElement);
+
+        if (currentIndex === -1) return;
+
+        updateLightbox();
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    function updateLightbox() {
+        const item = currentGallery[currentIndex];
+        if (!item) return;
+        
+        imgEl.src = item.src;
+        imgEl.alt = item.alt;
+        
+        let captionText = "";
+        const figure = item.closest("figure");
+        if (figure) {
+            const figcap = figure.querySelector("figcaption strong");
+            if (figcap) captionText = figcap.textContent;
+        } else {
+            const slide = item.closest(".coverflow-slide");
+            if (slide) {
+                captionText = slide.getAttribute("data-label");
+            }
+        }
+        
+        captionEl.textContent = captionText || item.alt || "";
+    }
+
+    function nextImage() {
+        if (!currentGallery.length) return;
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        updateLightbox();
+    }
+
+    function prevImage() {
+        if (!currentGallery.length) return;
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateLightbox();
+    }
+
+    const allGalleryImages = document.querySelectorAll(".coverflow-slide img, .bird-card img, .nail-card img");
+    allGalleryImages.forEach((img) => {
+        img.addEventListener("click", (e) => {
+            const slide = img.closest(".coverflow-slide");
+            if (slide && slide.getAttribute("data-pos") !== "0") {
+                return;
+            }
+            openLightbox(img);
+        });
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    overlay.addEventListener("click", closeLightbox);
+    nextBtn.addEventListener("click", nextImage);
+    prevBtn.addEventListener("click", prevImage);
+
+    document.addEventListener("keydown", (e) => {
+        if (lightbox.getAttribute("aria-hidden") === "false") {
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowRight") nextImage();
+            if (e.key === "ArrowLeft") prevImage();
+        }
+    });
+})();

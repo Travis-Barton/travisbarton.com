@@ -1421,3 +1421,111 @@ blockquote {
         font-size: 0.85rem;
     }
 }
+
+/* ---- Lightbox ---- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.lightbox[aria-hidden="false"] {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    position: relative;
+    z-index: 1001;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+    color: white;
+    font-size: 0.9rem;
+    font-family: var(--mono);
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.lightbox-btn, .lightbox-close {
+    position: absolute;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 1rem;
+    opacity: 0.7;
+    transition: opacity var(--transition), transform var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-btn:hover, .lightbox-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lightbox-prev {
+    top: 50%;
+    left: -4rem;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    top: 50%;
+    right: -4rem;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev:hover { transform: translateY(-50%) scale(1.1); }
+.lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
+
+.lightbox-close {
+    top: -3rem;
+    right: -3rem;
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .lightbox-prev { left: -1rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+    .lightbox-next { right: -1rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+    .lightbox-close { top: -1.5rem; right: -1.5rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+}
+
+/* Make gallery images look clickable */
+.coverflow-slide[data-pos="0"] img, 
+.bird-card img, 
+.nail-card img {
+    cursor: pointer;
+}
