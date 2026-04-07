@@ -651,6 +651,7 @@ a:hover {
 }
 
 .nail-card {
+    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--surface);
@@ -676,19 +677,27 @@ a:hover {
 }
 
 .nail-card figcaption {
-    padding: 1rem 1.25rem 1.25rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .nail-card figcaption strong {
-    display: block;
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.2rem;
 }
 
 .nail-card figcaption span {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    font-size: 0.8rem;
+    opacity: 0.75;
+    font-family: var(--mono);
 }
 
 /* ---- Essay Card ---- */
@@ -1473,12 +1482,18 @@ blockquote {
 }
 
 .lightbox-caption {
-    margin-top: 1rem;
-    color: white;
-    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    padding: 0.4rem 1.2rem;
+    background: var(--surface);
+    color: var(--text-primary);
+    border-radius: 999px;
+    font-size: 0.85rem;
     font-family: var(--mono);
     text-align: center;
     letter-spacing: 0.05em;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border);
 }
 
 .lightbox-btn, .lightbox-close {
