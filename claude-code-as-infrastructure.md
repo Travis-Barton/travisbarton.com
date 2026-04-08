@@ -15,6 +15,8 @@ tags:
 
 Most applied ML system engineers spend more time on parsing, auth, pagination, and plumbing than on the actual model itself. Claude Code offers a _new_ kind of infrastruture that solves much of these problems. To see how, lets look at a customer feedback workflow built two ways: once in Python, and once as a Claude Code pipeline.
 
+This is not a replacement for traditional infrastructure, but it is a genuinely new layer for workflows where input friction dominates the engineering cost.
+
 ## TL;DR
 
 - Claude Code pipelines are strongest when the inputs are messy, the output is language or code, and speed of building matters more than 100% determinism.
@@ -67,7 +69,7 @@ Then you add HTML extraction with `BeautifulSoup`, Slack OAuth plus cursor-based
 
 "Well Travis," you might say, "Why not add a LLM pipeline in *between my user and my python?*" and thats a great solution! However, the problem still remains. In the end you have to venture _into_ determinism for that pipeline to function, and sometimes (like when new feilds in data appear) there just _isn't_ compatability between your **data** and your **pipeline**. 
 
-Claude Code infra doesnt have this problem, because it's pipeline can _mold to the shape of your data._
+Claude Code infra handles this differently, because the pipeline can _mold to the shape of your data_ instead of insisting the data mold to the pipeline.
 
 // note for cursor: can we make this a color block like we did the "technocal part"?
 
@@ -79,7 +81,7 @@ Claude Code is a code-facing agent runtime. It can read files, execute commands,
 
 The coolest part (imo) is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match that pattern. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON, voice recordings, or all the above combined! The model can _infer_ structure instead of making you write a parser for every variation.
 
-Once you embrace that, input stops being the bottleneck, and a world of user inputs become available to you. Users just need to paste what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it." You can truely meet users where they're at.
+Once you embrace that, the constraint shifts from "can the system accept this input?" to "is the result worth the cost and risk?" Users just need to paste what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it." You can truly meet users where they're at.
 
 Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch, recover, and retry without you spelling out every edge case in advance. Subagents make that modular: ingestion, classification, and reporting can each run as separate specialists with separate context and permissions.
 

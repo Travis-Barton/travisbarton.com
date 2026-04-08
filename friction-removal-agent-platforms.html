@@ -49,6 +49,7 @@
                 <span class="meta-pill">Claude Code</span>
                 <span class="meta-pill">Trade-offs</span>
             </div>
+            <p class="article-footnote">This is not a replacement for traditional infrastructure, but it is a genuinely new layer for workflows where input friction dominates the engineering cost.</p>
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
@@ -108,7 +109,7 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
             <br>
             <p>Then you add HTML extraction with <span class="inline-code">BeautifulSoup</span>, Slack OAuth plus cursor-based pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract, and finally the operational work of deployment, monitoring, and maintenance. The end result is that you need a whole eng dedicated <em>just</em> to the maintenance and feature requests of the input, let alone the MLE for the model!</p>
             <p>"Well Travis," you might say, "Why not add an LLM pipeline in <em>between my user and my python?</em>" and that's a great solution! However, the problem still remains. In the end you have to venture <em>into</em> determinism for that pipeline to function, and sometimes (like when new fields in data appear) there just <em>isn't</em> compatibility between your <strong>data</strong> and your <strong>pipeline</strong>.</p>
-            <p>Claude Code infra doesn't have this problem, because its pipeline can <em>mold to the shape of your data.</em></p>
+            <p>Claude Code infra handles this differently, because the pipeline can <em>mold to the shape of your data</em> instead of insisting the data mold to the pipeline.</p>
             <div class="technical-aside">
                 <span class="technical-aside__label">&#9998; Note</span>
                 <p>In a Claude Code pipeline, connectors still have to be built, but more of the work gets absorbed by the runtime, existing tools, and the model's ability to reason through bad inputs. You are trading handwritten adapters for a system that can often recover on its own and/or make its own tooling. For example, if a Python tool that a Claude Code pipeline uses fails, it can edit that file, and then run it again. It works <em>around</em> failures instead of getting blocked by them.</p>
@@ -122,7 +123,7 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
             <h2 class="article-heading">What Claude Code changes</h2>
             <p>Claude Code is a code-facing agent runtime. It can read files, execute commands, call tools and APIs, and iterate on its own work. It happens to be used for code generation, but the same pattern works anywhere the inputs are messy and the steps are not fully predictable.</p>
             <p>The coolest part (imo) is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON, voice recordings, or all the above combined! The model can <em>infer</em> structure instead of making you write a parser for every variation.</p>
-            <p>Once you embrace that, input stops being the bottleneck, and a world of user inputs become available to you. Users just need to paste what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it." You can truly meet users where they're at.</p>
+            <p>Once you embrace that, the constraint shifts from "can the system accept this input?" to "is the result worth the cost and risk?" Users just need to paste what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it." You can truly meet users where they're at.</p>
             <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch, recover, and retry without you spelling out every edge case in advance. Subagents make that modular: ingestion, classification, and reporting can each run as separate specialists with separate context and permissions.</p>
 
             <h3 class="article-subheading">Smaller codebases</h3>
