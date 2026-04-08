@@ -59,14 +59,90 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
 /* ---- Coverflow Carousel ---- */
 
 (function () {
+    const coverflow = document.querySelector(".coverflow");
     const track = document.querySelector(".coverflow-track");
-    if (!track) return;
+    if (!coverflow || !track) return;
+
+    function normalizeText(text) {
+        return (text || "").replace(/\s+/g, " ").trim();
+    }
+
+    function collectGalleryItems(selector, kind) {
+        const container = document.querySelector(selector);
+        if (!container) return [];
+
+        const items = [];
+        const seen = new Set();
+
+        container.querySelectorAll("img").forEach((img) => {
+            const src = img.getAttribute("src");
+            if (!src || seen.has(src)) return;
+
+            seen.add(src);
+
+            const figure = img.closest("figure");
+            const figureTitle = figure?.querySelector("figcaption strong")?.textContent;
+            const title = normalizeText(figureTitle || img.getAttribute("alt"));
+            const alt = normalizeText(img.getAttribute("alt") || title);
+
+            items.push({
+                src,
+                alt,
+                label: `${kind} · ${title || alt || "Untitled"}`
+            });
+        });
+
+        return items;
+    }
+
+    function interleaveCollections(collections) {
+        const queues = collections.map((items) => items.slice());
+        const merged = [];
+        let hasItems = true;
+
+        while (hasItems) {
+            hasItems = false;
+
+            queues.forEach((queue) => {
+                if (queue.length === 0) return;
+                merged.push(queue.shift());
+                hasItems = true;
+            });
+        }
+
+        return merged;
+    }
+
+    const photographyItems = collectGalleryItems("#photography .bird-grid", "Photography");
+    const nailItems = collectGalleryItems("#nails .nail-grid", "Nail Art");
+    const coverflowItems = interleaveCollections([photographyItems, nailItems]);
+
+    if (coverflowItems.length > 0) {
+        const slides = coverflowItems.map((item, index) => {
+            const slide = document.createElement("div");
+            slide.className = "coverflow-slide";
+            slide.setAttribute("data-label", item.label);
+
+            const image = document.createElement("img");
+            image.src = item.src;
+            image.alt = item.alt || item.label;
+            image.loading = index < 6 ? "eager" : "lazy";
+            image.decoding = "async";
+
+            slide.appendChild(image);
+            return slide;
+        });
+
+        track.replaceChildren(...slides);
+    }
 
     const slides = Array.from(track.querySelectorAll(".coverflow-slide"));
     const prevBtn = document.querySelector(".coverflow-prev");
     const nextBtn = document.querySelector(".coverflow-next");
     const label = document.querySelector(".coverflow-label");
     const total = slides.length;
+    if (total === 0) return;
+
     let current = 0;
     let autoTimer = null;
 
@@ -100,6 +176,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     function prev() { goTo(current - 1); }
 
     function startAuto() {
+        if (total < 2) return;
         stopAuto();
         autoTimer = setInterval(next, 4000);
     }
@@ -139,8 +216,6 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     }, { passive: true });
 
     document.addEventListener("keydown", (e) => {
-        const coverflow = document.querySelector(".coverflow");
-        if (!coverflow) return;
         const rect = coverflow.getBoundingClientRect();
         if (rect.top > window.innerHeight || rect.bottom < 0) return;
 

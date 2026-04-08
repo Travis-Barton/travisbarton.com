@@ -350,14 +350,16 @@ a:hover {
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.08em;
-    color: var(--text-primary);
+    color: var(--text);
     background: var(--surface);
     padding: 0.35rem 1rem;
     border-radius: 999px;
     border: 1px solid var(--border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     text-align: center;
-    white-space: nowrap;
+    line-height: 1.4;
+    max-width: min(90vw, 28rem);
+    white-space: normal;
     transition: opacity 0.3s ease;
     z-index: 10;
 }
