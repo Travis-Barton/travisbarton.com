@@ -52,8 +52,8 @@
             <div class="article-callout">
                 <h2 class="article-heading">TL;DR</h2>
                 <ul>
-                    <li>Claude Code pipelines are strongest when the inputs are messy, the output is language or code, and speed of building matters more than strict determinism.</li>
-                    <li>You can build the same workflow in Python, but you pay for it in parser code, connector maintenance, schema drift, OCR, and all the glue nobody shows in the demo.</li>
+                    <li>Claude Code pipelines are strongest when the inputs are messy, the output is language or code, and speed of building matters more than 100% determinism.</li>
+                    <li>All Claude Code pipelines can also be built in Python, but you pay for it in maintenance, input limitations, inflexibility, and all the glue nobody shows in the demo.</li>
                     <li>The trade-off is real: higher run-time cost, slower execution, weaker guarantees, and a much larger security surface if you do not sandbox the agent carefully.</li>
                 </ul>
             </div>
@@ -67,16 +67,16 @@
         <div class="container article-container">
             <h2 class="article-heading">The problem: messy inputs</h2>
             <p>Let's take the example of a <em>customer feedback classifier</em>.</p>
-            <p>Every week, someone drops an Excel export of customer feedback. Sometimes it's a file. Sometimes it's the select-all, copy, paste blob into a chat box. Tabs, uneven columns, multiline cells, random whitespace.</p>
+            <p>Every week, someone drops you an export of customer feedback. Sometimes it's a file. Sometimes it's the select-all, copy, paste blob from a text box. Tabs, uneven columns, multiline cells, random whitespace.</p>
             <p>Then things get worse. The "feedback" also contains HTML dumps from a web form, Slack threads pasted inline, Jira tickets used as labels or ground truth, and screenshots of JSON from a dashboard because that was the fastest way to share it.</p>
-            <p>In most applied ML work, the model is the easy part. The hard part is the interface between reality and the model. That's the tax.</p>
+            <p>In most applied ML work, the model is the easy part. The hard part is the translation layer between reality and the model. (Who in their right mind would support pictures of JSON in their PRD??)</p>
         </div>
     </section>
 
     <!-- Python pipelines make you pay -->
     <section id="friction" class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">Python pipelines make you pay for every input</h2>
+            <h2 class="article-heading">Code pipelines make you specify every input source</h2>
             <p>Python can tame this kind of chaos, but only if you're willing to own every adapter yourself. You have to build and maintain a parser for every input format, and if someone pastes something slightly wrong, the pipeline fails. Sometimes gracefully, sometimes not. Either way, the output is wrong or missing.</p>
             <div class="technical-aside">
                 <span class="technical-aside__label">&#9888; Technical</span>
@@ -106,10 +106,13 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
     return df</code></pre>
             </div>
             <br>
-            <p>Now zoom out. To accept the real inputs that show up in this classifier, you wind up owning delimiter sniffing and schema validation, because columns change, fields appear, and fields disappear.</p>
-            <p>Then you add HTML extraction with <span class="inline-code">BeautifulSoup</span>, Slack OAuth plus cursor-based pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract, and finally the operational work of deployment, monitoring, and maintenance.</p>
-            <p>Python can do all of this. It just makes it your job.*</p>
-            <p class="article-footnote">*In a Claude Code pipeline, these problems do not disappear. More of them get absorbed by the runtime, existing tools, and the model's ability to reason through bad inputs. You are trading handwritten adapters for a system that can often recover on its own.</p>
+            <p>Then you add HTML extraction with <span class="inline-code">BeautifulSoup</span>, Slack OAuth plus cursor-based pagination and rate limits, Jira auth with <span class="inline-code">startAt</span>/<span class="inline-code">maxResults</span> pagination, OCR with Tesseract, and finally the operational work of deployment, monitoring, and maintenance. The end result is that you need a whole eng dedicated <em>just</em> to the maintenance and feature requests of the input, let alone the MLE for the model!</p>
+            <p>"Well Travis," you might say, "Why not add an LLM pipeline in <em>between my user and my python?</em>" and that's a great solution! However, the problem still remains. In the end you have to venture <em>into</em> determinism for that pipeline to function, and sometimes (like when new fields in data appear) there just <em>isn't</em> compatibility between your <strong>data</strong> and your <strong>pipeline</strong>.</p>
+            <p>Claude Code infra doesn't have this problem, because its pipeline can <em>mold to the shape of your data.</em></p>
+            <div class="technical-aside">
+                <span class="technical-aside__label">&#9998; Note</span>
+                <p>In a Claude Code pipeline, connectors still have to be built, but more of the work gets absorbed by the runtime, existing tools, and the model's ability to reason through bad inputs. You are trading handwritten adapters for a system that can often recover on its own and/or make its own tooling. For example, if a Python tool that a Claude Code pipeline uses fails, it can edit that file, and then run it again. It works <em>around</em> failures instead of getting blocked by them.</p>
+            </div>
         </div>
     </section>
 
@@ -118,11 +121,12 @@ def ingest_excel_paste(text: str) -&gt; pd.DataFrame:
         <div class="container article-container">
             <h2 class="article-heading">What Claude Code changes</h2>
             <p>Claude Code is a code-facing agent runtime. It can read files, execute commands, call tools and APIs, and iterate on its own work. It happens to be used for code generation, but the same pattern works anywhere the inputs are messy and the steps are not fully predictable.</p>
-            <p>The key difference is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON. The model can often infer structure instead of making you write a parser for every variation.</p>
-            <p>Once you embrace that, input stops being the bottleneck. Someone pastes what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it."</p>
+            <p>The coolest part (imo) is what counts as acceptable input. In a Python pipeline, you define a schema and reject anything that does not match. In a Claude Code pipeline, you start with the messy thing you actually have: a spreadsheet paste, an HTML dump, a screenshot, broken CSV, malformed JSON, voice recordings, or all the above combined! The model can <em>infer</em> structure instead of making you write a parser for every variation.</p>
+            <p>Once you embrace that, input stops being the bottleneck, and a world of user inputs become available to you. Users just need to paste what they have and the system can usually work with it. No ingestion UI, no client library, no "please clean this up before I can use it." You can truly meet users where they're at.</p>
             <p>Claude Code also runs in a loop: gather context, act, verify, repeat. It can branch, recover, and retry without you spelling out every edge case in advance. Subagents make that modular: ingestion, classification, and reporting can each run as separate specialists with separate context and permissions.</p>
 
-            <p>Here's what the same classifier looks like as a Claude Code skill instead of a Python pipeline:</p>
+            <h3 class="article-subheading">Smaller codebases</h3>
+            <p>When you build on Claude Code, what you're actually writing are high level instructions in the form of markdown files. Here's what the customer feedback classifier might look like as a Claude Code skill instead of a Python pipeline:</p>
             <div class="article-card">
                 <h3>Claude Code skill (SKILL.md)</h3>
                 <pre><code>---
@@ -152,17 +156,17 @@ Failure handling:
             </div>
             <br>
             <p>Now compare that with the Python side. If you want to see what handling messy inputs looks like at production scale, look at LangChain's <a href="https://github.com/langchain-ai/langchain/tree/master/libs/langchain/langchain_classic/document_loaders" target="_blank" rel="noopener noreferrer">document loaders directory</a>: well over a hundred Python modules dedicated to specific input sources. Across that directory, you see source-specific auth, pagination, error handling, and format quirks repeated over and over. That's the interface tax made visible. The Claude Code skill above is 20 lines of plain English.*</p>
-            <p class="article-footnote">*The complexity does not vanish. It gets pushed down into the runtime, existing CLI tools, MCP connectors, or the rest of your company's infrastructure. The work still happens. You just are not the one hand-writing and maintaining each adapter.</p>
+            <p class="article-footnote">*The complexity does not vanish. It gets pushed down into the runtime, existing CLI tools, MCP connectors, or the rest of your company's infrastructure. The work still happens. You just are not the one hand-writing and maintaining each adapter. And often you can rely on plugins that LLMs can easily understand/setup, e.g.: <a href="https://github.com/googleworkspace/cli" target="_blank" rel="noopener noreferrer">Google's workspace CLI</a>.</p>
         </div>
     </section>
 
     <!-- Where Claude Code starts to feel like a platform -->
     <section class="section article-section article-alt">
         <div class="container article-container">
-            <h2 class="article-heading">Where Claude Code starts to feel like a platform</h2>
-            <p>The reason this starts to feel like a platform is that it can own the full loop. Inspect the world, call tools, edit code, recover from failure, and keep going. Not perfectly, and not with the same guarantees as traditional infrastructure, but with much less hand-built glue.</p>
+            <h2 class="article-heading">Why Claude Code as a platform now?</h2>
+            <p>The reason that Claude Code starts to feel like a platform and previous LLM applications did not, is that it can own the full loop. Inspect the world, call tools, edit code, recover from failure, and keep going. Not perfectly, and not with the same guarantees as traditional infrastructure, but with much less hand-built glue.</p>
             <blockquote><strong>A personal example:</strong> I once sent a voice note into one of my agent workflows, and there was no transcription tool installed. The agent noticed the missing dependency, found one, installed it, transcribed the message, and drafted a reply. Nobody had designed that feature. The system just worked backward from the outcome and filled in the missing piece.</blockquote>
-            <p>That is the shift. Not that Claude Code wins every category. It doesn't. Traditional infrastructure is still better at scheduling, monitoring, and hard guarantees. What changes is the human interface. Inputs get looser, iteration gets faster, and far less of the work lives in handwritten adapter code.</p>
+            <p>Traditional infra is still better at scheduling, monitoring, and hard guarantees. What changes is the human interface, the ease of creation, and the ability to self-heal. Inputs get looser, iteration gets faster, and far less of the work lives in handwritten adapter code.</p>
         </div>
     </section>
 
@@ -170,7 +174,7 @@ Failure handling:
     <section id="risks" class="section article-section">
         <div class="container article-container">
             <h2 class="article-heading">The downsides are real</h2>
-            <p>These downsides are not theoretical. They should change what kinds of systems you do and do not build this way.</p>
+            <p>It's not all easy code and self-healing pipelines. Claude Code infra has some serious setbacks that may make them impossible for you to use.</p>
             <div class="article-table">
                 <table>
                     <thead>
@@ -182,11 +186,11 @@ Failure handling:
                     <tbody>
                         <tr>
                             <td>Cost</td>
-                            <td>Cost can be brutal. A Claude Code pipeline doing the same job can easily cost 10x or 100x more than a traditional pipeline, especially once retries, long contexts, and subagents get involved. Traditional pipelines usually pay more of the price up front in engineering time and fixed infrastructure. Claude Code keeps charging you every run, and long-running workflows can burn through tens or even hundreds of millions of tokens.</td>
+                            <td>Cost is a stopper. A Claude Code pipeline doing the same job can easily cost 10x or 100x more than a traditional pipeline, especially once retries, long contexts, and subagents get involved. Traditional pipelines usually pay more of the price up front in engineering time and fixed infrastructure. Claude Code keeps charging you every run, and long-running workflows can burn through tens or even hundreds of millions of tokens.</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
-                            <td>An LLM reading and interpreting messy input is slower than a hardcoded parser that already knows what to expect. If the workflow runs thousands of times a day and needs sub-second response, this is probably the wrong tool.</td>
+                            <td>An LLM reading and interpreting messy input is <em>significantly</em> slower than a hardcoded parser that already knows what to expect. If the workflow runs thousands of times a day and needs sub-second response, this is probably the wrong tool.</td>
                         </tr>
                         <tr>
                             <td>Security</td>
