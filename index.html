@@ -32,7 +32,7 @@
                 <a class="nav-link" href="#nails">Nail Art</a>
                 <a class="nav-link" href="#writing">Writing</a>
                 <a class="nav-link" href="#about">About</a>
-                <a class="nav-link" href="mailto:travis@travisbarton.com">Contact</a>
+                <a class="nav-link" href="#contact" data-contact-btn>Contact</a>
             </nav>
         </div>
     </header>
@@ -236,13 +236,34 @@
                     <div class="about-links">
                         <a href="https://github.com/Travis-Barton" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.linkedin.com/in/travis-data-barton/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                        <a href="mailto:travis@travisbarton.com">Email</a>
+                        <a href="#contact" data-contact-btn>Email</a>
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
+
+    <!-- ====== CONTACT MODAL ====== -->
+    <div id="contact-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal aria-label="Close modal">&times;</button>
+            <h2 id="modal-title">Get in touch</h2>
+            <p>Send me a message. This will draft an email in your default client.</p>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" placeholder="What's this about?">
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" rows="5" placeholder="Hi Travis..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary">Draft Email</button>
+            </form>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container footer-row">

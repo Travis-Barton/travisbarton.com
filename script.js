@@ -246,3 +246,48 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         }
     });
 })();
+
+/* ---- Contact Modal ---- */
+(function() {
+    const modal = document.getElementById("contact-modal");
+    if (!modal) return;
+
+    const triggers = document.querySelectorAll("[data-contact-btn]");
+    const closeBtns = document.querySelectorAll("[data-close-modal]");
+    const form = document.getElementById("contact-form");
+    
+    function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        setTimeout(() => document.getElementById("contact-subject")?.focus(), 100);
+    }
+    
+    function closeModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+    
+    triggers.forEach(btn => btn.addEventListener("click", openModal));
+    closeBtns.forEach(btn => btn.addEventListener("click", closeModal));
+    
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+            closeModal();
+        }
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const subject = encodeURIComponent(document.getElementById("contact-subject").value || "Hello from travisbarton.com");
+            const message = encodeURIComponent(document.getElementById("contact-message").value);
+            window.location.href = `mailto:travis@travisbarton.com?subject=${subject}&body=${message}`;
+            closeModal();
+            form.reset();
+        });
+    }
+})();
