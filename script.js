@@ -285,7 +285,13 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
             e.preventDefault();
             const subject = encodeURIComponent(document.getElementById("contact-subject").value || "Hello from travisbarton.com");
             const message = encodeURIComponent(document.getElementById("contact-message").value);
-            window.location.href = `mailto:travis@travisbarton.com?subject=${subject}&body=${message}`;
+            
+            // Use an anchor tag to ensure the mailto link opens reliably
+            const mailtoLink = document.createElement('a');
+            mailtoLink.href = `mailto:travis@travisbarton.com?subject=${subject}&body=${message}`;
+            mailtoLink.target = "_blank";
+            mailtoLink.click();
+            
             closeModal();
             form.reset();
         });

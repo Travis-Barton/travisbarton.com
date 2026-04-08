@@ -651,7 +651,6 @@ a:hover {
 }
 
 .nail-card {
-    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--surface);
@@ -677,27 +676,22 @@ a:hover {
 }
 
 .nail-card figcaption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 3rem 1.25rem 1.25rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    padding: 1.25rem;
 }
 
 .nail-card figcaption strong {
-    font-size: 1rem;
+    display: block;
+    font-size: 1.05rem;
     font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text);
 }
 
 .nail-card figcaption span {
-    font-size: 0.8rem;
-    opacity: 0.75;
-    font-family: var(--mono);
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
 }
 
 /* ---- Essay Card ---- */
