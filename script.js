@@ -222,14 +222,21 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         updateLightbox();
     }
 
-    const allGalleryImages = document.querySelectorAll(".coverflow-slide img, .bird-card img, .nail-card img");
-    allGalleryImages.forEach((img) => {
-        img.addEventListener("click", (e) => {
-            const slide = img.closest(".coverflow-slide");
-            if (slide && slide.getAttribute("data-pos") !== "0") {
-                return;
+    const allGalleryItems = document.querySelectorAll(".bird-card, .nail-card");
+    allGalleryItems.forEach((card) => {
+        card.addEventListener("click", (e) => {
+            const img = card.querySelector("img");
+            if (img) openLightbox(img);
+        });
+    });
+
+    const slides = document.querySelectorAll(".coverflow-slide");
+    slides.forEach((slide) => {
+        slide.addEventListener("click", (e) => {
+            if (slide.getAttribute("data-pos") === "0") {
+                const img = slide.querySelector("img");
+                if (img) openLightbox(img);
             }
-            openLightbox(img);
         });
     });
 
