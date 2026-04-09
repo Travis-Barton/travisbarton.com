@@ -412,11 +412,18 @@ a:hover {
 
 .bird-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--surface);
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.media-card-frame {
+    position: relative;
+    overflow: hidden;
 }
 
 .bird-card:hover {
@@ -465,6 +472,22 @@ a:hover {
 
 .bird-card--wide img {
     aspect-ratio: 16 / 9;
+}
+
+.media-card-cta {
+    justify-content: center;
+    margin: 0.9rem 1rem 1rem;
+}
+
+.media-card-cta[data-commerce-category="bird"] {
+    color: var(--bird);
+    border-color: rgba(45, 106, 79, 0.28);
+    background: rgba(45, 106, 79, 0.06);
+}
+
+.media-card-cta[data-commerce-category="bird"]:hover {
+    color: var(--bird);
+    background: rgba(45, 106, 79, 0.12);
 }
 
 /* ---- Project Feature ---- */
@@ -654,6 +677,8 @@ a:hover {
 
 .nail-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--surface);
@@ -700,6 +725,17 @@ a:hover {
     font-size: 0.8rem;
     opacity: 0.75;
     font-family: var(--mono);
+}
+
+.media-card-cta[data-commerce-category="nail"] {
+    color: var(--nail);
+    border-color: rgba(194, 24, 91, 0.22);
+    background: rgba(194, 24, 91, 0.05);
+}
+
+.media-card-cta[data-commerce-category="nail"]:hover {
+    color: var(--nail);
+    background: rgba(194, 24, 91, 0.11);
 }
 
 /* ---- Essay Card ---- */
@@ -1023,6 +1059,10 @@ a:hover {
     .about-photo {
         max-width: 240px;
     }
+
+    .commerce-preview {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 640px) {
@@ -1079,6 +1119,20 @@ a:hover {
 
     .nav-link {
         font-size: 0.85rem;
+    }
+
+    .commerce-preview {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .commerce-preview__actions {
+        flex-direction: column;
+    }
+
+    .commerce-preview__actions .btn {
+        width: 100%;
+        justify-content: center;
     }
 
     .header-row {
@@ -1598,7 +1652,7 @@ blockquote {
     margin-top: 1.5rem;
     padding: 0.4rem 1.2rem;
     background: var(--surface);
-    color: var(--text-primary);
+    color: var(--text);
     border-radius: 999px;
     font-size: 0.85rem;
     font-family: var(--mono);
@@ -1607,6 +1661,16 @@ blockquote {
     font-weight: 500;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--border);
+}
+
+.lightbox-commerce {
+    min-width: 15rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.lightbox-commerce[hidden] {
+    display: none;
 }
 
 .lightbox-btn, .lightbox-close {
@@ -1662,4 +1726,45 @@ blockquote {
 .bird-card img, 
 .nail-card img {
     cursor: pointer;
+}
+
+/* ---- Commerce Placeholder Pages ---- */
+
+.commerce-preview {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.commerce-preview__image-wrap[hidden] {
+    display: none;
+}
+
+.commerce-preview__image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+.commerce-preview__copy {
+    color: var(--text-secondary);
+}
+
+.commerce-preview__copy p:last-of-type {
+    margin-bottom: 0;
+}
+
+.commerce-preview__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
 }
