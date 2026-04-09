@@ -56,6 +56,114 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     });
 }
 
+const COMMERCE_CONFIG = {
+    bird: {
+        sectionLabel: "Photography",
+        ctaLabel: "Prints & Downloads",
+        href: "prints-and-downloads.html",
+        emailSubjectPrefix: "Print inquiry"
+    },
+    nail: {
+        sectionLabel: "Nail Art",
+        ctaLabel: "Order These Nails",
+        href: "order-nails.html",
+        emailSubjectPrefix: "Nail order inquiry"
+    }
+};
+
+function normalizeText(text) {
+    return (text || "").replace(/\s+/g, " ").trim();
+}
+
+function getCategoryFromElement(element) {
+    if (!element) return null;
+
+    if (typeof element.getAttribute === "function") {
+        const directCategory = element.getAttribute("data-commerce-category");
+        if (directCategory) return directCategory;
+    }
+
+    const taggedAncestor = element.closest?.("[data-commerce-category]");
+    if (taggedAncestor) {
+        return taggedAncestor.getAttribute("data-commerce-category");
+    }
+
+    if (element.closest?.("#photography")) return "bird";
+    if (element.closest?.("#nails")) return "nail";
+
+    return null;
+}
+
+function getMediaTitle(element) {
+    if (!element) return "";
+
+    if (typeof element.getAttribute === "function") {
+        const explicitTitle = element.getAttribute("data-commerce-title");
+        if (explicitTitle) return normalizeText(explicitTitle);
+    }
+
+    const figureTitle = element.closest?.("figure")?.querySelector("figcaption strong")?.textContent;
+    if (figureTitle) return normalizeText(figureTitle);
+
+    const slide = element.closest?.(".coverflow-slide");
+    const slideTitle = slide?.getAttribute("data-commerce-title");
+    if (slideTitle) return normalizeText(slideTitle);
+
+    const altText = typeof element.getAttribute === "function" ? element.getAttribute("alt") : "";
+    return normalizeText(altText);
+}
+
+function getCommerceDetails(sourceElement) {
+    const category = getCategoryFromElement(sourceElement);
+    const config = category ? COMMERCE_CONFIG[category] : null;
+    if (!config) return null;
+
+    const title = getMediaTitle(sourceElement);
+    const imageSrc = typeof sourceElement.getAttribute === "function"
+        ? sourceElement.getAttribute("src")
+        : "";
+
+    const url = new URL(config.href, window.location.href);
+    if (title) url.searchParams.set("title", title);
+    if (imageSrc) url.searchParams.set("image", imageSrc);
+
+    return {
+        category,
+        title,
+        ctaLabel: config.ctaLabel,
+        href: `${url.pathname}${url.search}`
+    };
+}
+
+function hydrateCommerceLink(link, sourceElement) {
+    const commerce = getCommerceDetails(sourceElement);
+    if (!commerce) return false;
+
+    link.href = commerce.href;
+    link.textContent = commerce.ctaLabel;
+    link.setAttribute("data-commerce-category", commerce.category);
+
+    if (commerce.title) {
+        link.setAttribute("aria-label", `${commerce.ctaLabel} for ${commerce.title}`);
+    } else {
+        link.setAttribute("aria-label", commerce.ctaLabel);
+    }
+
+    return true;
+}
+
+function initializeCommerceLinks() {
+    const cardLinks = document.querySelectorAll(".media-card-cta");
+    cardLinks.forEach((link) => {
+        const sourceImage = link.closest("figure")?.querySelector("img");
+        if (sourceImage) {
+            hydrateCommerceLink(link, sourceImage);
+        }
+    });
+}
+
+initializeCommerceLinks();
+
 /* ---- Coverflow Carousel ---- */
 
 (function () {
@@ -63,13 +171,12 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     const track = document.querySelector(".coverflow-track");
     if (!coverflow || !track) return;
 
-    function normalizeText(text) {
-        return (text || "").replace(/\s+/g, " ").trim();
-    }
-
-    function collectGalleryItems(selector, kind) {
+    function collectGalleryItems(selector, category) {
         const container = document.querySelector(selector);
         if (!container) return [];
+
+        const config = COMMERCE_CONFIG[category];
+        if (!config) return [];
 
         const items = [];
         const seen = new Set();
@@ -86,9 +193,11 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
             const alt = normalizeText(img.getAttribute("alt") || title);
 
             items.push({
+                category,
                 src,
                 alt,
-                label: `${kind} · ${title || alt || "Untitled"}`
+                title: title || alt || "Untitled",
+                label: `${config.sectionLabel} · ${title || alt || "Untitled"}`
             });
         });
 
@@ -113,8 +222,8 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         return merged;
     }
 
-    const photographyItems = collectGalleryItems("#photography .bird-grid", "Photography");
-    const nailItems = collectGalleryItems("#nails .nail-grid", "Nail Art");
+    const photographyItems = collectGalleryItems("#photography .bird-grid", "bird");
+    const nailItems = collectGalleryItems("#nails .nail-grid", "nail");
     const coverflowItems = interleaveCollections([photographyItems, nailItems]);
 
     if (coverflowItems.length > 0) {
@@ -122,12 +231,16 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
             const slide = document.createElement("div");
             slide.className = "coverflow-slide";
             slide.setAttribute("data-label", item.label);
+            slide.setAttribute("data-commerce-category", item.category);
+            slide.setAttribute("data-commerce-title", item.title);
 
             const image = document.createElement("img");
             image.src = item.src;
             image.alt = item.alt || item.label;
             image.loading = index < 6 ? "eager" : "lazy";
             image.decoding = "async";
+            image.setAttribute("data-commerce-category", item.category);
+            image.setAttribute("data-commerce-title", item.title);
 
             slide.appendChild(image);
             return slide;
@@ -239,6 +352,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     const nextBtn = document.querySelector(".lightbox-next");
     const imgEl = document.querySelector(".lightbox-img");
     const captionEl = document.querySelector(".lightbox-caption");
+    const commerceLink = document.querySelector(".lightbox-commerce");
 
     let currentGallery = [];
     let currentIndex = 0;
@@ -283,6 +397,11 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         }
         
         captionEl.textContent = captionText || item.alt || "";
+
+        if (commerceLink) {
+            const hasCommerce = hydrateCommerceLink(commerceLink, item);
+            commerceLink.hidden = !hasCommerce;
+        }
     }
 
     function nextImage() {
@@ -300,6 +419,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     const allGalleryItems = document.querySelectorAll(".bird-card, .nail-card");
     allGalleryItems.forEach((card) => {
         card.addEventListener("click", (e) => {
+            if (e.target.closest("[data-commerce-link]")) return;
             const img = card.querySelector("img");
             if (img) openLightbox(img);
         });
@@ -327,6 +447,43 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
             if (e.key === "ArrowLeft") prevImage();
         }
     });
+})();
+
+/* ---- Commerce Placeholder Pages ---- */
+
+(function () {
+    const page = document.querySelector("[data-commerce-page]");
+    if (!page) return;
+
+    const category = page.getAttribute("data-commerce-page");
+    const config = COMMERCE_CONFIG[category];
+    if (!config) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const selectedTitle = normalizeText(params.get("title")) || page.getAttribute("data-fallback-title") || "Selected work";
+    const selectedImage = params.get("image");
+
+    const titleTargets = document.querySelectorAll("[data-commerce-title]");
+    titleTargets.forEach((target) => {
+        target.textContent = selectedTitle;
+    });
+
+    const previewWrap = page.querySelector("[data-commerce-preview-wrap]");
+    const previewImage = page.querySelector("[data-commerce-preview]");
+    if (previewWrap && previewImage && selectedImage) {
+        previewWrap.hidden = false;
+        previewImage.src = selectedImage;
+        previewImage.alt = selectedTitle;
+    }
+
+    const contactLink = page.querySelector("[data-commerce-contact]");
+    if (contactLink) {
+        const body = category === "nail"
+            ? `Hi Travis,\n\nI’m interested in ordering the nail set "${selectedTitle}".\n\nCan you send me details when this is ready?\n`
+            : `Hi Travis,\n\nI’m interested in prints/downloads for "${selectedTitle}".\n\nCan you send me details when this is ready?\n`;
+
+        contactLink.href = `mailto:travis@travisbarton.com?subject=${encodeURIComponent(`${config.emailSubjectPrefix}: ${selectedTitle}`)}&body=${encodeURIComponent(body)}`;
+    }
 })();
 
 /* ---- Contact Modal ---- */
