@@ -193,6 +193,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
 
     slides.forEach((slide, i) => {
         slide.addEventListener("click", () => {
+            if (isDragging) return;
             if (i !== current) {
                 goTo(i);
                 stopAuto();
@@ -202,18 +203,64 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     });
 
     let touchStartX = 0;
+    let touchStartY = 0;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let isPointerDown = false;
+    let isDragging = false;
+
     track.addEventListener("touchstart", (e) => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
         stopAuto();
     }, { passive: true });
 
     track.addEventListener("touchend", (e) => {
         const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 40) {
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
             dx > 0 ? prev() : next();
         }
         startAuto();
     }, { passive: true });
+
+    track.addEventListener("pointerdown", (e) => {
+        if (e.pointerType !== "touch") return;
+        pointerStartX = e.clientX;
+        pointerStartY = e.clientY;
+        isPointerDown = true;
+        isDragging = false;
+        stopAuto();
+    });
+
+    track.addEventListener("pointermove", (e) => {
+        if (!isPointerDown || e.pointerType !== "touch") return;
+        const dx = e.clientX - pointerStartX;
+        const dy = e.clientY - pointerStartY;
+        if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+            isDragging = true;
+        }
+    });
+
+    track.addEventListener("pointerup", (e) => {
+        if (!isPointerDown || e.pointerType !== "touch") return;
+        const dx = e.clientX - pointerStartX;
+        const dy = e.clientY - pointerStartY;
+        if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
+            dx > 0 ? prev() : next();
+        }
+        isPointerDown = false;
+        requestAnimationFrame(() => {
+            isDragging = false;
+        });
+        startAuto();
+    });
+
+    track.addEventListener("pointercancel", () => {
+        isPointerDown = false;
+        isDragging = false;
+        startAuto();
+    });
 
     document.addEventListener("keydown", (e) => {
         const rect = coverflow.getBoundingClientRect();
@@ -257,6 +304,9 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         lightbox.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
     }
+
+    let lightboxTouchStartX = 0;
+    let lightboxTouchStartY = 0;
 
     function closeLightbox() {
         lightbox.setAttribute("aria-hidden", "true");
@@ -319,6 +369,21 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     overlay.addEventListener("click", closeLightbox);
     nextBtn.addEventListener("click", nextImage);
     prevBtn.addEventListener("click", prevImage);
+
+    lightbox.addEventListener("touchstart", (e) => {
+        if (lightbox.getAttribute("aria-hidden") !== "false") return;
+        lightboxTouchStartX = e.touches[0].clientX;
+        lightboxTouchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    lightbox.addEventListener("touchend", (e) => {
+        if (lightbox.getAttribute("aria-hidden") !== "false") return;
+        const dx = e.changedTouches[0].clientX - lightboxTouchStartX;
+        const dy = e.changedTouches[0].clientY - lightboxTouchStartY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+            dx > 0 ? prevImage() : nextImage();
+        }
+    }, { passive: true });
 
     document.addEventListener("keydown", (e) => {
         if (lightbox.getAttribute("aria-hidden") === "false") {

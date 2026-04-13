@@ -210,6 +210,7 @@ a:hover {
     height: 100%;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
+    touch-action: pan-y;
 }
 
 .coverflow-slide {
@@ -1043,30 +1044,38 @@ a:hover {
     }
 
     .coverflow {
-        height: 300px;
+        height: 320px;
     }
 
     .coverflow-slide {
-        width: 220px;
-        height: 270px;
-        margin-left: -110px;
-        margin-top: -135px;
+        width: 240px;
+        height: 280px;
+        margin-left: -120px;
+        margin-top: -140px;
     }
 
     .coverflow-slide[data-pos="1"] {
-        transform: translateX(170px) translateZ(-50px) rotateY(-30deg);
+        transform: translateX(145px) translateZ(-45px) rotateY(-24deg);
     }
     .coverflow-slide[data-pos="-1"] {
-        transform: translateX(-170px) translateZ(-50px) rotateY(30deg);
+        transform: translateX(-145px) translateZ(-45px) rotateY(24deg);
     }
 
-    .coverflow-prev { left: 0.5rem; }
-    .coverflow-next { right: 0.5rem; }
+    .coverflow-prev { left: 0.4rem; }
+    .coverflow-next { right: 0.4rem; }
 
     .coverflow-btn {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         font-size: 1.3rem;
+        background: rgba(255, 255, 255, 0.82);
+    }
+
+    .coverflow-label {
+        bottom: -18px;
+        max-width: calc(100vw - 2.5rem);
+        font-size: 0.7rem;
+        padding: 0.35rem 0.8rem;
     }
 
     .section {
@@ -1652,9 +1661,23 @@ blockquote {
 }
 
 @media (max-width: 768px) {
-    .lightbox-prev { left: -1rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
-    .lightbox-next { right: -1rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
-    .lightbox-close { top: -1.5rem; right: -1.5rem; background: rgba(0,0,0,0.3); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+    .lightbox-content {
+        width: min(100vw - 1.25rem, 32rem);
+        max-width: 100%;
+    }
+
+    .lightbox-img {
+        max-height: 72vh;
+    }
+
+    .lightbox-prev { left: 0.25rem; background: rgba(0,0,0,0.38); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+    .lightbox-next { right: 0.25rem; background: rgba(0,0,0,0.38); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+    .lightbox-close { top: 0.25rem; right: 0.25rem; background: rgba(0,0,0,0.45); border-radius: 50%; width: 3rem; height: 3rem; padding:0; }
+
+    .lightbox-caption {
+        margin-top: 0.9rem;
+        max-width: calc(100vw - 2rem);
+    }
 }
 
 /* Make gallery images look clickable */
