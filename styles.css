@@ -649,29 +649,8 @@ a:hover {
 
 .nail-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
-}
-
-@media (min-width: 641px) {
-    .nail-grid {
-        grid-auto-flow: column;
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        grid-template-columns: none;
-        grid-auto-columns: minmax(250px, 1fr);
-        overflow-x: auto;
-        overflow-y: hidden;
-        align-items: stretch;
-        padding-bottom: 0.75rem;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-    }
-
-    .nail-card {
-        min-width: 0;
-        scroll-snap-align: start;
-    }
 }
 
 .nail-card {
