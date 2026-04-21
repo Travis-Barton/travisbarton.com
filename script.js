@@ -394,6 +394,66 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     });
 })();
 
+/* ---- Rotating Nail Gallery ---- */
+(function() {
+    const gallery = document.querySelector("[data-rotating-gallery]");
+    if (!gallery) return;
+
+    const cards = Array.from(gallery.querySelectorAll(".nail-card"));
+    if (cards.length <= 3) return;
+
+    let startIndex = 0;
+    let rotationTimer = null;
+
+    function updateVisibleCards() {
+        cards.forEach((card, index) => {
+            const normalized = (index - startIndex + cards.length) % cards.length;
+            if (normalized < 3) {
+                card.hidden = false;
+                card.classList.add("is-featured");
+                card.classList.remove("is-faded");
+            } else {
+                card.hidden = false;
+                card.classList.remove("is-featured");
+                card.classList.add("is-faded");
+            }
+        });
+    }
+
+    function rotateGallery() {
+        startIndex = (startIndex + 1) % cards.length;
+        updateVisibleCards();
+    }
+
+    function startRotation() {
+        stopRotation();
+        rotationTimer = setInterval(rotateGallery, 2800);
+    }
+
+    function stopRotation() {
+        if (rotationTimer) {
+            clearInterval(rotationTimer);
+            rotationTimer = null;
+        }
+    }
+
+    gallery.addEventListener("mouseenter", stopRotation);
+    gallery.addEventListener("mouseleave", startRotation);
+    gallery.addEventListener("focusin", stopRotation);
+    gallery.addEventListener("focusout", startRotation);
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            stopRotation();
+        } else {
+            startRotation();
+        }
+    });
+
+    updateVisibleCards();
+    startRotation();
+})();
+
 /* ---- Contact Modal ---- */
 (function() {
     const modal = document.getElementById("contact-modal");

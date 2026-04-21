@@ -660,12 +660,22 @@ a:hover {
     background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), opacity 500ms ease, filter 500ms ease;
 }
 
 .nail-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+}
+
+.nail-card.is-faded {
+    opacity: 0.28;
+    filter: saturate(0.8) brightness(0.92);
+}
+
+.nail-card.is-featured {
+    opacity: 1;
+    filter: none;
 }
 
 .nail-card img {
