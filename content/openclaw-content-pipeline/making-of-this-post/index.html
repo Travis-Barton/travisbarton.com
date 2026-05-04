@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Making of This Post | OpenClaw Content Pipeline</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body { background: #fafafa; color: #1a1a1a; }
+        .hidden-doc { max-width: 820px; margin: 0 auto; padding: 64px 20px 96px; }
+        .hidden-doc h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; letter-spacing: -0.04em; margin-bottom: 1rem; }
+        .hidden-doc .dek { font-size: 1.2rem; color: #555; margin-bottom: 2rem; }
+        .hidden-doc section { margin-top: 2.5rem; }
+        .hidden-doc h2 { font-size: 1.35rem; margin-bottom: 0.75rem; }
+        .hidden-doc ol { padding-left: 1.35rem; }
+        .hidden-doc li { margin: 0.9rem 0; }
+        .hidden-doc .asset-list { display: grid; gap: 0.75rem; padding: 0; list-style: none; }
+        .hidden-doc .asset-list li { margin: 0; padding: 1rem; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; }
+        .hidden-doc .note { color: #666; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+<main class="hidden-doc">
+    <p class="note"><a href="/">Travis Barton</a> / hidden content trail</p>
+    <h1>Making of This Post: Creating Content Generation Pipelines in OpenClaw</h1>
+    <p class="dek">A public-friendly trail for the LinkedIn post: how the draft moved through research, feedback, routing, revision, and recovery.</p>
+
+    <section>
+        <h2>The actual trail so far</h2>
+        <ol>
+            <li>A long-form article draft came out of packet research and editor feedback. The first correction was simple: too long for the target, and the review artifact needed to be easier to mark up.</li>
+            <li>The first LinkedIn compression worked directionally, but needed a clearer project-update flow, a diagram instead of dense pipeline bullets, and a more consistent visual design.</li>
+            <li>The next version treated the project like an ongoing update. The better framing was a first public introduction that also explained that the post itself was produced by the system it describes.</li>
+            <li>The following version over-indexed on self-reference. The stronger hook was the pipeline learning taste, style, and quality bar over time.</li>
+            <li>A marked-up PDF asked for a clearer problem, concrete packet/file mechanics, fewer AI-isms, and repeated feedback loops.</li>
+            <li>The next review regressed: it explained the process, but lost the goal. Introspection converted that rejection into a recovery brief: start with the goal, explain why plain chat is insufficient, explain why OpenClaw, and show the real making-of history.</li>
+            <li>The finalist draft and supporting visuals were produced as a small public bundle: Markdown, PDF, timeline diagram, self-improving loop diagram, and visual prompt provenance.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Public bundle</h2>
+        <ul class="asset-list">
+            <li><a href="../finalist-linkedin-draft.md">Finalist LinkedIn draft — Markdown</a></li>
+            <li><a href="../finalist-linkedin-draft.pdf">Finalist LinkedIn draft — PDF</a></li>
+            <li><a href="../making-of-timeline-diagram.png">Making-of timeline diagram</a></li>
+            <li><a href="../self-improving-content-loop-diagram.png">Self-improving content loop diagram</a></li>
+            <li><a href="../visual-asset-prompts.md">Visual asset prompts / provenance</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>What this is meant to show</h2>
+        <p>Each content packet keeps durable context: brief, research, drafts, critiques, review artifacts, feedback summaries, diagrams, and status. Bounded operator passes inspect the packet, advance one safe step, update state, and stop. Specialist skills handle research, writing, editing, human review, and introspection while Travis stays in the loop as the taste and direction signal.</p>
+        <p>The point is not that a model can produce text. The point is whether the system gets closer to what Travis would have wanted without requiring the same context to be rebuilt every time.</p>
+    </section>
+</main>
+</body>
+</html>
