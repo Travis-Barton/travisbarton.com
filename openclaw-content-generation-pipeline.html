@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A project update on building a self-improving content generation pipeline in OpenClaw with durable packet artifacts, specialist skills, review loops, and a visible state board.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.travisbarton.com/openclaw-content-generation-pipeline.html">
+    <meta property="og:title" content="Building a Content Generation Pipeline in OpenClaw | Travis Barton">
+    <meta property="og:description" content="A self-improving editorial system in OpenClaw that remembers feedback, routes work through specialists, and keeps article packets inspectable across review rounds.">
+    <meta property="og:image" content="https://www.travisbarton.com/images/openclaw-content-pipeline/overall-process-hierarchy-diagram.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Building a Content Generation Pipeline in OpenClaw | Travis Barton</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="project-body">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
+            <ul class="nav-menu">
+                <li><a href="#top" class="nav-link">Top</a></li>
+                <li><a href="#why" class="nav-link">Why</a></li>
+                <li><a href="#process" class="nav-link">Process</a></li>
+                <li><a href="#carryover" class="nav-link">Carryover</a></li>
+                <li><a href="index.html#writing" class="nav-link">&larr; Back</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="top" class="section article-hero">
+        <div class="container article-container">
+            <p class="article-kicker">Project update &middot; May 2026</p>
+            <h1 class="article-title">Building a Content Generation Pipeline in OpenClaw</h1>
+            <p class="article-subtitle">I’m building a self-improving content-generation pipeline in OpenClaw: something that remembers my preferences, learns from feedback, feels like my writing, and can regularly produce blog posts and LinkedIn drafts without making me rebuild the context every time.</p>
+            <div class="article-meta">
+                <span class="meta-pill">OpenClaw</span>
+                <span class="meta-pill">Agentic workflows</span>
+                <span class="meta-pill">Editorial systems</span>
+                <span class="meta-pill">Human review</span>
+            </div>
+            <img src="images/openclaw-content-pipeline/overall-process-hierarchy-diagram.jpg" alt="OpenClaw content pipeline hierarchy showing packet workspace, specialist skills, review artifacts, operator pass, and dashboard" class="article-hero-banner">
+            <div class="article-callout">
+                <h2 class="article-heading">TL;DR</h2>
+                <ul>
+                    <li>The model is not the hard part in a single draft. The operating system around the model is.</li>
+                    <li>Each post gets a durable packet with source material, drafts, feedback, review artifacts, and current state.</li>
+                    <li>OpenClaw routes that packet through research, writing, editing, visual prep, and human review, then carries the feedback forward.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">The gap is not single-session model quality</h2>
+            <p>ChatGPT and Claude can absolutely draft, revise, and brainstorm. The gap is not model capability in a single session. The gap is the operating system around the model: durable project memory, review history, persistent packet artifacts, specialist routing, scheduled cadence, and enough workflow control that the next pass picks up from what happened previously instead of whatever I remember to paste into a chat box.</p>
+            <p>That is why I’m building this in OpenClaw. I want custom pipelines where files, skills, heartbeats, subagents, and review channels become an inspectable editorial system. Not “ask an AI to write something every Monday.” More like: keep a packet for every article, track its state, route work to the right specialist, preserve feedback, and make the next run smarter.</p>
+        </div>
+    </section>
+
+    <section id="process" class="section article-section article-alt">
+        <div class="container article-container">
+            <h2 class="article-heading">The reusable process</h2>
+            <p>Each post gets a small workspace with the source material, drafts, feedback, review artifacts, and current state. OpenClaw uses that workspace to decide what should happen next: research, writing, editing, visual prep, or human review.</p>
+            <p>A heartbeat/operator pass can inspect the board, advance one safe step, update the packet, and stop. That bounded loop matters. It keeps the system from turning into an uninspectable blob of agent work, while still letting the pipeline keep moving without me manually orchestrating every handoff.</p>
+            <div class="article-card">
+                <h3>What lives in a packet</h3>
+                <ul>
+                    <li>Briefs, source notes, research, drafts, and final publishable copy</li>
+                    <li>Editor critiques and explicit gate results before anything reaches human review</li>
+                    <li>Review artifacts, marked-up PDFs, returned notes, and routing decisions</li>
+                    <li>Status metadata that tells the operator what should happen next</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="carryover" class="section article-section">
+        <div class="container article-container">
+            <h2 class="article-heading">The important part is carryover</h2>
+            <p>Feedback does not disappear into a chat scrollback. Marked-up PDFs, review notes, rejected directions, style preferences, diagram decisions, and “please don’t write like that again” all become artifacts the next pass can read. Over time, the system should preserve more of my taste across documents: what I like, what I reject, what level of specificity I expect, and where previous drafts went off the rails.</p>
+            <p>This post is one test case of the workflow, but the real point is broader than this post. I’m trying to make content creation work less like repeatedly starting a new AI chat and more like operating a small editorial machine with memory, roles, review loops, and a visible state board.</p>
+            <p>If it works, future drafts should need less setup, carry forward more of the last review, and get to something I would actually publish in fewer rounds.</p>
+            <p>How am I planning to track that? I made a dashboard. By tracking review rounds per post, I can measure whether the pipeline is getting better at matching my taste and meeting my standards.</p>
+            <p><a href="https://contentgeneration.travisbarton.com/" target="_blank" rel="noopener noreferrer">Follow along on the content-generation dashboard &rarr;</a></p>
+        </div>
+    </section>
+</body>
+</html>
