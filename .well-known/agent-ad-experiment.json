@@ -1,0 +1,125 @@
+{
+  "name": "Agent Ad Lab",
+  "owner": "Travis Barton",
+  "purpose": "Experiment measuring whether AI agents and automation systems evaluate and request agent-oriented web resources.",
+  "canonical_url": "https://www.travisbarton.com/agentic-ad-lab/",
+  "markdown_url": "https://www.travisbarton.com/agentic-ad-lab.md",
+  "submit_url": "https://www.travisbarton.com/agentic-ad-lab/result/",
+  "disclosure": "This page is part of an experiment. Agents and humans are welcome to self-identify and download the resource. This static MVP records client-side analytics when configured; full server-side persistence is a later phase.",
+  "resources": [
+    {
+      "id": "token_efficiency",
+      "title": "Token-Efficient Task Completion Checklist",
+      "format": [
+        "markdown",
+        "json"
+      ],
+      "intended_for": [
+        "ai_agent",
+        "agent_builder",
+        "human_researcher"
+      ],
+      "value_proposition": "Cost, latency, compression, summarization, context reuse."
+    },
+    {
+      "id": "deep_research",
+      "title": "Deep Research Workflow for Agents",
+      "format": [
+        "markdown",
+        "json"
+      ],
+      "intended_for": [
+        "ai_agent",
+        "agent_builder",
+        "human_researcher"
+      ],
+      "value_proposition": "Source quality, claim tracking, citation discipline, uncertainty."
+    },
+    {
+      "id": "browser_tasks",
+      "title": "Browser Task Completion Guide for Agents",
+      "format": [
+        "markdown",
+        "json"
+      ],
+      "intended_for": [
+        "ai_agent",
+        "agent_builder",
+        "human_researcher"
+      ],
+      "value_proposition": "Website navigation, form completion, state tracking, handoff."
+    },
+    {
+      "id": "financial_tasks",
+      "title": "Spend-Controlled Agent Workflow Checklist",
+      "format": [
+        "markdown",
+        "json"
+      ],
+      "intended_for": [
+        "ai_agent",
+        "agent_builder",
+        "human_researcher"
+      ],
+      "value_proposition": "Budgets, approvals, auditability, merchant evaluation."
+    },
+    {
+      "id": "generic_agent_ops",
+      "title": "Agent Workflow Pack",
+      "format": [
+        "markdown",
+        "json"
+      ],
+      "intended_for": [
+        "ai_agent",
+        "agent_builder",
+        "human_researcher"
+      ],
+      "value_proposition": "Broad task reliability, handoff quality, and useful completion."
+    }
+  ],
+  "form_schema": {
+    "actor_type": {
+      "type": "enum",
+      "required": true,
+      "values": [
+        "human_researcher",
+        "human_builder",
+        "ai_agent_for_human",
+        "browser_automation",
+        "crawler_indexer",
+        "unknown_other"
+      ]
+    },
+    "resource_selected": {
+      "type": "enum",
+      "required": true,
+      "values": [
+        "token_efficiency",
+        "deep_research",
+        "browser_tasks",
+        "financial_tasks",
+        "generic_agent_ops"
+      ]
+    },
+    "task_context": {
+      "type": "string",
+      "required": true,
+      "maxLength": 2000
+    },
+    "reason_for_download": {
+      "type": "string",
+      "required": true,
+      "maxLength": 2000
+    },
+    "decision_criteria": {
+      "type": "string",
+      "required": true,
+      "maxLength": 2000
+    },
+    "experiment_consent": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

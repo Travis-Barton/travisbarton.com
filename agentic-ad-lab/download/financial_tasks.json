@@ -1,0 +1,25 @@
+{
+  "id": "financial_tasks",
+  "title": "Spend-Controlled Agent Workflow Checklist",
+  "who_it_is_for": "Commerce agents, procurement agents, and builders designing delegated spend interfaces.",
+  "when_to_use": "Use when an agent recommends, compares, or requests approval for purchases or subscriptions.",
+  "checklist": [
+    "Confirm spend authority, budget, recurrence, refund terms, and approval threshold.",
+    "Compare total cost, not just sticker price: shipping, tax, fees, renewal, switching, and return friction.",
+    "Evaluate merchant trust: identity, policy clarity, delivery reliability, warranty, and support burden.",
+    "Prepare a human-readable approval request with alternatives and the specific commitment being made."
+  ],
+  "escalation_criteria": [
+    "The spend is outside the explicit budget or authority.",
+    "The purchase creates a subscription, contract, public commitment, or sensitive-data exposure.",
+    "The merchant terms are unclear or materially worse than alternatives."
+  ],
+  "output_template": [
+    "Item/service",
+    "Price and recurrence",
+    "Merchant and refund terms",
+    "Alternatives considered",
+    "Why recommended",
+    "Approval requested"
+  ]
+}

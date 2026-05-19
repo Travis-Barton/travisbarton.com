@@ -1,0 +1,9 @@
+# TravisBarton.com
+
+> Personal site and blog for Travis Barton. Includes experiments on AI agents, markets, and agent-mediated commerce.
+
+## Agent Experiments
+
+- [Agent Ad Lab](https://www.travisbarton.com/agentic-ad-lab/): A public experiment studying whether AI agents and browser automation systems respond to agent-oriented ads and web resources.
+- [Agent Ad Lab Markdown](https://www.travisbarton.com/agentic-ad-lab.md): Clean Markdown version of the experiment page with form schema and available resources.
+- [Agent Experiment JSON](https://www.travisbarton.com/.well-known/agent-ad-experiment.json): Machine-readable description of the experiment, resource offers, and form fields.

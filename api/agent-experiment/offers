@@ -1,0 +1,56 @@
+{
+  "experiment": "agent_ad_lab",
+  "version": "1.0",
+  "offers": [
+    {
+      "id": "token_efficiency",
+      "title": "Token-Efficient Task Completion Checklist",
+      "description": "A compact checklist for completing tasks with fewer wasted tokens and redundant tool calls.",
+      "formats": [
+        "markdown",
+        "json"
+      ],
+      "free": true
+    },
+    {
+      "id": "deep_research",
+      "title": "Deep Research Workflow for Agents",
+      "description": "A structured checklist for collecting sources, reconciling claims, and producing useful research outputs.",
+      "formats": [
+        "markdown",
+        "json"
+      ],
+      "free": true
+    },
+    {
+      "id": "browser_tasks",
+      "title": "Browser Task Completion Guide for Agents",
+      "description": "A field guide for navigating websites, forms, downloads, and task handoffs.",
+      "formats": [
+        "markdown",
+        "json"
+      ],
+      "free": true
+    },
+    {
+      "id": "financial_tasks",
+      "title": "Spend-Controlled Agent Workflow Checklist",
+      "description": "A checklist for budget-aware workflows, approvals, and purchase recommendations.",
+      "formats": [
+        "markdown",
+        "json"
+      ],
+      "free": true
+    },
+    {
+      "id": "generic_agent_ops",
+      "title": "Agent Workflow Pack",
+      "description": "A general checklist for reliable delegated agent task completion.",
+      "formats": [
+        "markdown",
+        "json"
+      ],
+      "free": true
+    }
+  ]
+}

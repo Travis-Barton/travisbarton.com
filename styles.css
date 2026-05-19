@@ -1696,3 +1696,19 @@ blockquote {
 .nail-card img {
     cursor: pointer;
 }
+
+/* ---- Agent Ad Lab homepage card ---- */
+.essay-cover--text {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.22), transparent 32%),
+        radial-gradient(circle at 80% 10%, rgba(15, 118, 110, 0.18), transparent 34%),
+        linear-gradient(135deg, #111827, #1f2937);
+    color: #f8fafc;
+    font-family: var(--mono);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.06em;
+}
