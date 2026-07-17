@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A practical architecture guide to agentic systems: harnesses, housing, triggers, plugins, memory, guardrails, observability, and human review.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.travisbarton.com/building-on-agentic-systems.html">
+    <meta property="og:title" content="Building on Agentic Systems | Travis Barton">
+    <meta property="og:description" content="The model is not the whole system. The useful system is the model loop plus the housing around it: state, triggers, permissions, plugins, observability, and human escalation.">
+    <meta property="og:image" content="https://www.travisbarton.com/images/building-on-agentic-systems/slide-04.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Building on Agentic Systems | Travis Barton</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="project-body">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">Travis Barton</a></div>
+            <ul class="nav-menu">
+                <li><a href="#top" class="nav-link">Top</a></li>
+                <li><a href="#harness" class="nav-link">Harness</a></li>
+                <li><a href="#triggers" class="nav-link">Triggers</a></li>
+                <li><a href="#checklist" class="nav-link">Checklist</a></li>
+                <li><a href="index.html#writing" class="nav-link">&larr; Back</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="top" class="section article-hero agentic-hero">
+        <div class="container article-container">
+            <p class="article-kicker">Architecture guide &middot; July 2026</p>
+            <h1 class="article-title">Building on Agentic Systems</h1>
+            <p class="article-subtitle">The model is not the whole system. The useful system is the model loop plus the housing around it: state, triggers, permissions, plugins, observability, and human escalation.</p>
+            <div class="article-meta">
+                <span class="meta-pill">Agentic systems</span>
+                <span class="meta-pill">Architecture</span>
+                <span class="meta-pill">OpenClaw</span>
+                <span class="meta-pill">Human review</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="section article-section agentic-system-article">
+        <article class="container article-container">
+<section class="tldr"><div class="label">TL;DR / Narrative</div><p>Agentic systems are not just models with tool access. The useful system is the model loop plus the housing around it: state, triggers, permissions, plugins, observability, and human escalation. This guide moves from that core distinction, to the plugin layer where workflows become repeatable, to a fantasy-football example that shows cron, heartbeat, pub/sub, and human-in-the-loop triggers in practice, then lands on a checklist for building systems that are durable, observable, and bounded.</p></section><p>The model is not the whole system.</p>
+<p>That sounds obvious until you watch how most agent projects are described. The conversation usually starts with the model: which one, how many tokens, what benchmark score, what context window, what tool-calling API. Those things matter. They are not what makes an agentic system useful in production.</p>
+<p>The useful system is the model plus the operating environment around it: the tools it can touch, the memory it can carry forward, the schedules and event streams that wake it up, the permissions that keep it bounded, the traces that make it inspectable, and the human review paths that stop it from confidently doing the wrong thing.</p>
+<p>I think about this as two layers:</p>
+<ul><li><strong>Agentic harness:</strong> the reasoning and tool-use loop. This is where model calls, tool execution, MCP servers, multimodal input, planning, and action happen.</li><li><strong>Agentic housing:</strong> the environment around the loop. This is where persistence, scheduling, permissions, skills, memory, external integrations, and operator workflows live.</li></ul>
+<p>Those are my labels, not an industry standard. The field has not settled the vocabulary. Depending on the product or team, you will hear runtime, framework, executor, platform, host, environment, orchestration layer, or agentic loop used for overlapping ideas. The names matter less than the distinction.</p>
+<p>If you are building on agentic systems, you are not just choosing a model. You are designing the housing around the harness.</p>
+<figure class="figure-card"><div class="figure-meta"><span>Source slide 04</span><strong>Harness vs. Housing</strong></div><img src="images/building-on-agentic-systems/slide-04.png" alt="Two-column architecture diagram comparing an agentic harness with agentic housing." loading="lazy"><figcaption>The harness is the model/tool loop; the housing is the persistent operating environment that makes the loop useful, safe, and repeatable.</figcaption></figure>
+<h2 id="harness">The harness is the engine</h2>
+<p>The harness is the part most people recognize as &ldquo;the agent.&rdquo; It is the loop that takes context, calls a model, reasons about the next action, invokes a tool, observes the result, and keeps going until the task is done or blocked.</p>
+<p>A harness may include LLM calls, tool execution, MCP servers, multimodal I/O, planning, retries, and handoffs. Claude Code, Codex-style environments, Gemini CLI, OpenCode, and similar tools all expose versions of this layer. They differ in details, but the core idea is recognizable: a model-driven loop can inspect context, select actions, call tools, and adapt.</p>
+<p>This is a real shift from traditional software. In deterministic software, the developer encodes most of the decision path. In an agentic harness, the developer gives the system a goal, constraints, tools, and context, then lets the model decide some of the path at runtime.</p>
+<p>That flexibility is powerful, and it is where trouble starts. A harness can reason through messy inputs, recover from small surprises, and choose from tools dynamically. It can also take a strange path, overfit to irrelevant context, call a tool at the wrong time, or produce a plausible answer that is not actually correct. The harness is the engine. It is not the brakes, the garage, the maintenance log, or the insurance policy.</p>
+<p>That is why housing matters.</p>
+<h2>The housing is the environment that makes the engine useful</h2>
+<p>Agentic housing is the structural environment that gives the harness somewhere durable and safe to operate.</p>
+<p>It includes persistent state, memory, permissions, credentials, schedules, queues, pub/sub events, webhooks, skills, plugins, external integrations, review artifacts, traces, dashboards, and human escalation paths.</p>
+<p>This is the part that turns a clever single-session agent into an inspectable system.</p>
+<p>A chat window can produce a good answer. A housing layer lets the next run know what happened last time. It lets the operator see current state, wake the system on a schedule, respond to an event, ask for help, preserve artifacts, and stop before something expensive or destructive happens.</p>
+<p>This is the lesson from the OpenClaw content-generation pipeline I have been building. The hard part is not getting a model to draft one article. The hard part is the operating system around the model: durable packet workspaces, review history, specialist routing, scheduled operator passes, human review, and carryover from one iteration to the next.</p>
+<p>The same lesson applies outside content generation. If the agent is supposed to run more than once, affect external systems, or improve over time, the housing is not optional infrastructure. It is the product.</p>
+<h2>The plugin layer is where capability becomes behavior</h2>
+<p>A model with tools is still generic. The plugin layer is where generic capability becomes a repeatable workflow.</p>
+<p>A plugin, skill, command, rule, or workflow package is not just a prompt. It is a bundle of behavior: instructions, activation metadata, resources, examples, scripts, hooks, memory, permission boundaries, output contracts, and quality gates.</p>
+<p>Anthropic&rsquo;s Agent Skills framing is a useful example: skills are folders of instructions, scripts, and resources that agents can discover and load when relevant. The Model Context Protocol is another important piece of the ecosystem: it gives AI applications a standard way to connect to external tools, data sources, and workflows.</p>
+<p>But MCP is not the whole architecture. MCP can expose a tool; the housing still decides when the agent sees it, what permissions it has, what context it receives, and what gets logged afterward.</p>
+<p>This is where portability gets tricky. A workflow can look portable because the instructions are Markdown, but still fail when moved to another host. A research skill that calls <code>web_search</code>, writes to a local packet directory, and assumes memory retrieval may not port cleanly into a host where the search tool has a different name, file writes require an approval gate, activation is metadata-driven, and memory is unavailable or scoped per session. The procedure survived. The runtime semantics changed.</p>
+<p>A <code>SKILL.md</code> can carry the core procedure. It does not automatically carry the host adapter.</p>
+<p>If you are building reusable agent workflows, separate the reusable core from the host adapter:</p>
+<ol><li>What is the procedure?</li><li>When should it activate?</li><li>What tools and resources does it need?</li><li>What policy envelope is safe?</li><li>What artifacts should it produce?</li><li>What should be tested before rollout?</li></ol>
+<p>That order keeps you from mistaking the packaging format for the architecture.</p>
+<figure class="figure-card"><div class="figure-meta"><span>Source slide 05</span><strong>Plugin Architecture</strong></div><img src="images/building-on-agentic-systems/slide-05.png" alt="Plugin architecture diagram showing skills, resources, scripts and hooks, memory, and rules." loading="lazy"><figcaption>Plugins turn generic agent capability into repeatable workflow behavior by packaging instructions, resources, scripts, memory, rules, and permission boundaries.</figcaption></figure>
+<h2>A running example: the fantasy football manager</h2>
+<p>A useful way to understand agentic architecture is to stop drawing one giant &ldquo;agent&rdquo; box and instead decompose the system into skills, triggers, memory, tools, and review paths.</p>
+<p>Take a fantasy football manager. It sounds playful, but it has real system shape: external APIs, changing information, scheduled work, event-driven decisions, ambiguous human preferences, and actions that mutate state. You could build it as four skills.</p>
+<figure class="figure-card"><div class="figure-meta"><span>Source slide 09</span><strong>Fantasy Football Decomposition</strong></div><img src="images/building-on-agentic-systems/slide-09.png" alt="Architecture overview of fantasy football skills, triggers, memory, tools, and review paths." loading="lazy"><figcaption>A concrete agentic application is easier to reason about when it is decomposed into skills, triggers, memory, tools, and review paths.</figcaption></figure>
+<h3>1. Set lineup: cron plus validation hooks</h3>
+<p>Every week, the system needs to set the best lineup. That is a fixed schedule, so a cron job is the right trigger.</p>
+<p>The skill might fetch roster data, pull projections, choose starters, update the lineup through an API, and then validate that every required position is filled. The point is that the agent is not just &ldquo;thinking about fantasy football.&rdquo; It is operating inside a bounded workflow:</p>
+<ul><li>wake up at a known time</li><li>fetch known inputs</li><li>run a known optimization task</li><li>perform a controlled external write</li><li>validate the final state</li><li>leave an artifact or trace</li></ul>
+<p>Cron is good when the task should happen at a predictable interval. The risk is silent failure or stale assumptions. That is why the validation hook matters. A scheduled agent without post-run validation is just a confident alarm clock.</p>
+<h3>2. Waiver wire pickup: heartbeat plus controlled self-healing</h3>
+<p>Waiver wires are different. The system needs to monitor changing opportunities. A heartbeat or polling loop is a better fit: wake up periodically, scan the environment, decide whether anything is worth doing, and stop if not.</p>
+<p>This is where self-healing becomes tempting. If an ESPN data fetch fails, an agent might inspect the error, patch a helper script, or pivot to web search. That can be useful. It can also be dangerous.</p>
+<p>Self-healing should mean controlled recovery, not autonomous license. A safe version has scoped file permissions, a clear allowed-tool list, rollback behavior, validation checks, and an escalation threshold. The agent can fix a scraper in a fixture workspace. It should not freely rewrite production logic, mutate external records, and declare victory because the stack trace disappeared.</p>
+<p>The useful framing is: self-healing is a recovery loop with guardrails.</p>
+<h3>3. Accept or decline trades: pub/sub plus memory</h3>
+<p>A trade offer should not wait for the next polling interval. It is an event. The right trigger is pub/sub, a webhook, or another event-driven wakeup.</p>
+<p>When a trade arrives, the agent can evaluate the players, check recent news, recall standing preferences, and decide whether to accept, decline, or ask for help.</p>
+<p>Memory matters here. Without memory, the system only sees the current event. With memory, it can incorporate previous trades, manager preferences, earlier news, or standing rules about risk tolerance.</p>
+<p>But memory needs policy. What is stored? How long does it live? Can it be wrong? Is it cited back to the decision? Can a human inspect and correct it? Memory that cannot be audited becomes lore. Lore is not a system of record.</p>
+<h3>4. Human-in-the-loop: webhook plus arbitrary input</h3>
+<p>Eventually the agent will hit ambiguity. Maybe the data conflicts. Maybe the trade is close. Maybe the decision has social context the agent should not infer. That is when it should ask a human.</p>
+<p>A human-in-the-loop interface might send a Telegram, Slack, Discord, or SMS message with the relevant context, the question, and the options. The human might respond with text, a URL, a screenshot, or a voice note. The agent parses the input, updates context, executes the directive, and stores the useful learning for next time.</p>
+<p>This is one of the best reasons to build agentically: the system can accept messy human input without forcing every interaction through a rigid form.</p>
+<p>It is also an input channel that needs security boundaries. A human reply is not automatically safe just because it came through a messaging app. The system still needs to know who has authority, what instruction scope applies, whether the message contains prompt injection, and what actions require confirmation.</p>
+<h2 id="triggers">Trigger patterns are architecture decisions</h2>
+<p>The fantasy football example generalizes into a simple trigger model:</p>
+<div class="article-table"><table><tr><th>Pattern</th><th>Use when</th><th>Example</th><th>Main risk</th></tr><tr><td>Cron</td><td>A task should happen on a fixed schedule</td><td>Weekly lineup optimization</td><td>Silent failure; stale assumptions</td></tr><tr><td>Heartbeat / polling</td><td>The system should monitor for changing opportunities</td><td>Waiver wire scans</td><td>Cost, noise, unnecessary actions</td></tr><tr><td>Pub/sub</td><td>A specific external event should wake the agent immediately</td><td>Incoming trade offer</td><td>Bad event schema; missing context</td></tr><tr><td>Webhook / human loop</td><td>A human or external system should inject new context</td><td>Telegram reply with URL/audio/image/text</td><td>Ambiguous authority; prompt injection</td></tr></table></div>
+<section class="figure-card trigger-figure"><div class="figure-meta"><span>Generated composite</span><strong>Trigger Patterns as Architecture Decisions</strong></div><div class="trigger-grid"><div class="trigger-card"><span>Cron</span><h4>Set Lineup</h4><p>Run on a fixed schedule, then validate final state.</p><small>Risk: silent failure</small></div><div class="trigger-card"><span>Heartbeat</span><h4>Waiver Scan</h4><p>Wake periodically, check for opportunity, stop cheaply when nothing changed.</p><small>Risk: cost and noise</small></div><div class="trigger-card"><span>Pub/Sub</span><h4>Trade Offer</h4><p>Respond to an incoming event with memory-aware evaluation.</p><small>Risk: missing context</small></div><div class="trigger-card"><span>Human Loop</span><h4>Ask for Help</h4><p>Escalate ambiguity with context, options, and authority boundaries.</p><small>Risk: prompt injection</small></div></div><p class="caption">Cron, heartbeat, pub/sub, and human-in-the-loop workflows create different cost profiles, failure modes, and review requirements.</p></section>
+<p>Choosing the trigger is not an implementation detail. It changes the cost profile, failure mode, review model, and observability requirements.</p>
+<p>A cron job needs validation and alerting. A heartbeat needs a cheap &ldquo;nothing to do&rdquo; path. Pub/sub needs event schemas and idempotency. A human loop needs context, authority boundaries, and artifact retention.</p>
+<p>If you cannot describe how the agent wakes up, what state it reads, what it is allowed to mutate, and how you know what happened, you do not have an architecture yet. You have a demo.</p>
+<h2>When agentic systems are worth it</h2>
+<p>Agentic systems are best when flexibility is the point.</p>
+<p>They make sense when inputs are messy, multimodal, or variable. They make sense when the task requires judgment, decomposition, adaptation, or natural-language interaction. They make sense when the workflow benefits from carryover: prior attempts, review notes, preferences, state, traces, and artifacts that make the next run smarter.</p>
+<p>Good candidates have a few traits:</p>
+<ul><li>clear goal, variable path</li><li>messy or multimodal input</li><li>tool choice at runtime</li><li>recoverable surprises</li><li>tolerable nondeterminism</li><li>review before release</li><li>visible success signals through artifacts, traces, or evals</li></ul>
+<p>That last point is important. Agentic systems are easier to trust when the signal function is visible.</p>
+<p>In the content-generation pipeline, the signal is not &ldquo;did the model write words?&rdquo; It is whether future drafts need fewer review rounds, preserve more style feedback, and reach publishable quality with less setup. That is measurable because the housing preserves packet state, review artifacts, status changes, and human feedback.</p>
+<p>The lesson is broader: do not build an agentic system because agents are fashionable. Build one when the task benefits from adaptive reasoning and you can design the surrounding state, review, and measurement loops.</p>
+<h2>When not to build agentically</h2>
+<p>Agentic systems are powerful, but they are not free.</p>
+<p>They are often the wrong tool when the task is stable, exact, low-latency, cheap, and already well-specified. If deterministic code can solve the problem safely and clearly, use deterministic code. There is no prize for adding nondeterminism to a workflow that does not need it.</p>
+<p>The main costs are predictable:</p>
+<ul><li><strong>Token cost:</strong> Multi-step runs get expensive with retries, memory lookups, tool outputs, and long traces. Refresh exact model pricing close to deployment or publication.</li><li><strong>Latency:</strong> LLM inference and tool loops are slow compared with normal code. Seconds or minutes may be fine for research or operations, not for a low-latency product path.</li><li><strong>Nondeterminism:</strong> The same input may not produce the same path or output, which makes testing, certification, and regulated audit harder.</li><li><strong>Security and privacy:</strong> Prompts, tool outputs, files, and retrieved context may leave your environment unless you design around that. Skills and plugins can also introduce unsafe instructions or code.</li><li><strong>Data mutation risk:</strong> Agents can write files, call APIs, submit forms, merge code, or update records. If those actions are not scoped and reversible, self-healing can become self-damage.</li><li><strong>Vendor dependency:</strong> Model behavior, APIs, pricing, and tool integrations change. An update can silently alter a workflow that used to pass.</li><li><strong>Observability:</strong> Traditional logs do not fully explain an agent path. You need traces of model calls, tool calls, handoffs, guardrails, external writes, and escalations.</li></ul>
+<p>The blunt rule: use agentic systems where flexibility beats strict predictability. Avoid them where strict predictability is the main requirement.</p>
+<h2 id="checklist">Minimum viable architecture for an agentic system</h2>
+<p>This is the practical core. Before I would trust an agentic workflow beyond a demo, I would want at least this checklist.</p>
+<h3>1. A state model</h3>
+<p>Where does the agent read and write durable state? It could be a packet workspace, database, ticket, queue, object store, memory file, or vector index. The exact storage matters less than inspectability: what does the system believe, what happened last time, and what should happen next?</p>
+<h3>2. A trigger model</h3>
+<p>How does the agent wake up? Cron, heartbeat, pub/sub, webhook, manual invocation, and human reply all imply different failure modes. Pick deliberately. Do not hide every workflow behind &ldquo;the agent will notice.&rdquo;</p>
+<h3>3. A tool boundary</h3>
+<p>Which tools can it call, and under what conditions? MCP is useful for exposing tools and resources in a standard way. It does not replace permission design. The housing still decides authentication, scopes, approval points, sandboxing, and context exposure.</p>
+<h3>4. A mutation policy</h3>
+<p>What is the agent allowed to change? Separate read-only exploration from reversible writes from irreversible actions. Require confirmation for expensive, destructive, external, or privacy-sensitive actions. If the agent can modify code or data, design rollback and validation before celebrating self-healing.</p>
+<h3>5. A memory policy</h3>
+<p>What should carry forward? Memory should preserve useful context, not accumulate every token forever. Decide what gets stored, how it is retrieved, how it is corrected, and how it is cited back into decisions.</p>
+<h3>6. Skill and workflow tests</h3>
+<p>How do you know the reusable behavior works? Test the package surfaces you control: metadata, activation, referenced files, helper scripts, permissions, output contracts, and routing behavior. For important workflows, add fixture runs, trace review, regression checks, and security review.</p>
+<h3>7. Observability</h3>
+<p>Can you reconstruct what happened? Capture traces of model calls, tool calls, guardrails, handoffs, external writes, and human escalations. Agent behavior needs more than ordinary application logs. At minimum, preserve artifacts and decision trails.</p>
+<h3>8. Human escalation</h3>
+<p>When should the agent ask for help? Low confidence, conflicting data, high-impact mutations, policy ambiguity, and user-facing publication should all have escalation paths. A good human loop includes context, options, authority boundaries, and a decision record.</p>
+<h3>9. Carryover</h3>
+<p>How does the next run get smarter? If review notes, failed attempts, rejected directions, and successful patterns disappear into chat scrollback, the system is not learning operationally. Preserve the artifacts that matter.</p>
+<h2>Design the housing as carefully as the prompt</h2>
+<p>It is easy to make agentic systems sound magical. Give the model a goal, add tools, and let it figure things out.</p>
+<p>That is not wrong. It is just incomplete.</p>
+<p>Some work really does benefit from flexible inputs, abstract goals, adaptive planning, memory, and recovery. These systems fail when teams treat the model loop as the whole product.</p>
+<p>The harness matters. Better models and better tool loops will keep improving what agents can do.</p>
+<p>But the housing determines whether the system is useful, safe, and repeatable. It decides how the agent wakes up, what it can touch, what it remembers, how it recovers, when it asks for help, what gets logged, and how the next run improves.</p>
+<p>If you are building on agentic systems, do not start with &ldquo;what can the model do?&rdquo;</p>
+<p>Start with the checklist:</p>
+<ul><li>What state should exist before and after the run?</li><li>What event should wake the agent up?</li><li>What tools should be available, and under what permissions?</li><li>What artifacts should prove what happened?</li><li>What should be deterministic?</li><li>What should be agentic?</li><li>What should require a human?</li></ul>
+<p>That is the practical architecture question.</p>
+<p>The model is the engine. The housing is what makes the engine worth trusting.</p>
+        </article>
+    </main>
+</body>
+</html>
