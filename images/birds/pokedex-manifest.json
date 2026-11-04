@@ -1,0 +1,496 @@
+{
+  "album": "Pokédex",
+  "imported_on": "2026-11-04",
+  "entries": [
+    {
+      "id": "8596D2C2-6294-49EE-877D-32BBAE0E11C9",
+      "caption": "Ricaniid Planthopper",
+      "src": "images/birds/pokedex-ricaniid-planthopper-8596d2c2.jpg",
+      "sha256": "945f6b04c95d1e26b2fb911227d4cfe3c56b4f79e02902ef38df80bff1f165a9",
+      "kind": "photo"
+    },
+    {
+      "id": "38B247A6-EE88-4732-A997-A8708CBCDF23",
+      "caption": "Grey Heron",
+      "src": "images/birds/pokedex-grey-heron-38b247a6.jpg",
+      "sha256": "05d60c04e8282e5846b81fe2a8a24ba09789ae49a6baa07272bb2533adb71e8f",
+      "kind": "photo"
+    },
+    {
+      "id": "3B9FCD89-1CE7-4B26-9A72-D70C58C10526",
+      "caption": "Salt Marsh Moth",
+      "src": "images/birds/pokedex-salt-marsh-moth-3b9fcd89.jpg",
+      "sha256": "a3b0b927004b2596665ca2dbc7c61b099519432f69d755bc6ad2dfbf52928a67",
+      "kind": "photo"
+    },
+    {
+      "id": "3AAAFFE4-FD04-4391-993F-D372FCB8815E",
+      "caption": "Red Eared Slider",
+      "src": "images/birds/pokedex-red-eared-slider-3aaaffe4.jpg",
+      "sha256": "6a99319c5703a3f672bc2637f3f7a3eb6f23d399deadf75fe6e06ef999d3e08b",
+      "kind": "photo"
+    },
+    {
+      "id": "70480DEA-74AD-4B01-8215-262AB17FE537",
+      "caption": "Black Bear (cub)",
+      "src": "images/birds/pokedex-black-bear-cub-70480dea.jpg",
+      "sha256": "473e805739e31f57cb6ab667ac58ea1cba3982e9a3abd3d3344e9ffe95a8ec52",
+      "kind": "photo"
+    },
+    {
+      "id": "CF3A4CCC-89FF-4080-952D-0E36B0E8E0DF",
+      "caption": "Western Conifer Seed Bug",
+      "src": "images/birds/pokedex-western-conifer-seed-bug-cf3a4ccc.jpg",
+      "sha256": "1c556e9408f99051858d2d2bcb3260552543995b75fac6b877f4e08cdec537e4",
+      "kind": "photo"
+    },
+    {
+      "id": "5D3960A8-D74E-40A6-983B-381FE2229BDC",
+      "caption": "Scudderia Furcata",
+      "src": "images/birds/pokedex-scudderia-furcata-5d3960a8.jpg",
+      "sha256": "a242508cef663554e01ea867f3e71433f6b856c0ff951a67e80ab387e55d9229",
+      "kind": "photo"
+    },
+    {
+      "id": "F91D6200-0F08-47C8-AECE-A7207983E846",
+      "caption": "Praying Mantis",
+      "src": "images/birds/pokedex-praying-mantis-f91d6200.jpg",
+      "sha256": "7e92b3132d82b438981a6b3ab9733ba773207cc467e808793234b91929009ab4",
+      "kind": "photo"
+    },
+    {
+      "id": "26DB16B7-269A-48FF-9D23-21AF4F2FD272",
+      "caption": "Masked Chafer",
+      "src": "images/birds/pokedex-masked-chafer-26db16b7.jpg",
+      "sha256": "12a20e4f406b0e15494a222d8a6a833aa1b0f8f590b672ce303b0d16a3316db9",
+      "kind": "photo"
+    },
+    {
+      "id": "1C41FCA9-7A0D-4096-BE44-7BC8FC255F8E",
+      "caption": "Ruddy Daggerwing",
+      "src": "images/birds/pokedex-ruddy-daggerwing-1c41fca9.jpg",
+      "sha256": "2539b91354d68125a8fa108b3e0620a5ef976f0487a7a59ef405abca5797c253",
+      "kind": "photo"
+    },
+    {
+      "id": "F0A65F5F-9C34-4416-931E-472C7B9014F6",
+      "caption": "Flamingo",
+      "src": "images/birds/pokedex-flamingo-f0a65f5f.jpg",
+      "sha256": "639c3dcc006930f060e0345ea75bd34ba3c2947128dc1fec6e35bd4cf06d04b7",
+      "kind": "photo"
+    },
+    {
+      "id": "063A413D-4F27-48B3-8CC5-6EFA240D5F6F",
+      "caption": "Coatimundi",
+      "src": "images/birds/pokedex-coatimundi-063a413d.jpg",
+      "sha256": "bb630644fb19bdc0700aeda038a573eb248607118798cd0a54007f442d45ef19",
+      "kind": "photo"
+    },
+    {
+      "id": "BE87F978-EE4D-47C6-8CCC-447B91EF278D",
+      "caption": "Great Kiskadee",
+      "src": "images/birds/pokedex-great-kiskadee-be87f978.jpg",
+      "sha256": "bae834b09391e57686f428ab4be5216c26628d11192fffd66807a8b883f4f09b",
+      "kind": "photo"
+    },
+    {
+      "id": "AA9E96D2-713A-4263-9184-80DDD1161181",
+      "caption": "Green Iguana",
+      "src": "images/birds/pokedex-green-iguana-aa9e96d2.jpg",
+      "sha256": "4860e46d068df8e78d0cba3ae6de585f2e1c81f498477ce9ae091fe8b4d1b9fa",
+      "kind": "photo"
+    },
+    {
+      "id": "ACE3DA26-4769-4A7C-BC8F-A78006DABDC4",
+      "caption": "Yucatán Jay",
+      "src": "images/birds/pokedex-yucatan-jay-ace3da26.jpg",
+      "sha256": "56c28cdeadb1f46bb1a1d551aa05d6dc2fa0d72e0da0b5e6c45d5ae8e9e53fea",
+      "kind": "photo"
+    },
+    {
+      "id": "1F97CD3E-FAB8-4B58-844C-E4E2C7B921F8",
+      "caption": "Twin-Spotted Sphinx (moth)",
+      "src": "images/birds/pokedex-twin-spotted-sphinx-moth-1f97cd3e.jpg",
+      "sha256": "929854711e94e126e006ac1263d69441b5fb2c0737d8c397f49522498364ca3a",
+      "kind": "photo"
+    },
+    {
+      "id": "897A6F5C-2761-436C-B19F-B22DC50FB642",
+      "caption": "Barn Swallow",
+      "src": "images/birds/pokedex-barn-swallow-897a6f5c.jpg",
+      "sha256": "dea52369ae46f7c804135209285c8edc3c7adcbb3c7d39e1b87cecdcac7c0ca5",
+      "kind": "photo"
+    },
+    {
+      "id": "A7CE2A77-272B-4CEC-9179-BF2161E32ED7",
+      "caption": "Canada Goose (infant)",
+      "src": "images/birds/pokedex-canada-goose-infant-a7ce2a77.jpg",
+      "sha256": "faa21287b1909f0dd319d0cd7e07f81bc840e50fe1d349738380dcf295274196",
+      "kind": "photo"
+    },
+    {
+      "id": "91CD1315-057E-451C-8B73-1E959A16B9DC",
+      "caption": "Harbor Seals",
+      "src": "images/birds/pokedex-harbor-seals-91cd1315.jpg",
+      "sha256": "985b958c66a98ab04472473fa9420a9aa0bd0e86b1ec8b530785d17c9b6d1b4f",
+      "kind": "photo"
+    },
+    {
+      "id": "65B9ADA6-A101-431A-8DA5-EE409A851F1A",
+      "caption": "Monarch Butterfly Caterpillar",
+      "src": "images/birds/pokedex-monarch-butterfly-caterpillar-65b9ada6.jpg",
+      "sha256": "a2ff84cd7eb7798360822ddc148507003e1540b22be261b6914e14edbf252e99",
+      "kind": "photo"
+    },
+    {
+      "id": "22F64860-E2F4-48C1-9D08-A66690779B72",
+      "caption": "Potato Aphid",
+      "src": "images/birds/album-bird-1.jpg",
+      "sha256": "d6c42eab930363b3eb945ae96ff5b98555fc4690aab98c14c0a1180537076ddc",
+      "kind": "photo"
+    },
+    {
+      "id": "A8CC8F64-5C22-4416-B979-FE2E07EB42FF",
+      "caption": "Common Raven",
+      "src": "images/birds/common-raven.jpg",
+      "sha256": "f31824b8e8f01140d04d67281405abe00581e76bda5c954d33ee0f628efd092c",
+      "kind": "photo"
+    },
+    {
+      "id": "8F6790AA-C601-4667-A17C-E613FC5B80BB",
+      "caption": "Amblyptilia",
+      "src": "images/birds/album-bird-3.jpg",
+      "sha256": "0d770681b4959cdec0d0978380aaaf922c80243fae9da6c68b037e8479cb46a8",
+      "kind": "photo"
+    },
+    {
+      "id": "25DFCE5B-37DF-435C-830D-65A75AB4A0C4",
+      "caption": "Botta’s Pocket Gopher",
+      "src": "images/birds/album-bird-4.jpg",
+      "sha256": "d790fe31d12e36779daa7cc8e22c7e6fc776c472dc1a7f08027c51c0e47de598",
+      "kind": "photo"
+    },
+    {
+      "id": "E13A4522-5274-4899-A398-7C053839E1F3",
+      "caption": "Western Fence Lizard",
+      "src": "images/birds/album-bird-5.jpg",
+      "sha256": "b9ad4d478ab945b3e4b71fa00f9b235d1dea1f0712f002f00bf84c0437ce3cf8",
+      "kind": "photo"
+    },
+    {
+      "id": "BCEDD9B6-BB6F-4511-A6E2-89EF717F78DA",
+      "caption": "Wild Turkey",
+      "src": "images/birds/wild-turkey.jpg",
+      "sha256": "ef5c2ec8862e09534d8c1ff425350ff9222a3425385029cc12eff70a7e7d5cfa",
+      "kind": "photo"
+    },
+    {
+      "id": "64DEDC25-42F8-4B63-B722-DA93A653F26B",
+      "caption": "Crow",
+      "src": "images/birds/album-bird-7.jpg",
+      "sha256": "145c9fd7de75b7f857977fa72574aedc3ce13c781c84e6673ec3ed697cc5421b",
+      "kind": "photo"
+    },
+    {
+      "id": "0D4FB126-02E5-495E-88E8-725751F755FD",
+      "caption": "Mallard",
+      "src": "images/birds/album-bird-8.jpg",
+      "sha256": "7cccb6af2f8c66a5d7cf72b39d21a42214422df35d49d2349a5d5bafe094fc78",
+      "kind": "photo"
+    },
+    {
+      "id": "A3C501B2-CC73-4B8E-BE54-94C208A04202",
+      "caption": "Coot",
+      "src": "images/birds/album-bird-9.jpg",
+      "sha256": "ced04e8a7746f696c457754599d393c6d2c771c29d74f71fdbec983c559de684",
+      "kind": "photo"
+    },
+    {
+      "id": "8FEC04FC-D565-4530-A491-6AB58487F6B2",
+      "caption": "American Avocet",
+      "src": "images/birds/album-bird-10.jpg",
+      "sha256": "bd009c3ae827280b7c6f2fbe17ae0af71acca3880630c571fbac51bbc5980100",
+      "kind": "photo"
+    },
+    {
+      "id": "21FD789A-F55D-4C4A-B42E-47398EF10C93",
+      "caption": "Golden Paper Wasp",
+      "src": "images/birds/album-bird-11.jpg",
+      "sha256": "d213d2f833d798cc4d2d03cb2931de3628b34b938a367004747e160722902145",
+      "kind": "photo"
+    },
+    {
+      "id": "DC925D97-90D9-48F2-89EA-47129BD79C23",
+      "caption": "Ring-Billed Gull",
+      "src": "images/birds/album-bird-12.jpg",
+      "sha256": "6bf02e33a19ba2f83ba1ffcf4333f84b5a6481c47a09c1da89e91756fa174354",
+      "kind": "photo"
+    },
+    {
+      "id": "7699FB05-059D-4036-B1D5-9C23BFADE6F8",
+      "caption": "Bufflehead",
+      "src": "images/birds/album-bird-13.jpg",
+      "sha256": "46c8ffeed18353b5502947e48c796b78dce40056ebe6677f844d08de48262dea",
+      "kind": "photo"
+    },
+    {
+      "id": "7BB503F0-A9DD-47BA-B570-8365AE706BE4",
+      "caption": "Seven-Spot Ladybird",
+      "src": "images/birds/album-bird-14.jpg",
+      "sha256": "af4ef5a3c377a447f0e7fb2edbdd851d752dfae7286bea174fa3f08683f89b91",
+      "kind": "photo"
+    },
+    {
+      "id": "5EDAEDC3-CEE6-459D-91DE-F515A8A02554",
+      "caption": "Anise Swallowtail",
+      "src": "images/birds/album-bird-15.jpg",
+      "sha256": "f2325f981698e74405320d8a534ae344aad235501d51a54e8f7be3fb9952defa",
+      "kind": "photo"
+    },
+    {
+      "id": "9D4867F7-E291-4C88-86D7-A271C2876721",
+      "caption": "Mourning Dove",
+      "src": "images/birds/album-bird-16.jpg",
+      "sha256": "ee78eadab528a76f69668e1aabbcfbb5abe383f8dc02d69ec6bb7b8e944868d9",
+      "kind": "photo"
+    },
+    {
+      "id": "981B6D70-66FA-4ABD-8229-DEF62BC9CAA7",
+      "caption": "Black-Billed Magpie",
+      "src": "images/birds/album-bird-17.jpg",
+      "sha256": "fbc491f5f00326aae73e38b427918e5e988e91cb9a24be603e759e94598e5c2d",
+      "kind": "photo"
+    },
+    {
+      "id": "5A749B94-67B5-4EBB-B894-AD716095F937",
+      "caption": "Largus California",
+      "src": "images/birds/album-bird-18.jpg",
+      "sha256": "ce3fb7d6cb11d303d577283c7abcbddb476f7b67283db37287a6fb3f74e34a1b",
+      "kind": "photo"
+    },
+    {
+      "id": "B55C9567-1DE7-4D92-835B-C269654F2EF0",
+      "caption": "Ruby-throated, hummingbird",
+      "src": "images/birds/ruby-throated-hummingbird.jpg",
+      "sha256": "9e91c7f6412179e47805ad9cd77c3d322e5f0502418e2808e6fe0e993870caf0",
+      "kind": "photo"
+    },
+    {
+      "id": "783CF5A8-EBD0-4FB5-84C3-112B03075CCD",
+      "caption": "Western Boxelder Bug",
+      "src": "images/birds/album-bird-20.jpg",
+      "sha256": "aca516abce12fc43e9b6e62840398cdeda6044e9db4507b88511a4782505afdc",
+      "kind": "photo"
+    },
+    {
+      "id": "F2840D2A-F6EA-4043-8515-5E05E9B8344B",
+      "caption": "Willet",
+      "src": "images/birds/album-bird-21.jpg",
+      "sha256": "e560a62e0753ff94f689669426559fe38d5e918a384577f289e44ad185f97cd8",
+      "kind": "photo"
+    },
+    {
+      "id": "FC902C0D-D89B-4E70-9429-8E01D5DB4EAD",
+      "caption": "White Crowned-Sparrow",
+      "src": "images/birds/album-bird-22.jpg",
+      "sha256": "44eb8589cf23cc36edeac872581f9cee92d0ffc8148bb52a03d1b8f9aad0c49a",
+      "kind": "photo"
+    },
+    {
+      "id": "9710BBAE-DBB0-42BE-B372-BC2C7FB9897A",
+      "caption": "Belted Kingfisher",
+      "src": "images/birds/belted-kingfisher.jpg",
+      "sha256": "d6ce80683a00d544d2ef13c0f567af16cfcb489f9e49ea5caad0563ec44f6781",
+      "kind": "photo"
+    },
+    {
+      "id": "3BAE29E9-81C3-4133-A0FE-78A2B11F531D",
+      "caption": "Anna’s Hummingbird",
+      "src": "images/birds/album-bird-24.jpg",
+      "sha256": "d7e3e335911531387f7ec4063efaa38d6a49199d767a225921ed202b4d0521fd",
+      "kind": "photo"
+    },
+    {
+      "id": "E4D83531-D2AC-42DE-B11A-FF9A9A5FB41F",
+      "caption": "Turkey Vulture",
+      "src": "images/birds/album-bird-25.jpg",
+      "sha256": "a9575186ba7ee35d50af06783615d62e227f1ac6bb32248a85b97d4e683f9018",
+      "kind": "photo"
+    },
+    {
+      "id": "F5B31A91-6AE3-4DFB-B14C-7D3376103FB8",
+      "caption": "Black-necked Stilt",
+      "src": "images/birds/album-bird-26.jpg",
+      "sha256": "000bbfb1e58dc71f69257d577599bc2f0bf9538fb29b68287347430209a85ed2",
+      "kind": "photo"
+    },
+    {
+      "id": "B5C7DDF1-FF33-426F-8935-F9BFF580D825",
+      "caption": "Nuttall's Woodpecker",
+      "src": "images/birds/album-bird-27.jpg",
+      "sha256": "9e16a1284c331263bd5d3b2cb1161def814ddda4bd138b12c28eea9b0ac00651",
+      "kind": "photo"
+    },
+    {
+      "id": "01406E31-9D6D-4C34-86F8-32F7CADD71CF",
+      "caption": "Cedar Waxwing",
+      "src": "images/birds/album-bird-28.jpg",
+      "sha256": "d21490883bdb8f57179aa9b4549d0b88239ea086edc88761f393568609f4e3c5",
+      "kind": "photo"
+    },
+    {
+      "id": "F906BC8C-A7AC-4188-B935-228B85FCF634",
+      "caption": "Golden-crowned Sparrow",
+      "src": "images/birds/album-bird-29.jpg",
+      "sha256": "5164844db124b8c61713cee8907327aaae9b248e5147e0e2061d676e4ab31a69",
+      "kind": "photo"
+    },
+    {
+      "id": "D99EAEAA-6E15-41E5-A831-973808B87244",
+      "caption": "Black-Crowned Night Heron",
+      "src": "images/birds/album-bird-30.jpg",
+      "sha256": "b0a29b58feaa269e2f2f39abb1d0f3800369715c2fb23762d02d66dd807b0312",
+      "kind": "photo"
+    },
+    {
+      "id": "D309DCC5-4F9D-47F1-AAD1-B936B7B23FA8",
+      "caption": "Great Egret",
+      "src": "images/birds/great-egret.jpg",
+      "sha256": "620c4f28baf0b82bff5c0ba956e90198a763d614b2fd8b5b4503c06f03efcf5d",
+      "kind": "photo"
+    },
+    {
+      "id": "9D9B85BE-2E92-4411-B2FB-843097D49B72",
+      "caption": "American Avocet",
+      "src": "images/birds/album-bird-32.jpg",
+      "sha256": "b1c38bd379af846212c66b301e700df5a8931903fcd0cbaa500f6c3ec62903e8",
+      "kind": "photo"
+    },
+    {
+      "id": "40E3267A-A27E-475F-A0C8-47B8351BC187",
+      "caption": "Yellow-Romped Warbler",
+      "src": "images/birds/album-bird-33.jpg",
+      "sha256": "73240d9a30ce79436511fa13807efc59a21747e6a1c045e1745b3323b67cba51",
+      "kind": "photo"
+    },
+    {
+      "id": "BCD1352C-BC7E-4AAF-AB80-5CB230B6E88E",
+      "caption": "Song Sparrow",
+      "src": "images/birds/album-bird-34.jpg",
+      "sha256": "cf54d53c47d4ed6b115eda61e71631c7d1c3635f0d1e89ab1110537112be2781",
+      "kind": "photo"
+    },
+    {
+      "id": "5B15F561-4F5D-43D3-B20D-90E4B62D5329",
+      "caption": "Western Gull",
+      "src": "images/birds/album-bird-35.jpg",
+      "sha256": "d4bf3b0a36de9a589a4cb4a062a381dea2154499b6ee9f39ef7becfa13c1eeff",
+      "kind": "photo"
+    },
+    {
+      "id": "1E9051FE-8C83-4808-8335-2C13860DA909",
+      "caption": "Least Sandpiper",
+      "src": "images/birds/album-bird-36.jpg",
+      "sha256": "b14be40a4f1e57f20a4f04dd2ff78a1777bc84f438e642dd11fddf24cad9cb0e",
+      "kind": "photo"
+    },
+    {
+      "id": "FFC545C7-8992-45B9-8AD1-91E172E43B78",
+      "caption": "American Wigeon",
+      "src": "images/birds/album-bird-37.jpg",
+      "sha256": "f21bd51afd4675a810012582c4f3b2bc457e1aa090921d9ed5cb9ac326d20fd5",
+      "kind": "photo"
+    },
+    {
+      "id": "813C622D-96C7-4EED-AEFC-254D74CA9C14",
+      "caption": "Acorn Woodpecker",
+      "src": "images/birds/album-bird-38.jpg",
+      "sha256": "fb0fba254214d67029a87becf43b9c5367134a547af8ebb5735a9c50aeac8b2a",
+      "kind": "photo"
+    },
+    {
+      "id": "047A66E7-C62B-4403-BD0F-4138BBA369DA",
+      "caption": "Chyrus",
+      "src": "images/birds/album-bird-39.jpg",
+      "sha256": "0e4dcbf391304be0db61741e35a61c22464dd2e352ee17c44536f26a1aebf36e",
+      "kind": "photo"
+    },
+    {
+      "id": "3793DD72-BF53-4728-A6D3-EEA12F383BF8",
+      "caption": "Shield-backed katydid",
+      "src": "images/birds/album-bird-40.jpg",
+      "sha256": "e1a28da27803ad8d922235ccf9642c7b4f0fb2ad95dbf1700a1dad51861225d0",
+      "kind": "photo"
+    },
+    {
+      "id": "7D6C85D4-F140-411B-8FA5-278A0F8A1E4B",
+      "caption": "Banana slug (dark)",
+      "src": "images/birds/album-bird-41.jpg",
+      "sha256": "419f312264ad4493df26856b7b97f7347a344e2c1616939db7c38d9408fac83b",
+      "kind": "photo"
+    },
+    {
+      "id": "29D4C788-38A5-4B8D-9710-F124F6E469F3",
+      "caption": "Alopecosa",
+      "src": "images/birds/album-bird-42.jpg",
+      "sha256": "71ffc7c3b3f3192b615b8620dcbad7aa6ae8d744992e062f7a7c43294b875af7",
+      "kind": "photo"
+    },
+    {
+      "id": "34E12B30-8E2E-45BF-881A-F7E32AE68022",
+      "caption": "Great Blue Heron",
+      "src": "images/birds/album-bird-43.jpg",
+      "sha256": "e596ca1212b1a3e04326f79a837df4fd75bde90aab57e189fc5a4420aea03388",
+      "kind": "photo"
+    },
+    {
+      "id": "5CB4777E-B04B-4C90-8E29-F457689AB167",
+      "caption": "Northern Shoveler",
+      "src": "images/birds/northern-shoveler.jpg",
+      "sha256": "8332c496afe85a7e24b26706fa612817eb43b8e2929ba2cab97b4fd27c4f4254",
+      "kind": "photo"
+    },
+    {
+      "id": "C77447D9-01C2-4763-820E-1682660AF932",
+      "caption": "Song sparrow",
+      "src": "images/birds/album-bird-45.jpg",
+      "sha256": "80018bbef15a1cf29a360da266ae5b8a016740e97b0ce30884f8336009995d8c",
+      "kind": "photo"
+    },
+    {
+      "id": "408A10B0-3A5C-4F70-8EAE-4789C213E780",
+      "caption": "Snowy egret",
+      "src": "images/birds/album-bird-46.jpg",
+      "sha256": "c84722113a14503ee74e92e837c8149e36a5a919826d0d77f3774fd0889f3deb",
+      "kind": "photo"
+    },
+    {
+      "id": "26575949-643D-4D04-B829-DE805D8649F5",
+      "caption": "Black phoebe",
+      "src": "images/birds/album-bird-47.jpg",
+      "sha256": "e6a8c0396196e3a92eb6823542ad7ef0a6c7aa2ed7837847669d9924b9cf8924",
+      "kind": "photo"
+    },
+    {
+      "id": "03A94037-41E5-42DF-849E-0EDCE0885079",
+      "caption": "Squirrel (red) (video still)",
+      "src": "images/birds/pokedex-squirrel-red-03a94037.jpg",
+      "sha256": "f02816020faf3f5785e72228574b97812537ae8eef3a60442c2ae887565112bd",
+      "kind": "video_still"
+    },
+    {
+      "id": "24AE3A0C-BF06-4E96-A1AB-CB65439B742C",
+      "caption": "Mouse (video still)",
+      "src": "images/birds/pokedex-mouse-24ae3a0c.jpg",
+      "sha256": "da9523edee2a7effe50d4910064f98d3d4f30782870ed736dcdd0458d7730a84",
+      "kind": "video_still"
+    },
+    {
+      "id": "751BDA0D-1054-4591-8CCE-853978F2CACB",
+      "caption": "House finch (male)",
+      "src": "images/birds/album-bird-50.jpg",
+      "sha256": "949f1c5aba4a8d7ed434d138c6e1bf6b2e5b8d9c7b09c5b8554f62c122dac6c1",
+      "kind": "photo"
+    }
+  ]
+}
