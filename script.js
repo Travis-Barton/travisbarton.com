@@ -87,6 +87,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
 
             items.push({
                 src,
+                fullSrc: img.getAttribute("data-full-src") || src,
                 alt,
                 label: `${kind} · ${title || alt || "Untitled"}`
             });
@@ -118,15 +119,18 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     const coverflowItems = interleaveCollections([photographyItems, nailItems]);
 
     if (coverflowItems.length > 0) {
-        const slides = coverflowItems.map((item, index) => {
+        const slides = coverflowItems.map((item) => {
             const slide = document.createElement("div");
             slide.className = "coverflow-slide";
             slide.setAttribute("data-label", item.label);
 
             const image = document.createElement("img");
-            image.src = item.src;
+            // A transformed/hidden slide is not a reliable native lazy-load target
+            // in Safari. Assign sources explicitly as slides approach the viewport.
+            image.dataset.src = item.src;
+            image.dataset.fullSrc = item.fullSrc;
             image.alt = item.alt || item.label;
-            image.loading = index < 6 ? "eager" : "lazy";
+            image.loading = "eager";
             image.decoding = "async";
 
             slide.appendChild(image);
@@ -152,6 +156,13 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
 
             if (pos > Math.floor(total / 2)) pos -= total;
             if (pos < -Math.floor(total / 2)) pos += total;
+
+            if (Math.abs(pos) <= 4) {
+                const image = slide.querySelector("img");
+                if (image && !image.hasAttribute("src")) {
+                    image.src = image.dataset.src;
+                }
+            }
 
             if (Math.abs(pos) > 3) {
                 slide.style.visibility = "hidden";
@@ -289,6 +300,16 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
 
     let currentGallery = [];
     let currentIndex = 0;
+    let imageRequestId = 0;
+    let fullImageLoader = null;
+
+    function cancelFullImage() {
+        imageRequestId += 1;
+        if (fullImageLoader) {
+            fullImageLoader.removeAttribute("src");
+            fullImageLoader = null;
+        }
+    }
 
     function openLightbox(imgElement) {
         // Group by section containers
@@ -309,6 +330,7 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
     let lightboxTouchStartY = 0;
 
     function closeLightbox() {
+        cancelFullImage();
         lightbox.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
     }
@@ -317,8 +339,25 @@ if ("IntersectionObserver" in window && navContainers.length > 0) {
         const item = currentGallery[currentIndex];
         if (!item) return;
         
-        imgEl.src = item.src;
+        cancelFullImage();
+        const requestId = imageRequestId;
+        const previewSrc = item.dataset.src || item.getAttribute("src");
+        const fullSrc = item.dataset.fullSrc || previewSrc;
+        // Keep a portable preview visible while decoding the original. A failed
+        // full-resolution/HDR decode must not turn a working preview into a broken image.
+        imgEl.src = previewSrc;
         imgEl.alt = item.alt;
+
+        if (fullSrc !== previewSrc) {
+            const loader = new Image();
+            fullImageLoader = loader;
+            loader.src = fullSrc;
+            loader.decode().then(() => {
+                if (requestId === imageRequestId) {
+                    imgEl.src = fullSrc;
+                }
+            }).catch(() => { /* Retain the baseline JPEG preview. */ });
+        }
         
         let captionText = "";
         const figure = item.closest("figure");

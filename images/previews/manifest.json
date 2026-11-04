@@ -1,0 +1,655 @@
+{
+  "version": 1,
+  "max_edge": 960,
+  "format": "baseline JPEG, sRGB",
+  "images": [
+    {
+      "original": "images/birds/pokedex-grey-heron-38b247a6.jpg",
+      "preview": "images/previews/pokedex-grey-heron-38b247a6-491ca7ce115c.jpg",
+      "original_bytes": 775746,
+      "preview_bytes": 134108,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-ricaniid-planthopper-8596d2c2.jpg",
+      "preview": "images/previews/pokedex-ricaniid-planthopper-8596d2c2-0e79d1202e89.jpg",
+      "original_bytes": 1512688,
+      "preview_bytes": 241751,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-black-bear-cub-70480dea.jpg",
+      "preview": "images/previews/pokedex-black-bear-cub-70480dea-153d387949ad.jpg",
+      "original_bytes": 1811320,
+      "preview_bytes": 311581,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-coatimundi-063a413d.jpg",
+      "preview": "images/previews/pokedex-coatimundi-063a413d-5eabba9114e2.jpg",
+      "original_bytes": 1573455,
+      "preview_bytes": 214364,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "original": "images/birds/album-bird-38.jpg",
+      "preview": "images/previews/album-bird-38-e4947e69f14a.jpg",
+      "original_bytes": 1098868,
+      "preview_bytes": 221865,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-42.jpg",
+      "preview": "images/previews/album-bird-42-9069ca395bff.jpg",
+      "original_bytes": 1068186,
+      "preview_bytes": 214045,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-3.jpg",
+      "preview": "images/previews/album-bird-3-479adcefd2ac.jpg",
+      "original_bytes": 735479,
+      "preview_bytes": 112285,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-10.jpg",
+      "preview": "images/previews/album-bird-10-a7f4f32d54d5.jpg",
+      "original_bytes": 594075,
+      "preview_bytes": 88885,
+      "width": 479,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-32.jpg",
+      "preview": "images/previews/album-bird-32-f8e5057d4734.jpg",
+      "original_bytes": 452468,
+      "preview_bytes": 72099,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-37.jpg",
+      "preview": "images/previews/album-bird-37-6fe13c3850d1.jpg",
+      "original_bytes": 677333,
+      "preview_bytes": 122595,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-15.jpg",
+      "preview": "images/previews/album-bird-15-ecfb01b2b80a.jpg",
+      "original_bytes": 1077204,
+      "preview_bytes": 189712,
+      "width": 960,
+      "height": 650
+    },
+    {
+      "original": "images/birds/album-bird-24.jpg",
+      "preview": "images/previews/album-bird-24-f85506263be2.jpg",
+      "original_bytes": 452092,
+      "preview_bytes": 34515,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-41.jpg",
+      "preview": "images/previews/album-bird-41-0892c03a7fe2.jpg",
+      "original_bytes": 1078089,
+      "preview_bytes": 153560,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-barn-swallow-897a6f5c.jpg",
+      "preview": "images/previews/pokedex-barn-swallow-897a6f5c-ab6f6b665f8b.jpg",
+      "original_bytes": 1183511,
+      "preview_bytes": 154464,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/belted-kingfisher.jpg",
+      "preview": "images/previews/belted-kingfisher-0c975d4d4fb1.jpg",
+      "original_bytes": 282239,
+      "preview_bytes": 32270,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-47.jpg",
+      "preview": "images/previews/album-bird-47-099a39ed6cf8.jpg",
+      "original_bytes": 1206300,
+      "preview_bytes": 240807,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-17.jpg",
+      "preview": "images/previews/album-bird-17-3c1ad0f94a6d.jpg",
+      "original_bytes": 1716639,
+      "preview_bytes": 290643,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-30.jpg",
+      "preview": "images/previews/album-bird-30-6e2e63b49a9b.jpg",
+      "original_bytes": 713347,
+      "preview_bytes": 110317,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-26.jpg",
+      "preview": "images/previews/album-bird-26-40d2331bdae7.jpg",
+      "original_bytes": 338567,
+      "preview_bytes": 91395,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-4.jpg",
+      "preview": "images/previews/album-bird-4-ba128fc6f529.jpg",
+      "original_bytes": 2737785,
+      "preview_bytes": 226702,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-13.jpg",
+      "preview": "images/previews/album-bird-13-e98eff820bed.jpg",
+      "original_bytes": 228243,
+      "preview_bytes": 76677,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-canada-goose-infant-a7ce2a77.jpg",
+      "preview": "images/previews/pokedex-canada-goose-infant-a7ce2a77-2399c3c60043.jpg",
+      "original_bytes": 731067,
+      "preview_bytes": 89457,
+      "width": 960,
+      "height": 640
+    },
+    {
+      "original": "images/birds/album-bird-28.jpg",
+      "preview": "images/previews/album-bird-28-ae176e540e1e.jpg",
+      "original_bytes": 917024,
+      "preview_bytes": 126806,
+      "width": 960,
+      "height": 640
+    },
+    {
+      "original": "images/birds/album-bird-39.jpg",
+      "preview": "images/previews/album-bird-39-4995bf539044.jpg",
+      "original_bytes": 520775,
+      "preview_bytes": 73465,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/common-raven.jpg",
+      "preview": "images/previews/common-raven-12984e9d830e.jpg",
+      "original_bytes": 2116529,
+      "preview_bytes": 161707,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-9.jpg",
+      "preview": "images/previews/album-bird-9-0189d2019a19.jpg",
+      "original_bytes": 1460277,
+      "preview_bytes": 103132,
+      "width": 450,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-7.jpg",
+      "preview": "images/previews/album-bird-7-64ace29f1191.jpg",
+      "original_bytes": 938293,
+      "preview_bytes": 128120,
+      "width": 960,
+      "height": 640
+    },
+    {
+      "original": "images/birds/pokedex-flamingo-f0a65f5f.jpg",
+      "preview": "images/previews/pokedex-flamingo-f0a65f5f-bf24cffe131c.jpg",
+      "original_bytes": 920494,
+      "preview_bytes": 143892,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-11.jpg",
+      "preview": "images/previews/album-bird-11-94255bd54f92.jpg",
+      "original_bytes": 381466,
+      "preview_bytes": 58947,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-29.jpg",
+      "preview": "images/previews/album-bird-29-8ba3500e1ed0.jpg",
+      "original_bytes": 836792,
+      "preview_bytes": 95665,
+      "width": 960,
+      "height": 640
+    },
+    {
+      "original": "images/birds/goose-and-gosling.jpg",
+      "preview": "images/previews/goose-and-gosling-baa73f2c22c9.jpg",
+      "original_bytes": 376562,
+      "preview_bytes": 120051,
+      "width": 960,
+      "height": 640
+    },
+    {
+      "original": "images/birds/album-bird-43.jpg",
+      "preview": "images/previews/album-bird-43-78334af93197.jpg",
+      "original_bytes": 786958,
+      "preview_bytes": 130538,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/great-egret.jpg",
+      "preview": "images/previews/great-egret-72d2bbb5265a.jpg",
+      "original_bytes": 440147,
+      "preview_bytes": 70406,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-great-kiskadee-be87f978.jpg",
+      "preview": "images/previews/pokedex-great-kiskadee-be87f978-02de1cf66586.jpg",
+      "original_bytes": 1159810,
+      "preview_bytes": 114699,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-green-iguana-aa9e96d2.jpg",
+      "preview": "images/previews/pokedex-green-iguana-aa9e96d2-276312191eb5.jpg",
+      "original_bytes": 1439109,
+      "preview_bytes": 164470,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-harbor-seals-91cd1315.jpg",
+      "preview": "images/previews/pokedex-harbor-seals-91cd1315-67b81b6aea29.jpg",
+      "original_bytes": 1021929,
+      "preview_bytes": 204336,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-50.jpg",
+      "preview": "images/previews/album-bird-50-366d4530ba65.jpg",
+      "original_bytes": 204532,
+      "preview_bytes": 87249,
+      "width": 960,
+      "height": 492
+    },
+    {
+      "original": "images/birds/album-bird-18.jpg",
+      "preview": "images/previews/album-bird-18-c1c439f49001.jpg",
+      "original_bytes": 1680350,
+      "preview_bytes": 116764,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-36.jpg",
+      "preview": "images/previews/album-bird-36-b13fa14e7cc9.jpg",
+      "original_bytes": 597288,
+      "preview_bytes": 97181,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-8.jpg",
+      "preview": "images/previews/album-bird-8-43c37532a9fe.jpg",
+      "original_bytes": 1841644,
+      "preview_bytes": 139949,
+      "width": 515,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-masked-chafer-26db16b7.jpg",
+      "preview": "images/previews/pokedex-masked-chafer-26db16b7-cf74026c6009.jpg",
+      "original_bytes": 1380361,
+      "preview_bytes": 241766,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-monarch-butterfly-caterpillar-65b9ada6.jpg",
+      "preview": "images/previews/pokedex-monarch-butterfly-caterpillar-65b9ada6-5e2b2eacf1d9.jpg",
+      "original_bytes": 823031,
+      "preview_bytes": 159113,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "original": "images/birds/album-bird-16.jpg",
+      "preview": "images/previews/album-bird-16-09580c5f5a5e.jpg",
+      "original_bytes": 872950,
+      "preview_bytes": 62657,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-mouse-24ae3a0c.jpg",
+      "preview": "images/previews/pokedex-mouse-24ae3a0c-a31057bfcaf1.jpg",
+      "original_bytes": 166502,
+      "preview_bytes": 76990,
+      "width": 960,
+      "height": 540
+    },
+    {
+      "original": "images/birds/northern-shoveler.jpg",
+      "preview": "images/previews/northern-shoveler-e0e9486e7f50.jpg",
+      "original_bytes": 806768,
+      "preview_bytes": 89886,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-27.jpg",
+      "preview": "images/previews/album-bird-27-807b1cd1646f.jpg",
+      "original_bytes": 150961,
+      "preview_bytes": 82896,
+      "width": 587,
+      "height": 697
+    },
+    {
+      "original": "images/birds/album-bird-1.jpg",
+      "preview": "images/previews/album-bird-1-5656be4bdb97.jpg",
+      "original_bytes": 466887,
+      "preview_bytes": 80327,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-praying-mantis-f91d6200.jpg",
+      "preview": "images/previews/pokedex-praying-mantis-f91d6200-d6632c285e50.jpg",
+      "original_bytes": 906899,
+      "preview_bytes": 58794,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-red-eared-slider-3aaaffe4.jpg",
+      "preview": "images/previews/pokedex-red-eared-slider-3aaaffe4-b5f617090c59.jpg",
+      "original_bytes": 1591504,
+      "preview_bytes": 270321,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-12.jpg",
+      "preview": "images/previews/album-bird-12-582d0535ebfc.jpg",
+      "original_bytes": 377177,
+      "preview_bytes": 64134,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/ruby-throated-hummingbird.jpg",
+      "preview": "images/previews/ruby-throated-hummingbird-fefcc0469a1f.jpg",
+      "original_bytes": 558970,
+      "preview_bytes": 85701,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-ruddy-daggerwing-1c41fca9.jpg",
+      "preview": "images/previews/pokedex-ruddy-daggerwing-1c41fca9-b1113acbab9f.jpg",
+      "original_bytes": 912484,
+      "preview_bytes": 58145,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-salt-marsh-moth-3b9fcd89.jpg",
+      "preview": "images/previews/pokedex-salt-marsh-moth-3b9fcd89-efceb4e31f45.jpg",
+      "original_bytes": 1335897,
+      "preview_bytes": 217046,
+      "width": 726,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-scudderia-furcata-5d3960a8.jpg",
+      "preview": "images/previews/pokedex-scudderia-furcata-5d3960a8-daa67ca98bd4.jpg",
+      "original_bytes": 1313823,
+      "preview_bytes": 239122,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "original": "images/birds/album-bird-14.jpg",
+      "preview": "images/previews/album-bird-14-1c22f5ea4c6d.jpg",
+      "original_bytes": 508655,
+      "preview_bytes": 63619,
+      "width": 456,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-40.jpg",
+      "preview": "images/previews/album-bird-40-62e91b82e7cc.jpg",
+      "original_bytes": 809159,
+      "preview_bytes": 146512,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-46.jpg",
+      "preview": "images/previews/album-bird-46-93d41dd11905.jpg",
+      "original_bytes": 895501,
+      "preview_bytes": 158271,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-34.jpg",
+      "preview": "images/previews/album-bird-34-ea123cdb9bb6.jpg",
+      "original_bytes": 471290,
+      "preview_bytes": 86870,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-45.jpg",
+      "preview": "images/previews/album-bird-45-27579c4ac74b.jpg",
+      "original_bytes": 1189002,
+      "preview_bytes": 167372,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-squirrel-red-03a94037.jpg",
+      "preview": "images/previews/pokedex-squirrel-red-03a94037-fe5009dc940c.jpg",
+      "original_bytes": 228165,
+      "preview_bytes": 106568,
+      "width": 960,
+      "height": 540
+    },
+    {
+      "original": "images/birds/album-bird-25.jpg",
+      "preview": "images/previews/album-bird-25-da9f9c5ab5f7.jpg",
+      "original_bytes": 177704,
+      "preview_bytes": 18807,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-twin-spotted-sphinx-moth-1f97cd3e.jpg",
+      "preview": "images/previews/pokedex-twin-spotted-sphinx-moth-1f97cd3e-155c88e2bfc8.jpg",
+      "original_bytes": 588834,
+      "preview_bytes": 89595,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-20.jpg",
+      "preview": "images/previews/album-bird-20-059539173ca6.jpg",
+      "original_bytes": 1643233,
+      "preview_bytes": 274614,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-western-conifer-seed-bug-cf3a4ccc.jpg",
+      "preview": "images/previews/pokedex-western-conifer-seed-bug-cf3a4ccc-b0ea835e6de3.jpg",
+      "original_bytes": 701379,
+      "preview_bytes": 115198,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-5.jpg",
+      "preview": "images/previews/album-bird-5-92b2d9d50ad0.jpg",
+      "original_bytes": 1875316,
+      "preview_bytes": 320647,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-35.jpg",
+      "preview": "images/previews/album-bird-35-ef6118aacbdc.jpg",
+      "original_bytes": 728530,
+      "preview_bytes": 82875,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-22.jpg",
+      "preview": "images/previews/album-bird-22-a52d4004733c.jpg",
+      "original_bytes": 1548077,
+      "preview_bytes": 171094,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/wild-turkey.jpg",
+      "preview": "images/previews/wild-turkey-43a67f5c0acc.jpg",
+      "original_bytes": 1806652,
+      "preview_bytes": 285711,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-21.jpg",
+      "preview": "images/previews/album-bird-21-65bdfadc2176.jpg",
+      "original_bytes": 515163,
+      "preview_bytes": 79029,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/birds/album-bird-33.jpg",
+      "preview": "images/previews/album-bird-33-5b2a4310f705.jpg",
+      "original_bytes": 538993,
+      "preview_bytes": 75752,
+      "width": 443,
+      "height": 960
+    },
+    {
+      "original": "images/birds/pokedex-yucatan-jay-ace3da26.jpg",
+      "preview": "images/previews/pokedex-yucatan-jay-ace3da26-19c47971c1d6.jpg",
+      "original_bytes": 882071,
+      "preview_bytes": 158136,
+      "width": 442,
+      "height": 960
+    },
+    {
+      "original": "images/nails/green-french-holly.jpg",
+      "preview": "images/previews/green-french-holly-2b0e555bc99e.jpg",
+      "original_bytes": 382179,
+      "preview_bytes": 103647,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/blue-stripes-fruit.jpg",
+      "preview": "images/previews/blue-stripes-fruit-7f470ba33b03.jpg",
+      "original_bytes": 341411,
+      "preview_bytes": 106095,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/olive-green-red-dot.jpg",
+      "preview": "images/previews/olive-green-red-dot-f6ff9b3adb12.jpg",
+      "original_bytes": 175421,
+      "preview_bytes": 65517,
+      "width": 630,
+      "height": 960
+    },
+    {
+      "original": "images/nails/polka-dot-french.jpg",
+      "preview": "images/previews/polka-dot-french-46474434aef2.jpg",
+      "original_bytes": 1469236,
+      "preview_bytes": 134106,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/blue-chrome-tips.jpg",
+      "preview": "images/previews/blue-chrome-tips-9d6f732edfcd.jpg",
+      "original_bytes": 2132967,
+      "preview_bytes": 184698,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/pearl-starfish.jpg",
+      "preview": "images/previews/pearl-starfish-e94ba8fe00f7.jpg",
+      "original_bytes": 299416,
+      "preview_bytes": 91336,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "original": "images/nails/blue-fruit-mix.jpg",
+      "preview": "images/previews/blue-fruit-mix-08b8b3f8c53a.jpg",
+      "original_bytes": 1168059,
+      "preview_bytes": 173612,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "original": "images/nails/olive-blue-dots.jpg",
+      "preview": "images/previews/olive-blue-dots-09790186cbab.jpg",
+      "original_bytes": 1187517,
+      "preview_bytes": 107213,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/black-white-checkered.jpg",
+      "preview": "images/previews/black-white-checkered-0e15ab489ff3.jpg",
+      "original_bytes": 188615,
+      "preview_bytes": 48477,
+      "width": 720,
+      "height": 960
+    },
+    {
+      "original": "images/nails/pink-silver.jpg",
+      "preview": "images/previews/pink-silver-fe6b7e774874.jpg",
+      "original_bytes": 206548,
+      "preview_bytes": 54923,
+      "width": 453,
+      "height": 960
+    }
+  ]
+}
